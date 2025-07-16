@@ -1,0 +1,28 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Radial background glow -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="500dp"
+                android:centerX="30%"
+                android:centerY="30%"
+                android:startColor="#80B0BEC5"
+            android:endColor="#00455A64"
+            android:useLevel="false" />
+        </shape>
+    </item>
+
+    <!-- Main linear gradient overlay -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#B0BEC5"
+                android:endColor="#455A64" />
+        </shape>
+    </item>
+
+</layer-list>

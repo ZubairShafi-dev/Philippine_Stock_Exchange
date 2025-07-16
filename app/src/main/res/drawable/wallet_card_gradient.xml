@@ -1,0 +1,65 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Deep emerald base with vertical richness -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="#043D2E"
+                android:endColor="#147C4A" />
+        </shape>
+    </item>
+
+    <!-- Soft radial glow at top-left to mimic ambient light -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="450dp"
+                android:centerX="30%"
+                android:centerY="35%"
+                android:startColor="#66FFB66F"
+                android:endColor="#00222222"
+                android:useLevel="false" />
+        </shape>
+    </item>
+
+    <!-- Glassy highlight streak -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#33FFFFFF"
+                android:centerColor="#11FFFFFF"
+                android:endColor="#00FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- Subtle dark vignette edges for depth -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="1000dp"
+                android:centerX="50%"
+                android:centerY="50%"
+                android:startColor="#00000000"
+                android:endColor="#22000000"
+                android:useLevel="false" />
+        </shape>
+    </item>
+
+    <!-- Slight gloss reflection band (top to bottom fade) -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="90"
+                android:startColor="#22FFFFFF"
+                android:endColor="#00FFFFFF" />
+        </shape>
+    </item>
+
+</layer-list>

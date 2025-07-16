@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Gradient goes from Right (darker green) to Left (lighter green) -->
+    <gradient
+        android:startColor="#387B2A"
+    android:endColor="#87CD7B"
+    android:angle="0" />
+
+    <corners android:radius="18dp"/>
+</shape>

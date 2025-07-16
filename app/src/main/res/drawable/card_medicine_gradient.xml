@@ -1,0 +1,27 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base radial light glow -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="500dp"
+                android:centerX="30%"
+                android:centerY="30%"
+                android:startColor="#66B2FF66"
+                android:endColor="#0033CC33"
+                android:useLevel="false" />
+        </shape>
+    </item>
+
+    <!-- Subtle linear highlight over it -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#AA00C853"
+                android:centerColor="#FF43A047"
+                android:endColor="#9900C853" />
+        </shape>
+    </item>
+</layer-list>

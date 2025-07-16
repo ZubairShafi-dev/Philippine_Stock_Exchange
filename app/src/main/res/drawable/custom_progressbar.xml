@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background track with rounded corners -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#4C4C4C" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Progress with gradient color and rounded corners -->
+    <item android:id="@android:id/progress">
+        <clip android:clipOrientation="horizontal" android:gravity="left">
+            <shape android:shape="rectangle">
+                <gradient
+                    android:startColor="#00FFA3"
+                android:centerColor="#3AD29F"
+                android:endColor="#007965"
+                android:angle="0" />
+                <corners android:radius="12dp" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

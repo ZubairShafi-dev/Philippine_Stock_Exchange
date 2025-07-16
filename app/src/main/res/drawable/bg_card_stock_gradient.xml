@@ -1,0 +1,29 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Radial glow base -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="500dp"
+                android:centerX="30%"
+                android:centerY="30%"
+                android:startColor="#55292E7F"
+            android:endColor="#0013152F"
+            android:useLevel="false" />
+        </shape>
+    </item>
+
+    <!-- Linear highlight overlay -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#FF292E7F"
+                android:centerColor="#FF1F1A3F"
+                android:endColor="#FF13152F" />
+        </shape>
+    </item>
+
+</layer-list>
