@@ -1,0 +1,90 @@
+package com.pse.pse.ui.fragments.chat
+
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.trustledger.aitrustledger.R
+import com.trustledger.aitrustledger.adapters.chat.ChatPreviewAdapter
+import com.trustledger.aitrustledger.data.repository.chat.ChatViewModelFactory
+import com.trustledger.aitrustledger.databinding.FragmentChatBinding
+import com.trustledger.aitrustledger.models.chat.Admin
+import com.trustledger.aitrustledger.models.chat.ChatPreview
+import com.trustledger.aitrustledger.ui.viewModels.ChatViewModel
+
+class ChatFragment : Fragment(), ChatPreviewAdapter.OnChatPreviewClickListener {
+
+    private var _binding: FragmentChatBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var chatViewModel: ChatViewModel
+    private lateinit var adapter: ChatPreviewAdapter
+    private var adminListCache: List<Admin>? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentChatBinding.inflate(inflater, container, false)
+
+        adapter = ChatPreviewAdapter(emptyList(), this)
+        binding.chatListRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.chatListRecyclerView.adapter = adapter
+
+        chatViewModel = ViewModelProvider(
+            this, ChatViewModelFactory(requireContext())
+        )[ChatViewModel::class.java]
+
+        chatViewModel.getChatPreviewList().observe(viewLifecycleOwner) { chatPreviews ->
+            adapter.setChatPreviews(chatPreviews)
+        }
+
+        chatViewModel.getAdmin().observe(viewLifecycleOwner) { admins ->
+            adminListCache = admins
+            Log.d("ChatFragment", "Cached admin list: ${admins.map { it.id }}")
+        }
+
+        binding.btnStartChat.setOnClickListener {
+            val adminList = adminListCache
+            val firstAdmin = adminList?.firstOrNull()
+
+            if (firstAdmin?.id.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "No Admin available", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val bundle = Bundle().apply {
+                putString("adminId", firstAdmin!!.id)
+                putString("adminName", firstAdmin.name)
+                putBoolean("isNewChat", true)
+            }
+
+            if (firstAdmin != null) {
+                Log.d("ChatFragment", "Navigating to chat with admin: ${firstAdmin.id}")
+            }
+            findNavController().navigate(R.id.action_chatFragment_to_detailChatFragment, bundle)
+        }
+
+        return binding.root
+    }
+
+    override fun onChatPreviewClick(chatPreview: ChatPreview) {
+        val bundle = Bundle().apply {
+            putString("adminId", chatPreview.userId)
+            putString("adminName", chatPreview.userName)
+            putBoolean("isNewChat", false)
+        }
+
+        Log.d("ChatPreviewClick", "Navigating to chat with ${chatPreview.userId}")
+        findNavController().navigate(R.id.action_chatFragment_to_detailChatFragment, bundle)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
