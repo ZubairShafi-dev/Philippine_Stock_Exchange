@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottomsheet_bg">
+
+    <!-- Top Content -->
+    <RelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Back"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/white" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnBack"
+            android:layout_marginTop="16dp"
+            android:text="Tesla Motors"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Symbol -->
+        <TextView
+            android:id="@+id/tvSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginTop="4dp"
+            android:text="TSLA"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp" />
+
+        <!-- Stock Type -->
+        <TextView
+            android:id="@+id/tvStockType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSymbol"
+            android:layout_marginTop="16dp"
+            android:text="Regular"
+            android:textColor="@color/yellow"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.AITrustLedger.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvStockType"
+            android:layout_marginTop="36dp"
+            android:hint="Price"
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PriceET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$99"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </RelativeLayout>
+
+    <!-- Bottom Summary + Button -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top"
+        android:layout_marginTop="8dp"
+        android:elevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Dark_grey"
+            android:padding="16dp">
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white" />
+
+            <!-- Amount Row -->
+            <TextView
+                android:id="@+id/amountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_marginTop="12dp"
+                android:text="Total Amount to Invest :"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/amountValueTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/amountTV"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@id/amountTV"
+                android:text=""
+                android:textColor="@color/yellow"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Bottom Divider -->
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/amountTV"
+                android:layout_marginTop="12dp"
+                android:background="@color/yellow" />
+
+            <!-- Sell Button -->
+            <Button
+                android:id="@+id/btnBuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view2"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/button_buy"
+                android:text="Tap to buy"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

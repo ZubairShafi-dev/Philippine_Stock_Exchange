@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="30dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardSuccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="20dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/glassy_action_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Circular icon background -->
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/reward_img" />
+            </FrameLayout>
+
+            <!-- Main Title -->
+            <TextView
+                android:id="@+id/tvRequestSent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="56dp"
+                android:layout_marginBottom="12dp"
+                android:text="Level Reward"
+                android:textColor="@color/yellow"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/collectRewardLocked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:lineSpacingExtra="2dp"
+                android:text="0.5986"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="15dp"
+                android:layout_marginBottom="20dp">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" android:orientation="vertical"
+               android:background="#473E16"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Collect Reward"
+                   android:textSize="14sp"
+                   android:layout_centerInParent="true"
+                   android:textStyle="bold"
+                   android:textColor="@color/black"/>
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_lock"
+                   android:layout_centerInParent="true"/>
+
+           </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

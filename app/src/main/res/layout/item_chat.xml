@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="4dp"
+    android:gravity="start"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp">
+
+    <!-- Avatar for the sender -->
+    <ImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_avatar_default"
+        android:contentDescription="Avatar"
+        android:layout_gravity="start"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circular_background"/>
+
+    <!-- Chat message bubble -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <!-- Message bubble container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:orientation="vertical"
+            android:gravity="start"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="start">
+
+            <!-- Message text -->
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bhai withdraw issue a rha hai?"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/chat_bubble_incoming"
+                android:maxWidth="250dp"
+                android:lineSpacingExtra="2dp"/>
+
+            <!-- Message timestamp -->
+            <TextView
+                android:id="@+id/tv_timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:30 PM"
+                android:textSize="12sp"
+                android:layout_gravity="end"
+                android:textColor="#A0A0A0"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Delivered Status Indicator -->
+        <ImageView
+            android:id="@+id/img_status"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_check_circle"
+            android:layout_gravity="end"
+            android:contentDescription="Message Status"/>
+    </LinearLayout>
+</LinearLayout>

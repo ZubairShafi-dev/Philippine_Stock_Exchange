@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottomsheet_bg"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:id="@+id/layout_bottom_sheet">
+
+
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow_back"
+            android:contentDescription="Back"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:tint="@color/white" />
+
+
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ethereum"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_below="@id/btnBack"
+
+            android:layout_marginStart="12dp" />
+
+        <!-- Symbol -->
+        <TextView
+            android:id="@+id/tvSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00004568 ETH"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:layout_below="@id/tvTitle"
+            android:layout_alignStart="@id/tvTitle" />
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/tvStockType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regular"
+            android:textColor="@color/yellow"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@id/tvSymbol"
+            android:layout_marginTop="24dp" />
+
+        <!-- Change -->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/tvStockType"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/quantityTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Quantity"
+
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                />
+
+
+            <TextView
+                android:id="@+id/priceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Price"
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+
+        <!-- View Chart Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@id/layout1"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/btnBuy"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="1"
+                android:padding="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@null"
+                android:background="@drawable/buy_sell_btn"/>
+
+
+            <TextView
+                android:id="@+id/Price_ET"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="$910.2"
+                android:padding="10dp"
+                android:layout_marginTop="6dp"
+                android:textSize="16dp"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@null"
+                android:background="@drawable/buy_sell_btn"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_bottom_sheet">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/Dark_grey">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:id="@+id/view1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@id/amountTV"
+                android:text="Total amount to be invested :"
+                android:textColor="@color/white"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/view1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/amountValueTV"
+                android:text="$910.2"
+                android:textColor="@color/yellow"
+                android:layout_toRightOf="@id/amountTV"
+                android:layout_below="@id/view1"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/holo_green_light"
+                android:id="@+id/view2"
+                android:layout_marginTop="4dp"
+                android:layout_below="@id/amountValueTV"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view2"
+                android:layout_marginHorizontal="20dp"
+                android:text="Tap To Buy"
+                android:textColor="@color/Dark_grey"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_buy"
+                android:layout_marginVertical="10dp"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/back_button"-->
+        <!--            android:layout_width="50dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:contentDescription="Back"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:src="@drawable/back"-->
+        <!--            app:tint="@android:color/white" />-->
+
+        <!-- User profile picture -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/img"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
+
+        <!-- User name and status -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="User Name"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="Online"
+                android:textColor="@color/text_hint"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:padding="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/et_message_bg"
+            android:hint="Write a message"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/text_hint"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/buttonSendMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="Send Message"
+            android:src="@drawable/send"
+            app:tint="@color/skyblue" />
+    </LinearLayout>
+</LinearLayout>

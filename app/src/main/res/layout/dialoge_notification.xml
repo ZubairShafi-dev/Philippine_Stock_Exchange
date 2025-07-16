@@ -1,0 +1,56 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:background="@android:color/transparent"
+    android:padding="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="24dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp"> <!-- Glass effect -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/glassy_action_card_bg"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="This Week"
+                android:textColor="@color/green"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ClearNotifications"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/green"
+                android:textSize="13sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="8dp"
+                android:textStyle="bold"
+                android:id="@+id/clearNotificationView"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notificationRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/clearNotificationView"
+                android:layout_marginTop="10dp"
+                tools:listitem="@layout/item_announcment" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/gradient_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp"
+    tools:context=".ui.fragments.SplashFragment">
+
+    <!-- App Logo -->
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:contentDescription="App Logo"
+        android:src="@drawable/app_logo" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        android:text="AI Trust Ledger"
+        android:textColor="@android:color/white"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:letterSpacing="0.02"
+        android:text="The better ways to move forward."
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/navigateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Continue"
+        android:src="@drawable/next" />
+
+</LinearLayout>

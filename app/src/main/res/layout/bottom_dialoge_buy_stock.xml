@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottomsheet_bg">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:id="@+id/layout_bottom_sheet">
+
+
+    <!-- Back Arrow -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/arrow_back"
+        android:contentDescription="Back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:tint="@color/white" />
+
+    <!-- Tesla Logo -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/btnBack"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/tesla"
+        android:contentDescription="Logo"
+        android:padding="10dp" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tesla Motors"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/imgLogo"
+        android:layout_alignTop="@id/imgLogo"
+        android:layout_marginStart="12dp" />
+
+    <!-- Symbol -->
+    <TextView
+        android:id="@+id/tvSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TSLA"
+        android:textColor="#AAAAAA"
+        android:textSize="12sp"
+        android:layout_below="@id/tvTitle"
+        android:layout_alignStart="@id/tvTitle" />
+
+    <!-- Price -->
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$910.89"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_below="@id/imgLogo"
+        android:layout_marginTop="24dp" />
+
+    <!-- Change -->
+    <TextView
+        android:id="@+id/tvChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+17.8"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="22sp"
+       android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:drawablePadding="4dp"
+        android:layout_alignBaseline="@id/tvPrice"
+        android:layout_marginStart="12dp" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tesla Motors, Inc. (TSLA) is a well-known electric vehicle (EV) manufacturer..."
+        android:textColor="#CCCCCC"
+        android:textSize="13sp"
+        android:layout_below="@id/tvPrice"
+        android:layout_marginTop="16dp" />
+
+    <!-- View Chart Button -->
+    <Button
+        android:id="@+id/btnChart"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/tvDescription"
+        android:layout_marginTop="20dp"
+        android:text="👁 View Chart"
+        app:backgroundTint="@null"
+        android:background="@drawable/buy_sell_btn"
+        android:textColor="@android:color/white"
+        android:drawablePadding="6dp"
+        android:gravity="center" />
+
+</RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:id="@+id/view1"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/layout_bottom_sheet"/>
+   <androidx.cardview.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/view1">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:gravity="center"
+           android:background="#1E2329"
+           android:weightSum="2">
+
+           <Button
+               android:id="@+id/btnBuy"
+               android:layout_width="0dp"
+               android:layout_height="48dp"
+               android:layout_weight="1"
+               android:text="↑ Buy"
+               android:layout_margin="20dp"
+               android:textColor="@android:color/white"
+               app:backgroundTint="@null"
+               android:background="@drawable/buy_sell_btn"/>
+
+
+           <Button
+               android:id="@+id/btnSell"
+               android:layout_width="0dp"
+               android:layout_height="48dp"
+               android:layout_weight="1"
+               android:text="↓ Sell"
+               android:layout_marginHorizontal="20dp"
+               android:textColor="@android:color/white"
+               app:backgroundTint="@null"
+               android:background="@drawable/buy_sell_btn"/>
+       </LinearLayout>
+   </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

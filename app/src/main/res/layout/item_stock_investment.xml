@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginTop="10dp"
+    android:background="@android:color/transparent"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="16dp"
+    app:strokeColor="@android:color/transparent"
+    app:strokeWidth="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/glassy_action_card_bg"
+        android:foregroundGravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Logo -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgLogoStock"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tesla"
+                app:shapeAppearanceOverlay="@style/RoundedImageSmall" />
+
+            <!-- Price -->
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/imgLogoStock"
+                android:text="$910.89"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Change percentage -->
+            <TextView
+                android:id="@+id/tvChangeProfit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPrice"
+                android:layout_alignStart="@id/tvPrice"
+                android:layout_marginTop="4dp"
+                android:text="+17.8%"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="15sp" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgLogoStock"
+                android:layout_marginTop="12dp"
+                android:text="Tesla Motors"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Symbol -->
+            <TextView
+                android:id="@+id/tvSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:text="TSLA"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <!-- Line chart -->
+            <ImageView
+                android:id="@+id/imgChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSymbol"
+                android:layout_marginStart="4dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/vector" />
+
+        </RelativeLayout>
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

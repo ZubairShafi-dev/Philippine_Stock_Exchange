@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_bg">
+
+    <!-- Header: Today's Date, centered -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical|center">
+
+        <TextView
+            android:id="@+id/tv_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <!-- Chat Message List (Dummy messages) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_chat"/>
+
+    <!-- Message Input Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#F5F5F5"
+        android:gravity="center_vertical">
+
+        <!-- Link Icon (Start of Keyboard Bar) -->
+        <ImageView
+            android:id="@+id/iv_link"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_link"
+            android:contentDescription="Link"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Input Field -->
+        <EditText
+            android:id="@+id/et_message_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Write your message..."
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Camera Button -->
+        <ImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_camera"
+            android:contentDescription="Camera"
+            android:clickable="true"
+            android:focusable="true" />
+        <!-- Microphone Button -->
+        <ImageView
+            android:id="@+id/iv_microphone"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_microphone"
+            android:contentDescription="Microphone"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="8dp"/>
+
+
+
+        <!-- Send Button -->
+    </LinearLayout>
+
+</LinearLayout>

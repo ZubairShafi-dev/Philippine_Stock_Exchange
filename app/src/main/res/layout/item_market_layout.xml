@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="20dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/glassy_action_card_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="22dp">
+
+            <!-- Icon -->
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_ethereum" />
+
+            <!-- Name and unit -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ethereum"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0004586 ETH"
+                    android:textColor="#CCCCCC"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Price and percentage -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="0.7"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:text="₹1,085.18"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="5dp"
+                    android:text="-21.00%"
+                    android:textColor="@color/red"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <!-- Invest Button -->
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:backgroundTint="@android:color/white"
+                android:elevation="2dp"
+                android:text="Invest"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:cornerRadius="50dp"
+                app:iconPadding="0dp"
+                app:strokeWidth="0dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="20dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/glassy_action_card_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="22dp">
+
+            <!-- Icon -->
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_cardano" />
+
+            <!-- Name and unit -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cardano"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18.698 ADA"
+                    android:textColor="#CCCCCC"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Price and percentage -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="0.7"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:text="₹886.127"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="5dp"
+                    android:text="+16.31%"
+                    android:textColor="@color/sea_green"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <!-- Invest Button -->
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:backgroundTint="@android:color/white"
+                android:elevation="2dp"
+                android:text="Invest"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:cornerRadius="50dp"
+                app:iconPadding="0dp"
+                app:strokeWidth="0dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="20dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/glassy_action_card_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="22dp">
+
+            <!-- Icon -->
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_tron" />
+
+            <!-- Name and unit -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TRON"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10.589 TRX"
+                    android:textColor="#CCCCCC"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Price and percentage -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="0.7"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:text="₹50.529"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="5dp"
+                    android:text="-16.58%"
+                    android:textColor="@color/red"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <!-- Invest Button -->
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:backgroundTint="@android:color/white"
+                android:elevation="2dp"
+                android:text="Invest"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:cornerRadius="50dp"
+                app:iconPadding="0dp"
+                app:strokeWidth="0dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="20dp"
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/glassy_action_card_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="22dp">
+
+            <!-- Icon -->
+            <ImageView
+                android:id="@+id/coinIcon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_dogecoin" />
+
+            <!-- Name and unit -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/coinName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dogecoin"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/coinUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5.485 DOGE"
+                    android:textColor="#CCCCCC"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Price and percentage -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="0.7"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/coinPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:text="₹589.39"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/coinPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="5dp"
+                    android:text="+120.00%"
+                    android:textColor="@color/red"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <!-- Invest Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/investButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:backgroundTint="@android:color/white"
+                android:elevation="2dp"
+                android:text="Invest"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:cornerRadius="50dp"
+                app:iconPadding="0dp"
+                app:strokeWidth="0dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

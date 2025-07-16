@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#3F3F3F"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center">
+
+        <!-- Amount -->
+        <TextView
+            android:id="@+id/amountVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount:200"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- QR Code -->
+        <ImageView
+            android:id="@+id/ivQRCode"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- BEP20 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BEP20"
+            android:textColor="#00FF00"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Instruction -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kindly deposit amount on this address"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Address and Copy -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/sendingAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/copyButton"
+                android:text=""
+                android:padding="11dp"
+                android:textColor="#000000"
+                android:textSize="13sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/copyButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="4dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#00FF00">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_link" />
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_bg">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/menuIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="6dp"
+                android:src="@drawable/ic_menu" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Team"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <!-- Content Layout -->
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/topBar"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <!-- Top 3 Avatars -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp"
+                android:weightSum="3">
+
+                <!-- 2nd Place -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/circle_bg_gray"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/avatar" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/ic_star" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="2"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Growing Gang"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- 1st Place -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:background="@drawable/circle_bg_white"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/avatar" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-12dp"
+                        android:src="@drawable/ic_crown" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="3"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Solid Circle"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- 3rd Place -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/circle_bg_gray"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/avatar" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/ic_lock" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="4"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Power Pack"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Rankings Card List (Scroll only this) -->
+            <LinearLayout
+                android:id="@+id/rankingsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_top_rounded"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Ranking Items -->
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/starterSquadLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="1"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Risisng Star"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/starterSquadLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/growingGangLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="2"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Elite Trailblazer"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/growingGangLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/solidCircleLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="3"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Visionary Leader"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/solidCircleLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/powerPackLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="4"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Platinum Vanguard"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/powerPackLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/eliteCrewLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="5"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Diamond Pioneer"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/eliteCrewLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/ultimateForceLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="6"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Ruby Champion"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/ultimateForceLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/emeraldTitan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="7"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Emerald Titan"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/emeraldTitanLockedIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/saphireMonarchLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="8"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Saphire Monarch"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/saphireMonarchLockIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/titaniumOverLoadLAyout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="9"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Titanium Overload"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/titaniumOverLoadLockIcon"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardBackgroundColor="#E928282F"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/supremeEmperorLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:text="10"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="@drawable/circle_bg"
+                                    android:src="@drawable/avatar" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="25dp"
+                                    android:layout_weight="1"
+                                    android:text="Saphire Monarch"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/supremeEmperorLock"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="25dp"
+                                    android:src="@drawable/ic_lock" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>
