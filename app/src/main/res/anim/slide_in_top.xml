@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/decelerate_quad"
+    android:duration="800">
+
+    <!-- Slide from top to original position -->
+    <translate
+        android:fromYDelta="-100%"
+        android:toYDelta="0%" />
+
+    <!-- Fade in from 0% to 100% opacity -->
+    <alpha
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0" />
+</set>
