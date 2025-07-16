@@ -9,17 +9,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.pse.pse.ui.fragments.BaseFragment
+import com.google.firebase.Timestamp
+import com.pse.pse.R
+import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.DialogeSellStockBinding
+import com.pse.pse.databinding.FragmentBoughtForexBinding
+import com.pse.pse.models.UserPlanModel
+import com.pse.pse.ui.viewModels.PlanViewModel
+import com.pse.pse.ui.viewModels.PlanViewModelFactory
+import com.pse.pse.utils.SharedPrefManager
+import com.pse.pse.utils.Status
 import com.trustledger.aitrustledger.R
 import com.trustledger.aitrustledger.adapters.BoughtForexAdapter
-import com.trustledger.aitrustledger.data.repository.BuyPlanRepo
 import com.trustledger.aitrustledger.databinding.DialogeSellStockBinding
-import com.trustledger.aitrustledger.databinding.FragmentBoughtForexBinding
-import com.trustledger.aitrustledger.models.UserPlanModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModelFactory
-import com.trustledger.aitrustledger.utils.SharedPrefManager
-import com.trustledger.aitrustledger.utils.Status
 import kotlinx.coroutines.launch
 
 
@@ -71,7 +73,7 @@ class BoughtForexFragment : BaseFragment() {
                     profitTrack = (it["profitTrack"] as? Number)?.toDouble() ?: 0.0,
                     status = it["status"] as? String ?: "",
                     docId = it["docId"] as? String ?: "",
-                    expiry_date = it["expiry_date"] as com.google.firebase.Timestamp,
+                    expiry_date = it["expiry_date"] as Timestamp,
                 )
             }
             val onInvestClick: (UserPlanModel) -> Unit = { plan ->

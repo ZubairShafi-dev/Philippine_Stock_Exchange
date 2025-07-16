@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/boughtStocksFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.BoughtStocks"
+        android:label="Bought Stocks"
+        tools:layout="@layout/fragment_bought_stocks" />
+
+    <fragment
+        android:id="@+id/detailChatFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.chat.DetailChatFragment"
+        android:label="Detail Chat"
+        tools:layout="@layout/fragment_detail_chat" />
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.chat.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat">
+
+        <action
+            android:id="@+id/action_chatFragment_to_detailChatFragment"
+            app:destination="@id/detailChatFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/forexInvestmentFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.ForexInvestmentFragment"
+        android:label="Forex Investment"
+        tools:layout="@layout/fragment_forex_investment" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_plans"
+            app:destination="@id/plansFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+
+        <action
+            android:id="@+id/action_home_to_chatBox"
+            app:destination="@id/chatFragment" />
+
+        <action
+            android:id="@+id/action_home_to_withdrawAmount"
+            app:destination="@id/withdrawAmountFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+
+        <action
+            android:id="@+id/action_home_to_depositAmount"
+            app:destination="@id/depositAmountFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_home_to_transactionHistory"
+            app:destination="@id/transactionHistoryFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_home_to_stockPlans"
+            app:destination="@id/stockInvestmentPlansFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_home_to_medicinePlans"
+            app:destination="@id/medicineInvestmenetPlanFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_home_to_forexPlans"
+            app:destination="@id/forexInvestmentFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_boughtStocksFragment"
+            app:destination="@id/boughtStocksFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_boughtMedicinesFragment"
+            app:destination="@id/boughtMedicinesFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_boughtForexFragment"
+            app:destination="@id/boughtForexFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_stockInvestmentPlansFragment"
+            app:destination="@id/stockInvestmentPlansFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_medicineInvestmenetPlanFragment"
+            app:destination="@id/medicineInvestmenetPlanFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_forexInvestmentFragment"
+            app:destination="@id/forexInvestmentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicineInvestmenetPlanFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.MedicineInvestmentPlan"
+        android:label="Medicine Investment Plan"
+        tools:layout="@layout/fragment_medicine_investment_plan" />
+
+    <fragment
+        android:id="@+id/withdrawAmountFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.WithdrawAmountFragment"
+        android:label="Withdraw Amount"
+        tools:layout="@layout/fragment_withdraw_amount" />
+
+    <fragment
+        android:id="@+id/depositAmountFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.DepositAmountFragment"
+        android:label="Deposit Amount"
+        tools:layout="@layout/fragment_deposit_amount" />
+
+    <fragment
+        android:id="@+id/newSupportRequestFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.NewSupportRequestFragment"
+        android:label="New Support Request"
+        tools:layout="@layout/fragment_new_support_request" />
+
+    <fragment
+        android:id="@+id/plansFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.PlansFragment"
+        android:label="@string/plans"
+        tools:layout="@layout/fragment_plans">
+        <action
+            android:id="@+id/action_plansFragment_to_stockInvestmentPlansFragment"
+            app:destination="@id/stockInvestmentPlansFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_plansFragment_to_medicineInvestmenetPlanFragment"
+            app:destination="@id/medicineInvestmenetPlanFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_plansFragment_to_forexInvestmentFragment"
+            app:destination="@id/forexInvestmentFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.SignInFragment"
+        android:label="@string/sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.SignUpFragment"
+        android:label="@string/sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUp_to_signIn"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.SplashFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_splash">
+
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/stockInvestmentPlansFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.StockInvestmentPlansFragment"
+        android:label="@string/stock_investment_plans"
+        tools:layout="@layout/fragment_stock_investment_plan">
+        <action
+            android:id="@+id/action_stockInvestmentPlansFragment_to_boughtStocksFragment"
+            app:destination="@id/boughtStocksFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/supportChatFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.SupportChatFragment"
+        android:label="Support Chat"
+        tools:layout="@layout/fragment_support_chat" />
+
+    <fragment
+        android:id="@+id/supportFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.SupportFragment"
+        android:label="@string/support"
+        tools:layout="@layout/fragment_support">
+        <action
+            android:id="@+id/action_support_to_chat"
+            app:destination="@id/supportChatFragment" />
+        <action
+            android:id="@+id/action_support_to_request"
+            app:destination="@id/newSupportRequestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.TeamFragment"
+        android:label="@string/team"
+        tools:layout="@layout/fragment_team">
+        <action
+            android:id="@+id/action_team_to_levels"
+            app:destination="@id/teamLevelsFragment" />
+        <action
+            android:id="@+id/action_team_to_ranking"
+            app:destination="@id/teamRankingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamLevelsFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.TeamLevelsFragment"
+        android:label="@string/team"
+        tools:layout="@layout/fragment_team_levels" >
+        <action
+            android:id="@+id/action_teamLevelsFragment_to_levelUsersFragment"
+            app:destination="@id/levelUsersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamRankingFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.TeamRankingFragment"
+        android:label="Team Ranking"
+        tools:layout="@layout/fragment_team_ranking" />
+
+
+    <fragment
+        android:id="@+id/transactionHistoryFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.TransactionHistoryFragment"
+        android:label="@string/history"
+        tools:layout="@layout/fragment_transaction_history" />
+
+    <fragment
+        android:id="@+id/boughtForexFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.BoughtForexFragment"
+        android:label="boughtForex"
+        tools:layout="@layout/fragment_bought_forex" />
+
+    <fragment
+        android:id="@+id/boughtMedicinesFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.BoughtMedicinesFragment"
+        android:label="boughtMedicine"
+        tools:layout="@layout/fragment_bought_medicines" />
+    <fragment
+        android:id="@+id/levelUsersFragment"
+        android:name="com.trustledger.aitrustledger.ui.fragments.LevelUsersFragment"
+        android:label="fragment_level_users"
+        tools:layout="@layout/fragment_level_users" />
+
+
+</navigation>

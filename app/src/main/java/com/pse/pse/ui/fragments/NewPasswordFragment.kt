@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,10 @@ import android.widget.ScrollView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.data.repository.AuthRepository
-import com.trustledger.aitrustledger.databinding.FragmentNewPasswordBinding
-import com.trustledger.aitrustledger.utils.SharedPrefManager
+import com.pse.pse.R
+import com.pse.pse.data.repository.AuthRepository
+import com.pse.pse.databinding.FragmentNewPasswordBinding
+import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 

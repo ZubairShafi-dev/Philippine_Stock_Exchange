@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,18 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.data.repository.BuyPlanRepo
-import com.trustledger.aitrustledger.databinding.DialogueBuyStockBinding
-import com.trustledger.aitrustledger.databinding.FragmentStockInvestmentPlanBinding
-import com.trustledger.aitrustledger.models.AccountModel
-import com.trustledger.aitrustledger.models.PlanModel
-import com.trustledger.aitrustledger.ui.viewModels.AccountViewModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModelFactory
-import com.trustledger.aitrustledger.utils.SharedPrefManager
-import com.trustledger.aitrustledger.utils.Status
+import com.pse.pse.R
+import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.DialogueBuyStockBinding
+import com.pse.pse.databinding.FragmentStockInvestmentPlanBinding
+import com.pse.pse.models.AccountModel
+import com.pse.pse.models.PlanModel
+import com.pse.pse.ui.viewModels.AccountViewModel
+import com.pse.pse.ui.viewModels.PlanViewModel
+import com.pse.pse.ui.viewModels.PlanViewModelFactory
+import com.pse.pse.utils.SharedPrefManager
+import com.pse.pse.utils.Status
+
 import com.trustledger.aitrustledger.viewModel.Adapters.StocksPlanAdapter
 import kotlinx.coroutines.launch
 

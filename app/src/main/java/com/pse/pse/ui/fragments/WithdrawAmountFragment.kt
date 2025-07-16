@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -14,10 +14,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.FragmentWithdrawAmountBinding
-import com.trustledger.aitrustledger.ui.viewModels.TransactionViewModel
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentWithdrawAmountBinding
+import com.pse.pse.ui.viewModels.TransactionViewModel
 
 class WithdrawAmountFragment : BaseFragment() {
 

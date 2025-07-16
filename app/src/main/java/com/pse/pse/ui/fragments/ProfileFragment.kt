@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 
 import UserModel
@@ -23,13 +23,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.storage.FirebaseStorage
-import com.pse.pse.ui.fragments.BaseFragment
+import com.pse.pse.databinding.FragmentProfileBinding
+import com.pse.pse.ui.viewModels.ProfileViewModel
+import com.pse.pse.utils.NotificationPreferenceManager
+import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.R
 import com.trustledger.aitrustledger.adapters.NotificationAdapter
-import com.trustledger.aitrustledger.databinding.FragmentProfileBinding
-import com.trustledger.aitrustledger.ui.viewModels.ProfileViewModel
-import com.trustledger.aitrustledger.utils.NotificationPreferenceManager
-import com.trustledger.aitrustledger.utils.SharedPrefManager
 
 class ProfileFragment : BaseFragment() {
 

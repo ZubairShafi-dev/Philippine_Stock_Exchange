@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -17,15 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
-import com.pse.pse.ui.fragments.BaseFragment
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentTransactionHistoryBinding
 import com.trustledger.aitrustledger.R
 import com.trustledger.aitrustledger.adapters.NotificationAdapter
 import com.trustledger.aitrustledger.adapters.TransactionAdapter
 import com.trustledger.aitrustledger.databinding.FragmentTransactionHistoryBinding
-import com.trustledger.aitrustledger.models.TransactionModel
-import com.trustledger.aitrustledger.ui.viewModels.TransactionViewModel
-import com.trustledger.aitrustledger.utils.NotificationPreferenceManager
-import com.trustledger.aitrustledger.utils.SharedPrefManager
+import com.pse.pse.models.TransactionModel
+import com.pse.pse.ui.viewModels.TransactionViewModel
+import com.pse.pse.utils.NotificationPreferenceManager
+import com.pse.pse.utils.SharedPrefManager
 
 
 class TransactionHistoryFragment : BaseFragment() {

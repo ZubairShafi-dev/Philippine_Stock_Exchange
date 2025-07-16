@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.trustledger.aitrustledger.utils.SharedPrefManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
+import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.DialogMedicineDetailBinding
+import com.pse.pse.databinding.FragmentBoughtMedicinesBinding
+import com.pse.pse.models.UserPlanModel
+import com.pse.pse.ui.viewModels.PlanViewModel
+import com.pse.pse.ui.viewModels.PlanViewModelFactory
+import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.adapters.BoughtMedicineAdapter
-import com.trustledger.aitrustledger.data.repository.BuyPlanRepo
-import com.trustledger.aitrustledger.databinding.DialogMedicineDetailBinding
-import com.trustledger.aitrustledger.databinding.FragmentBoughtMedicinesBinding
-import com.trustledger.aitrustledger.models.UserPlanModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModelFactory
-import java.security.Timestamp
 
 
 class BoughtMedicinesFragment : BaseFragment() {

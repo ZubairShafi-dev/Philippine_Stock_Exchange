@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -16,14 +16,13 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.utils.SharedPrefManager
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.FragmentTeamRankingBinding
-import com.trustledger.aitrustledger.models.AchievementModel
-import com.trustledger.aitrustledger.models.LevelCondition
-import com.trustledger.aitrustledger.models.TeamStats
-import com.trustledger.aitrustledger.ui.viewModels.TeamViewModel
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentTeamRankingBinding
+import com.pse.pse.models.AchievementModel
+import com.pse.pse.models.LevelCondition
+import com.pse.pse.models.TeamStats
+import com.pse.pse.ui.viewModels.TeamViewModel
+import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.launch
 
 class TeamRankingFragment : BaseFragment() {

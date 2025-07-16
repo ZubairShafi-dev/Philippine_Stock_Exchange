@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.FragmentSupportBinding
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentSupportBinding
 
 class SupportFragment : BaseFragment() {
 

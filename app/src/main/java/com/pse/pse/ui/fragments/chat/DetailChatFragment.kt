@@ -6,20 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pse.pse.data.repository.chat.ChatViewModelFactory
+import com.pse.pse.databinding.FragmentDetailChatBinding
+import com.pse.pse.models.chat.Admin
+import com.pse.pse.ui.viewModels.ChatViewModel
+import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.adapters.chat.ChatDetailAdapter
-import com.trustledger.aitrustledger.data.repository.chat.ChatViewModelFactory
-import com.trustledger.aitrustledger.databinding.FragmentDetailChatBinding
 import com.trustledger.aitrustledger.fcm.AccessToken
 import com.trustledger.aitrustledger.fcm.Fcm
-import com.trustledger.aitrustledger.models.chat.Admin
-import com.trustledger.aitrustledger.ui.viewModels.ChatViewModel
-import com.trustledger.aitrustledger.utils.SharedPrefManager
 
 class DetailChatFragment : Fragment() {
 

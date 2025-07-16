@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,16 +10,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.data.repository.BuyPlanRepo
-import com.trustledger.aitrustledger.databinding.DialogeSellStockBinding
-import com.trustledger.aitrustledger.databinding.FragmentBoughtStocksBinding
-import com.trustledger.aitrustledger.models.UserPlanModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModelFactory
-import com.trustledger.aitrustledger.utils.SharedPrefManager
-import com.trustledger.aitrustledger.utils.Status
+import com.pse.pse.R
+import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.DialogeSellStockBinding
+import com.pse.pse.databinding.FragmentBoughtStocksBinding
+import com.pse.pse.models.UserPlanModel
+import com.pse.pse.ui.viewModels.PlanViewModel
+import com.pse.pse.ui.viewModels.PlanViewModelFactory
+import com.pse.pse.utils.SharedPrefManager
+import com.pse.pse.utils.Status
 import com.trustledger.aitrustledger.viewModel.Adapters.UserPlanAdapter
 import kotlinx.coroutines.launch
 

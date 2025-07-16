@@ -1,11 +1,11 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
 
 class LoadingDialogFragment : DialogFragment() {
     override fun onCreateView(

@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
@@ -9,12 +9,11 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentTeamLevelsBinding
+import com.pse.pse.ui.viewModels.TeamViewModel
+import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.adapters.TeamLevelAdapter
-import com.trustledger.aitrustledger.databinding.FragmentTeamLevelsBinding
-import com.trustledger.aitrustledger.ui.viewModels.TeamViewModel
-import com.trustledger.aitrustledger.utils.SharedPrefManager
 
 class TeamLevelsFragment : BaseFragment() {
 

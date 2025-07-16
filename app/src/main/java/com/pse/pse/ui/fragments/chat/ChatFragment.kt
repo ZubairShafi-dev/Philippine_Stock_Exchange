@@ -10,13 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentChatBinding
 import com.trustledger.aitrustledger.R
 import com.trustledger.aitrustledger.adapters.chat.ChatPreviewAdapter
-import com.trustledger.aitrustledger.data.repository.chat.ChatViewModelFactory
-import com.trustledger.aitrustledger.databinding.FragmentChatBinding
-import com.trustledger.aitrustledger.models.chat.Admin
-import com.trustledger.aitrustledger.models.chat.ChatPreview
-import com.trustledger.aitrustledger.ui.viewModels.ChatViewModel
+import com.pse.pse.data.repository.chat.ChatViewModelFactory
+import com.pse.pse.models.chat.Admin
+import com.pse.pse.models.chat.ChatPreview
+import com.pse.pse.ui.viewModels.ChatViewModel
 
 class ChatFragment : Fragment(), ChatPreviewAdapter.OnChatPreviewClickListener {
 

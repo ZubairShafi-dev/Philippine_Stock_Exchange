@@ -1,14 +1,13 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pse.pse.ui.fragments.BaseFragment
+import com.pse.pse.databinding.FragmentLevelUsersBinding
+import com.pse.pse.models.UserListModel
 import com.trustledger.aitrustledger.adapters.ReferralDataAdapter
-import com.trustledger.aitrustledger.databinding.FragmentLevelUsersBinding
-import com.trustledger.aitrustledger.models.UserListModel
 
 class LevelUsersFragment : BaseFragment(){
 

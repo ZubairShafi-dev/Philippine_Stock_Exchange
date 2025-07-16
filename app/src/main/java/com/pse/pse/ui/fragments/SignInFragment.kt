@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -13,10 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.FragmentSignInBinding
-import com.trustledger.aitrustledger.ui.viewModels.AuthViewModel
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentSignInBinding
+import com.pse.pse.ui.viewModels.AuthViewModel
 
 class SignInFragment : BaseFragment() {
 

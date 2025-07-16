@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -14,15 +14,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.pse.pse.ui.fragments.BaseFragment
-import com.trustledger.aitrustledger.utils.SharedPrefManager
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
+import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.adapters.NotificationAdapter
-import com.trustledger.aitrustledger.data.repository.BuyPlanRepo
-import com.trustledger.aitrustledger.databinding.FragmentPlansBinding
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModel
-import com.trustledger.aitrustledger.ui.viewModels.PlanViewModelFactory
-import com.trustledger.aitrustledger.utils.NotificationPreferenceManager
+import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.FragmentPlansBinding
+import com.pse.pse.ui.viewModels.PlanViewModel
+import com.pse.pse.ui.viewModels.PlanViewModelFactory
+import com.pse.pse.utils.NotificationPreferenceManager
 
 class PlansFragment : BaseFragment() {
 

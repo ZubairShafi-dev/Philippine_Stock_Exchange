@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import UserModel
 import android.os.Bundle
@@ -9,11 +9,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.firebase.Timestamp
-import com.pse.pse.ui.fragments.BaseFragment
+import com.pse.pse.databinding.FragmentSignUpBinding
+import com.pse.pse.ui.viewModels.AuthViewModel
+import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.FragmentSignUpBinding
-import com.trustledger.aitrustledger.ui.viewModels.AuthViewModel
-import com.trustledger.aitrustledger.utils.SharedPrefManager
 
 class SignUpFragment : BaseFragment() {
 

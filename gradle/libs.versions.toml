@@ -41,7 +41,8 @@ firebaseStorage             = "20.1.0"
 navigationFragmentKtxVersion= "2.9.0"
 navigationUiKtxVersion      = "2.9.0"
 googleAuthLibraryOauth2Http = "1.2.0"
-ultraPtr                    = "1.0.11"  # ← newly added
+ultraPtr                    = "1.0.11"
+common = "18.11.0"  # ← newly added
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -100,3 +101,4 @@ picasso                                     = { module = "com.squareup.picasso:p
 firebase-analytics-ktx                      = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-config                             = { module = "com.google.firebase:firebase-config", version.ref = "firebaseConfigKtx" }
 firebase-functions-ktx                      = { module = "com.google.firebase:firebase-functions-ktx" }
+common = { group = "com.google.mlkit", name = "common", version.ref = "common" }

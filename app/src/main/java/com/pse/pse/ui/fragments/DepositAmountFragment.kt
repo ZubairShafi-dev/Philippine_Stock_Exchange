@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments
+package com.pse.pse.ui.fragments
 
 import android.app.Dialog
 import android.content.ClipData
@@ -25,11 +25,12 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
-import com.pse.pse.ui.fragments.BaseFragment
+import com.pse.pse.R
+import com.pse.pse.databinding.FragmentDepositAmountBinding
 import com.trustledger.aitrustledger.R
 import com.trustledger.aitrustledger.databinding.FragmentDepositAmountBinding
-import com.trustledger.aitrustledger.ui.viewModels.TransactionViewModel
-import com.trustledger.aitrustledger.utils.SharedPrefManager
+import com.pse.pse.ui.viewModels.TransactionViewModel
+import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,7 +66,7 @@ class DepositAmountFragment : BaseFragment() {
 
         // 1) Load the current balance from Firestore
         viewModel.loadCurrentBalance()
-        userId=SharedPrefManager(requireContext()).getId().toString()
+        userId= SharedPrefManager(requireContext()).getId().toString()
         email=FirebaseAuth.getInstance().currentUser?.email.toString()
         // 2) Observe it
         viewModel.currentBalance.observe(viewLifecycleOwner) { balance ->
