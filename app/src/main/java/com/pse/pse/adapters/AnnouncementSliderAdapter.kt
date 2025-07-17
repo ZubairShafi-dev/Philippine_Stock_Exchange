@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.adapters
+package com.pse.pse.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.trustledger.aitrustledger.R
+import com.bumptech.glide.R
 
 /**
  * A simple ViewPager2 adapter that takes a list of image URLs

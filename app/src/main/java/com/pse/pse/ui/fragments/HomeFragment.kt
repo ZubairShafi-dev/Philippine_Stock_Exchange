@@ -31,9 +31,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.FirebaseFirestore
 import com.pse.pse.R
-import com.trustledger.aitrustledger.R
 import com.trustledger.aitrustledger.adapters.AnnouncementAdapter
-import com.trustledger.aitrustledger.adapters.AnnouncementSliderAdapter
+import com.pse.pse.adapters.AnnouncementSliderAdapter
 import com.trustledger.aitrustledger.adapters.HomeScreenAdapter
 import com.trustledger.aitrustledger.adapters.NotificationAdapter
 import com.pse.pse.data.repository.AuthRepository
