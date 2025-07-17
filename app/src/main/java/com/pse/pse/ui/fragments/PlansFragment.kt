@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pse.pse.R
 import com.pse.pse.utils.SharedPrefManager
-import com.trustledger.aitrustledger.adapters.NotificationAdapter
+import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.data.repository.BuyPlanRepo
 import com.pse.pse.databinding.FragmentPlansBinding
 import com.pse.pse.ui.viewModels.PlanViewModel

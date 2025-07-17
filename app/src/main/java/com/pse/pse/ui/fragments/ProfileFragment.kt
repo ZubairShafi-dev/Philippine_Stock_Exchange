@@ -28,7 +28,7 @@ import com.pse.pse.ui.viewModels.ProfileViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.adapters.NotificationAdapter
+import com.pse.pse.adapters.NotificationAdapter
 
 class ProfileFragment : BaseFragment() {
 

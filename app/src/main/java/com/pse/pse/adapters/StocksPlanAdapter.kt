@@ -1,10 +1,10 @@
-package com.trustledger.aitrustledger.viewModel.Adapters
+package com.pse.pse.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.ItemStockInvestmentBinding
+import com.pse.pse.R
+import com.pse.pse.databinding.ItemStockInvestmentBinding
 import com.pse.pse.models.PlanModel
 
 class StocksPlanAdapter(

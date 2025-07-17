@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pse.pse.databinding.FragmentLevelUsersBinding
 import com.pse.pse.models.UserListModel
-import com.trustledger.aitrustledger.adapters.ReferralDataAdapter
+import com.pse.pse.adapters.ReferralDataAdapter
 
 class LevelUsersFragment : BaseFragment(){
 

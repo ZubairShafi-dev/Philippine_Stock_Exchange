@@ -34,7 +34,7 @@ import com.pse.pse.R
 import com.trustledger.aitrustledger.adapters.AnnouncementAdapter
 import com.pse.pse.adapters.AnnouncementSliderAdapter
 import com.pse.pse.adapters.HomeScreenAdapter
-import com.trustledger.aitrustledger.adapters.NotificationAdapter
+import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.data.repository.AuthRepository
 import com.pse.pse.data.repository.BuyPlanRepo
 import com.pse.pse.databinding.FragmentHomeBinding

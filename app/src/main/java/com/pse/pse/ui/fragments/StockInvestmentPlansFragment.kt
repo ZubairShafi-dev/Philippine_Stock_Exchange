@@ -24,7 +24,7 @@ import com.pse.pse.ui.viewModels.PlanViewModelFactory
 import com.pse.pse.utils.SharedPrefManager
 import com.pse.pse.utils.Status
 
-import com.trustledger.aitrustledger.viewModel.Adapters.StocksPlanAdapter
+import com.pse.pse.adapters.StocksPlanAdapter
 import kotlinx.coroutines.launch
 
 class StockInvestmentPlansFragment : BaseFragment(), StocksPlanAdapter.OnItemClickListener {

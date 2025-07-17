@@ -1,13 +1,15 @@
-package com.trustledger.aitrustledger.adapters
+package com.pse.pse.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
 import com.pse.pse.models.NotificationModel
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class NotificationAdapter(
     private val notifications: List<NotificationModel>
@@ -26,7 +28,7 @@ class NotificationAdapter(
 
             val formattedTime = notification.timestamp.let {
                 val date = Date(it)  // Convert the long timestamp to a Date object
-                java.text.SimpleDateFormat("MMM dd, yyyy • hh:mm a", java.util.Locale.getDefault())
+                SimpleDateFormat("MMM dd, yyyy • hh:mm a", Locale.getDefault())
                     .format(date)
             } ?: "—"
 
