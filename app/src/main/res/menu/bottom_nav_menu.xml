@@ -6,15 +6,16 @@
         android:icon="@drawable/ic_home"
         android:title="Home" />
 
-    <item
-        android:id="@+id/teamLevelsFragment"
-        android:icon="@drawable/ic_team"
-        android:title="Team" />
+
 
     <item
         android:id="@+id/plansFragment"
         android:icon="@drawable/ic_plans"
         android:title="Plan" />
+    <item
+        android:id="@+id/teamLevelsFragment"
+        android:icon="@drawable/ic_team"
+        android:title="Team" />
 
     <item
         android:id="@+id/transactionHistoryFragment"

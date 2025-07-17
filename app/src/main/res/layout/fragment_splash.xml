@@ -16,7 +16,8 @@
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:contentDescription="App Logo"
-        android:src="@drawable/app_logo" />
+        android:src="@drawable/pse"
+        />
 
     <!-- Title -->
     <TextView
@@ -25,9 +26,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.05"
-        android:text="AI Trust Ledger"
+        android:text="Pilippine Stock Exchange"
         android:textColor="@android:color/white"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <!-- Subtitle -->
