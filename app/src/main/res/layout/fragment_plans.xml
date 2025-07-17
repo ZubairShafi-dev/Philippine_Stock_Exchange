@@ -75,7 +75,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_card_stock_gradient"
+                    android:background="@drawable/gradient_bg"
                     android:padding="18dp">
 
                     <!-- Wallet Type -->
@@ -196,7 +196,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_medicine_gradient"
+                    android:background="@drawable/gradient_bg"
                     android:padding="18dp">
 
                     <!-- Wallet Type -->
@@ -319,7 +319,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/card_forex_gradient"
+                    android:background="@drawable/gradient_bg"
                     android:padding="18dp">
 
                     <!-- Wallet Type -->
