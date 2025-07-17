@@ -15,7 +15,7 @@ import com.pse.pse.models.UserPlanModel
 import com.pse.pse.ui.viewModels.PlanViewModel
 import com.pse.pse.ui.viewModels.PlanViewModelFactory
 import com.pse.pse.utils.SharedPrefManager
-import com.trustledger.aitrustledger.adapters.BoughtMedicineAdapter
+import com.pse.pse.adapters.BoughtMedicineAdapter
 
 
 class BoughtMedicinesFragment : BaseFragment() {

@@ -19,9 +19,7 @@ import com.pse.pse.ui.viewModels.PlanViewModel
 import com.pse.pse.ui.viewModels.PlanViewModelFactory
 import com.pse.pse.utils.SharedPrefManager
 import com.pse.pse.utils.Status
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.adapters.BoughtForexAdapter
-import com.trustledger.aitrustledger.databinding.DialogeSellStockBinding
+import com.pse.pse.adapters.BoughtForexAdapter
 import kotlinx.coroutines.launch
 
 
