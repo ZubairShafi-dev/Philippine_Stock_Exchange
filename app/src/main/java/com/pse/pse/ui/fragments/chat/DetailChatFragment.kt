@@ -17,8 +17,8 @@ import com.pse.pse.models.chat.Admin
 import com.pse.pse.ui.viewModels.ChatViewModel
 import com.pse.pse.utils.SharedPrefManager
 import com.pse.pse.adapters.chat.ChatDetailAdapter
-import com.trustledger.aitrustledger.fcm.AccessToken
-import com.trustledger.aitrustledger.fcm.Fcm
+import com.pse.pse.fcm.AccessToken
+import com.pse.pse.fcm.Fcm
 
 class DetailChatFragment : Fragment() {
 

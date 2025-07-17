@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.data.local.Dao
+package com.pse.pse.data.local.Dao
 
 import UserModel
 import androidx.room.Dao

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "347675643482",
+    "project_id": "philippine-stock-exchang-296cd",
+    "storage_bucket": "philippine-stock-exchang-296cd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347675643482:android:6c7b053b52b62a1e575263",
+        "android_client_info": {
+          "package_name": "com.pse.pse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf8tcByu7-Ct01MsJDf5mqFqhOaIeCOxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

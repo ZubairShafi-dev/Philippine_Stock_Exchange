@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.fcm
+package com.pse.pse.fcm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,7 +10,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
 import com.pse.pse.models.NotificationModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
