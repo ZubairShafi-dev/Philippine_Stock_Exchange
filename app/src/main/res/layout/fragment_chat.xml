@@ -25,12 +25,15 @@
         android:clipToPadding="false"
         android:paddingBottom="16dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStartChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14p"
+        android:elevation="10dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/cardview_light_background"
         android:text="Start New Chat" />
 
 </LinearLayout>

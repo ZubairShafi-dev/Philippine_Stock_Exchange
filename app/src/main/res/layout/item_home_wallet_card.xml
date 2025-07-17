@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/wallet_card_gradient"
+        android:background="@drawable/gradient_bg"
         android:padding="18dp">
 
         <!-- User Name -->

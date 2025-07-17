@@ -209,7 +209,7 @@
                                         android:layout_below="@+id/planStockTitle"
                                         android:layout_marginStart="18dp"
                                         android:text="180.06%"
-                                        android:textColor="@color/green"
+                                        android:textColor="@color/white"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
 
@@ -243,7 +243,7 @@
                                         android:layout_marginStart="18dp"
                                         android:layout_marginTop="3dp"
                                         android:text="$000"
-                                        android:textColor="@color/green"
+                                        android:textColor="@color/white"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
 
@@ -295,7 +295,7 @@
                                         android:layout_below="@+id/planMedicineTitle"
                                         android:layout_marginStart="18dp"
                                         android:text="200.08%"
-                                        android:textColor="@color/green"
+                                        android:textColor="@color/white"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
 
@@ -329,7 +329,7 @@
                                         android:layout_marginStart="18dp"
                                         android:layout_marginTop="3dp"
                                         android:text="$000"
-                                        android:textColor="@color/green"
+                                        android:textColor="@color/white"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
 
@@ -380,7 +380,7 @@
                                         android:layout_below="@+id/planForexTitle"
                                         android:layout_marginStart="18dp"
                                         android:text="219.07%"
-                                        android:textColor="@color/green"
+                                        android:textColor="@color/white"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
 
@@ -414,7 +414,7 @@
                                         android:layout_marginStart="18dp"
                                         android:layout_marginTop="3dp"
                                         android:text="$000"
-                                        android:textColor="@color/green"
+                                        android:textColor="@color/white"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
 

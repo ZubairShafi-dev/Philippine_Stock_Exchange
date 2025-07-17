@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@drawable/glassy_action_card_bg"
+        android:background="@drawable/gradient_bg"
         android:foregroundGravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="+17.8%"
-                android:textColor="@android:color/holo_green_light"
+                android:textColor="@android:color/white"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@id/tvPrice"
                 app:layout_constraintTop_toBottomOf="@id/tvPrice" />
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Days :"
-                android:textColor="@android:color/holo_green_light"
+                android:textColor="@android:color/white"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@id/tvChange"
                 app:layout_constraintTop_toBottomOf="@id/tvChange" />

@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/glassy_action_card_bg"
+            android:background="@drawable/gradient_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@null"
-                    android:src="@drawable/app_logo" />
+                    android:src="@drawable/pse" />
             </FrameLayout>
 
             <!-- Main Title -->
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
-                android:backgroundTint="@color/green"
+                android:backgroundTint="@color/progress_blue"
                 android:text="Verified"
                 android:textColor="@color/white"
                 app:cornerRadius="15dp" />
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
-                android:backgroundTint="@color/green"
+                android:backgroundTint="@color/progress_blue"
                 android:text="Resend Email"
                 android:textColor="@color/white"
                 app:cornerRadius="15dp" />
