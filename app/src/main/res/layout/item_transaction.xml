@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Approved"
-                android:textColor="#00ff00"
+                android:textColor="@color/progress_blue"
                 android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>

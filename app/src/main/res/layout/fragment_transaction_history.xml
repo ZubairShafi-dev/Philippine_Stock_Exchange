@@ -83,14 +83,14 @@
                 android:background="@android:color/transparent"
                 app:tabGravity="fill"
                 app:tabIndicator="@drawable/tab_indicator_bg"
-                app:tabIndicatorColor="@color/dark_green"
+                app:tabIndicatorColor="@color/progress_blue"
                 app:tabIndicatorFullWidth="true"
                 app:tabIndicatorGravity="center"
                 app:tabIndicatorHeight="38dp"
                 app:tabMode="fixed"
                 app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="@color/white">
+                app:tabTextColor="@color/black">
 
                 <!-- Each TabItem now has layout_width & layout_height -->
                 <com.google.android.material.tabs.TabItem

@@ -36,7 +36,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
-                    app:cardBackgroundColor="#21FFFFFF"
+                    app:cardBackgroundColor="@color/progress_blue"
                     app:cardCornerRadius="8dp">
 
                     <ImageView
@@ -45,7 +45,7 @@
                         android:layout_height="14dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_home_deposit"
-                        app:tint="@color/green" />
+                        app:tint="@color/white" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <!-- Label -->
