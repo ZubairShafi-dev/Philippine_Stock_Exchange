@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
 import com.pse.pse.models.TransactionModel
 import java.text.SimpleDateFormat
 import java.util.Date

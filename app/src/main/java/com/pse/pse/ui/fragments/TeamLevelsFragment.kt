@@ -13,7 +13,7 @@ import com.pse.pse.R
 import com.pse.pse.databinding.FragmentTeamLevelsBinding
 import com.pse.pse.ui.viewModels.TeamViewModel
 import com.pse.pse.utils.SharedPrefManager
-import com.trustledger.aitrustledger.adapters.TeamLevelAdapter
+import com.pse.pse.adapters.TeamLevelAdapter
 
 class TeamLevelsFragment : BaseFragment() {
 

@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.adapters
+package com.pse.pse.adapters
 
 import android.graphics.Color
 import android.graphics.RenderEffect
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.trustledger.aitrustledger.R
+import com.pse.pse.R
 import com.pse.pse.models.TeamLevelModel
 import com.pse.pse.models.TeamLevelStatus
 
