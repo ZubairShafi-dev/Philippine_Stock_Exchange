@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BEP20"
-            android:textColor="#00FF00"
+            android:textColor="@color/progress_blue"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
@@ -80,7 +80,7 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="4dp"
                 app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#00FF00">
+                app:cardBackgroundColor="@color/progress_blue">
 
                 <ImageView
                     android:layout_width="24dp"

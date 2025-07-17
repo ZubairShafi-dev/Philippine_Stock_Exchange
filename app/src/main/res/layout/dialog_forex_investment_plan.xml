@@ -53,7 +53,7 @@
             android:layout_below="@id/tvSymbol"
             android:layout_marginTop="16dp"
             android:text="Regular"
-            android:textColor="@color/yellow"
+            android:textColor="@color/progress_blue"
             android:textSize="16sp"
             android:textStyle="bold" />
 
