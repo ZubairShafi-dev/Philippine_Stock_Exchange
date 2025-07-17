@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/glassy_action_card_bg"
+            android:background="@drawable/gradient_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -67,11 +67,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Collect Reward"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:id="@+id/collectRewardButton"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:cornerRadius="15dp"
-                android:backgroundTint="@color/yellow"
+                android:backgroundTint="@color/progress_blue"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center_horizontal" />
 

@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/glassy_action_card_bg"
+            android:background="@drawable/gradient_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -72,16 +72,16 @@
            <RelativeLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent" android:orientation="vertical"
-               android:background="#473E16"
+               android:background="@color/progress_blue"
                >
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Collect Reward"
-                   android:textSize="14sp"
+                   android:textSize="16sp"
                    android:layout_centerInParent="true"
                    android:textStyle="bold"
-                   android:textColor="@color/black"/>
+                   android:textColor="@color/white"/>
                <ImageView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

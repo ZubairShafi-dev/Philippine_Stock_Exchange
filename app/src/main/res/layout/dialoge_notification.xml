@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/glassy_action_card_bg"
+            android:background="@drawable/gradient_bg"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -29,7 +29,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="This Week"
-                android:textColor="@color/green"
+                android:textColor="@color/black"
                 android:textSize="13sp"
                 android:textStyle="bold" />
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="ClearNotifications"
                 android:layout_alignParentEnd="true"
-                android:textColor="@color/green"
+                android:textColor="@color/black"
                 android:textSize="13sp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginVertical="8dp"

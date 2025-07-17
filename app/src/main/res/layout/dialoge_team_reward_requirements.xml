@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/glassy_action_card_bg"
+            android:background="@drawable/gradient_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -72,7 +72,7 @@
                             android:layout_gravity="start|top"
                             android:layout_marginTop="8dp"
                             android:text="Min Investment"
-                            android:textColor="@android:color/darker_gray"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
                         <!-- Amount -->
@@ -126,7 +126,7 @@
                             android:layout_gravity="start|top"
                             android:layout_marginTop="8dp"
                             android:text="Active Team"
-                            android:textColor="@android:color/darker_gray"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
                         <!-- Amount -->
@@ -180,7 +180,7 @@
                             android:layout_gravity="start|top"
                             android:layout_marginTop="8dp"
                             android:text="Direct Buisness"
-                            android:textColor="@android:color/darker_gray"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
                         <!-- Amount -->
@@ -234,7 +234,7 @@
                             android:layout_gravity="start|top"
                             android:layout_marginTop="8dp"
                             android:text="Group Sell"
-                            android:textColor="@color/Light_Grey"
+                            android:textColor="@color/white"
                             android:textSize="13sp" />
 
                         <!-- Amount -->
@@ -269,9 +269,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/yellow"
+                android:backgroundTint="@color/progress_blue"
                 android:text="Collect Reward"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 app:cornerRadius="15dp" />
 
         </LinearLayout>
