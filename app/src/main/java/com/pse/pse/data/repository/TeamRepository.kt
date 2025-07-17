@@ -1,23 +1,17 @@
 package com.pse.pse.data.repository
 
 import android.util.Log
-import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.functions.functions
 import com.pse.pse.models.AchievementModel
-import com.pse.pse.models.CreditMeta
 import com.pse.pse.models.LevelCondition
-import com.pse.pse.models.TeamLevelModel
-import com.pse.pse.models.TeamLevelStatus
 import com.pse.pse.models.TeamStats
 import com.pse.pse.models.TransactionModel
-import com.pse.pse.models.UserListModel
 import kotlinx.coroutines.tasks.await
 
 class TeamRepository {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val functions = Firebase.functions
+  /*  private val functions = Firebase.functions*/
 
 
     /**
@@ -25,7 +19,7 @@ class TeamRepository {
      *
      * @return Pair(first = list of level stats, second = profit meta)
      */
-    suspend fun fetchLevelsAndMaybeCredit(
+   /* suspend fun fetchLevelsAndMaybeCredit(
         userId: String
     ): Pair<List<TeamLevelStatus>, CreditMeta> {
 
@@ -34,12 +28,12 @@ class TeamRepository {
             .getHttpsCallable("computeTeamLevelsAndCreditProfit")
             .call(data).await().data as HashMap<*, *>
 
-        /* ---------- levels ---------- */
+        *//* ---------- levels ---------- *//*
         @Suppress("UNCHECKED_CAST")
         val levelsRaw = result["levels"] as List<HashMap<String, *>>
 
         val levels = levelsRaw.map { m ->
-            /* users -------------------------------------------------------- */
+            *//* users -------------------------------------------------------- *//*
             @Suppress("UNCHECKED_CAST")
             val usersRaw = m["users"] as List<HashMap<String, *>>
             val users = usersRaw.map { u ->
@@ -64,14 +58,14 @@ class TeamRepository {
             TeamLevelStatus(tl, m["levelUnlocked"] as Boolean)
         }
 
-        /* ---------- meta ---------- */
+        *//* ---------- meta ---------- *//*
         val meta = CreditMeta(
             booked         = result["profitBooked"] as Boolean,
             creditedAmount = (result["creditedAmount"] as Number).toDouble()
         )
 
         return levels to meta
-    }
+    }*/
 
     private suspend fun getActiveDirectReferrals(uid: String): List<String> {
         return try {

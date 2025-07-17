@@ -26,6 +26,7 @@ class TeamViewModel : ViewModel() {
 
     val claimedRewards = mutableSetOf<Int>()
 
+/*
     fun loadEverything(userId: String) = viewModelScope.launch {
         try {
             val (levels, meta) = teamRepository.fetchLevelsAndMaybeCredit(userId)
@@ -42,6 +43,7 @@ class TeamViewModel : ViewModel() {
             Log.e("TeamVM", "❌ Cloud call failed", e)
         }
     }
+*/
 
     fun fetchTeamStats(userId: String) {
         viewModelScope.launch {

@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
-    id ("kotlin-parcelize")
+    id("kotlin-parcelize")
+
+
+
 }
 
 android {
@@ -52,6 +55,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.common)
+    implementation(libs.androidx.gridlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,6 +78,9 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.auth)
     ksp(libs.androidx.room.compiler)
+
+    implementation(libs.circleimageview)
+
 
     // UI
     implementation(libs.lottie)
@@ -101,7 +108,7 @@ dependencies {
 // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-
+    implementation(platform("com.google.firebase:firebase-bom:32.3.0"))
 // Firebase Storage
     implementation("com.google.firebase:firebase-storage-ktx:21.0.2")
     implementation ("androidx.viewpager2:viewpager2:1.1.0")

@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.R
+import com.pse.pse.R
+
 
 /**
  * A simple ViewPager2 adapter that takes a list of image URLs

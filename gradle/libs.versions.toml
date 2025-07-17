@@ -35,14 +35,17 @@ kotlinxCoroutinesAndroid    = "1.7.3"
 kotlinxCoroutinesTest       = "1.7.3"
 mockitoCore                 = "5.6.0"
 mockitoKotlin               = "4.1.0"
-firebaseBom                 = "32.0.0"
-firebaseConfigKtx           = "23.2.1"
+firebaseBom                 = "32.3.0"
+firebaseConfigKtx           = "22.1.2"
 firebaseStorage             = "20.1.0"
 navigationFragmentKtxVersion= "2.9.0"
 navigationUiKtxVersion      = "2.9.0"
 googleAuthLibraryOauth2Http = "1.2.0"
 ultraPtr                    = "1.0.11"
-common = "18.11.0"  # ← newly added
+common = "18.11.0"
+gridlayout = "1.1.0"  # ← newly added
+circleImageView = "3.1.0"
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -59,7 +62,7 @@ material                                    = { module = "com.google.android.mat
 androidx-activity                           = { module = "androidx.activity:activity", version.ref = "activity" }
 androidx-constraintlayout                   = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-navigation-compose                 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-firebase-bom                                = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-bom                = { module = "com.google.firebase:firebase-bom",     version.ref = "firebaseBom" }
 glide                                       = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 gson                                        = { module = "com.google.code.gson:gson", version.ref = "gson" }
 lottie                                      = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
@@ -68,7 +71,6 @@ grpc-core                                   = { module = "io.grpc:grpc-core", ve
 grpc-okhttp                                 = { module = "io.grpc:grpc-okhttp", version.ref = "grpcOkhttp" }
 grpc-protobuf-lite                          = { module = "io.grpc:grpc-protobuf-lite", version.ref = "grpcProtobufLite" }
 grpc-stub                                   = { module = "io.grpc:grpc-stub", version.ref = "grpcStub" }
-circleimageview                             = { module = "de.hdodenhof:circleimageview", version.ref = "cardview" }
 androidx-lifecycle-livedata-ktx             = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-runtime-ktx              = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-viewmodel-ktx            = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
@@ -80,7 +82,7 @@ firebase-auth-ktx                           = { module = "com.google.firebase:fi
 firebase-firestore                          = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestore" }
 firebase-auth                               = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-messaging                          = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
-firebase-config-ktx                         = { module = "com.google.firebase:firebase-config-ktx", version.ref = "firebaseConfigKtx" }
+firebase-config-ktx          = { module = "com.google.firebase:firebase-config-ktx", version.ref = "firebaseConfigKtx" }
 firebase-storage                            = { module = "com.google.firebase:firebase-storage", version.ref = "firebaseStorage" }
 volley                                      = { module = "com.android.volley:volley", version.ref = "volley" }
 okhttp                                      = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
@@ -102,3 +104,5 @@ firebase-analytics-ktx                      = { module = "com.google.firebase:fi
 firebase-config                             = { module = "com.google.firebase:firebase-config", version.ref = "firebaseConfigKtx" }
 firebase-functions-ktx                      = { module = "com.google.firebase:firebase-functions-ktx" }
 common = { group = "com.google.mlkit", name = "common", version.ref = "common" }
+androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleImageView" }

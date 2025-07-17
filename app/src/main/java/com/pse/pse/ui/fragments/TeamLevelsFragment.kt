@@ -61,10 +61,10 @@ class TeamLevelsFragment : BaseFragment() {
 
         // ——— kick-off load ———
         val userId = SharedPrefManager(requireContext()).getId()
-        if (userId != null) {
+        /*if (userId != null) {
             teamViewModel.loadEverything(userId)
         }
-
+*/
         // ——— observe combined list (stats + lock state) ———
         teamViewModel.teamLevelsWithStats.observe(viewLifecycleOwner) { list ->
             teamLevelAdapter.submitList(list)

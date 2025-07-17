@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pse.pse.R
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.ItemMedicineInvestmentBinding
+import com.pse.pse.databinding.ItemMedicineInvestmentBinding
 import com.pse.pse.models.UserPlanModel
 
 class BoughtMedicineAdapter(
