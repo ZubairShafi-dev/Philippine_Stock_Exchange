@@ -45,6 +45,13 @@ android {
         buildConfig = true
     }
 
+    packaging {
+        resources {
+            // exclude the duplicate META-INF/DEPENDENCIES entries
+            excludes += "META-INF/DEPENDENCIES"
+        }
+    }
+
 }
 
 dependencies {

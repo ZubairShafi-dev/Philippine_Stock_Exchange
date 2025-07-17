@@ -23,12 +23,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.storage.FirebaseStorage
+import com.pse.pse.R
+import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.databinding.FragmentProfileBinding
 import com.pse.pse.ui.viewModels.ProfileViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
-import com.trustledger.aitrustledger.R
-import com.pse.pse.adapters.NotificationAdapter
 
 class ProfileFragment : BaseFragment() {
 

@@ -2,9 +2,8 @@ package com.pse.pse.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.trustledger.aitrustledger.models.NotificationModel
+import com.pse.pse.models.NotificationModel
 import org.json.JSONObject
-import kotlin.collections.iterator
 
 class NotificationPreferenceManager(private val context: Context) {
 

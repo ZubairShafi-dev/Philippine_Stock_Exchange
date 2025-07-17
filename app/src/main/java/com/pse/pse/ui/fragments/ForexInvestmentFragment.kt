@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.pse.pse.R
+import com.pse.pse.adapters.ForexPlanAdapter
 import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.DialogeBuyMedicineBinding
 import com.pse.pse.databinding.FragmentForexInvestmentBinding
 import com.pse.pse.models.PlanModel
 import com.pse.pse.ui.viewModels.PlanViewModel
 import com.pse.pse.ui.viewModels.PlanViewModelFactory
 import com.pse.pse.utils.Status
-import com.trustledger.aitrustledger.R
-import com.pse.pse.adapters.ForexPlanAdapter
-import com.trustledger.aitrustledger.databinding.DialogeBuyMedicineBinding
 import kotlinx.coroutines.launch
 
 class ForexInvestmentFragment : BaseFragment() {

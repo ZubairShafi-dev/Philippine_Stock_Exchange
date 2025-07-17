@@ -27,8 +27,6 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentDepositAmountBinding
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.databinding.FragmentDepositAmountBinding
 import com.pse.pse.ui.viewModels.TransactionViewModel
 import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +38,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
-
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 

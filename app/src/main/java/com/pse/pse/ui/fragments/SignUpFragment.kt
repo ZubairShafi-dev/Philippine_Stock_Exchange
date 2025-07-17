@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.firebase.Timestamp
+import com.pse.pse.R
 import com.pse.pse.databinding.FragmentSignUpBinding
 import com.pse.pse.ui.viewModels.AuthViewModel
 import com.pse.pse.utils.SharedPrefManager
-import com.trustledger.aitrustledger.R
 
 class SignUpFragment : BaseFragment() {
 

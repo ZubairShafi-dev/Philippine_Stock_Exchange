@@ -25,7 +25,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import com.trustledger.aitrustledger.databinding.DialogUpdateBinding
+import com.pse.pse.databinding.DialogUpdateBinding
 import com.trustledger.aitrustledger.utils.UpdateDownloadReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

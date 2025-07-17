@@ -31,15 +31,16 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.FirebaseFirestore
 import com.pse.pse.R
-import com.trustledger.aitrustledger.adapters.AnnouncementAdapter
+import com.pse.pse.adapters.AnnouncementAdapter
 import com.pse.pse.adapters.AnnouncementSliderAdapter
 import com.pse.pse.adapters.HomeScreenAdapter
 import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.data.repository.AuthRepository
 import com.pse.pse.data.repository.BuyPlanRepo
+import com.pse.pse.databinding.DialogeBuyMedicineBinding
+import com.pse.pse.databinding.DialogueBuyStockBinding
 import com.pse.pse.databinding.FragmentHomeBinding
-import com.trustledger.aitrustledger.databinding.DialogeBuyMedicineBinding
-import com.trustledger.aitrustledger.databinding.DialogueBuyStockBinding
+
 import com.pse.pse.models.AnnouncementModel
 import com.pse.pse.models.PlanModel
 import com.pse.pse.ui.viewModels.AccountViewModel
