@@ -16,7 +16,7 @@ import com.pse.pse.databinding.FragmentDetailChatBinding
 import com.pse.pse.models.chat.Admin
 import com.pse.pse.ui.viewModels.ChatViewModel
 import com.pse.pse.utils.SharedPrefManager
-import com.trustledger.aitrustledger.adapters.chat.ChatDetailAdapter
+import com.pse.pse.adapters.chat.ChatDetailAdapter
 import com.trustledger.aitrustledger.fcm.AccessToken
 import com.trustledger.aitrustledger.fcm.Fcm
 

@@ -12,8 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentChatBinding
-import com.trustledger.aitrustledger.R
-import com.trustledger.aitrustledger.adapters.chat.ChatPreviewAdapter
+import com.pse.pse.adapters.chat.ChatPreviewAdapter
 import com.pse.pse.data.repository.chat.ChatViewModelFactory
 import com.pse.pse.models.chat.Admin
 import com.pse.pse.models.chat.ChatPreview
