@@ -75,7 +75,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:contentDescription="@string/add_support_request"
-        app:backgroundTint="@color/green"
+        app:backgroundTint="@color/progress_blue"
         app:shapeAppearanceOverlay="@style/FabShape.Circle"
         app:srcCompat="@drawable/ic_add"
         app:tint="@android:color/white" />

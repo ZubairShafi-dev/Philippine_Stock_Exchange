@@ -21,7 +21,7 @@
                 android:layout_height="180dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
-                android:src="@drawable/app_logo" />
+                android:src="@drawable/pse" />
 
             <!-- Let’s Sign In -->
             <TextView
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background=""
                     android:padding="26dp">
 
                     <TextView
@@ -69,7 +70,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="26dp"
                         android:text="@string/sign_in_to_your_account"
-                        android:textColor="#CCCCCC"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <!-- Email -->
@@ -126,7 +127,7 @@
                         android:minHeight="52dp"
                         android:text="@string/login"
                         android:textColor="@android:color/white"
-                        app:backgroundTint="@color/green"
+                        app:backgroundTint="@color/progress_blue"
                         app:cornerRadius="30dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -144,14 +145,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/don_t_have_an_account"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/signUpLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_up"
-                    android:textColor="@color/light_green"
+                    android:textColor="@color/progress_blue"
                     android:textStyle="bold" />
             </LinearLayout>
 
