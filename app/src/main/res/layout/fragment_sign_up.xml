@@ -59,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="First Name"
-                        android:textColorHint="@color/light_green"
+                        android:textColorHint="@color/white"
                         app:endIconDrawable="@drawable/ic_check_circle"
                         app:endIconTint="@color/white">
 
@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="Last Name"
-                        android:textColorHint="@color/light_green"
+                        android:textColorHint="@color/white"
                         app:endIconDrawable="@drawable/ic_check_circle"
                         app:endIconTint="@color/white">
 
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="Email Address"
-                        android:textColorHint="@color/light_green"
+                        android:textColorHint="@color/white"
                         app:endIconDrawable="@drawable/ic_check_circle"
                         app:endIconTint="@color/white">
 
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="Password"
-                        android:textColorHint="@color/light_green"
+                        android:textColorHint="@color/white"
                         app:endIconMode="password_toggle">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -134,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="Phone Number"
-                        android:textColorHint="@color/light_green"
+                        android:textColorHint="@color/white"
                         app:endIconDrawable="@drawable/ic_check_circle"
                         app:endIconTint="@color/white">
 
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="Referel Code"
-                        android:textColorHint="@color/light_green"
+                        android:textColorHint="@color/white"
                         app:endIconDrawable="@drawable/ic_check_circle"
                         app:endIconTint="@color/white">
 
