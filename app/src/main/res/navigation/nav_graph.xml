@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/boughtStocksFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.BoughtStocks"
+        android:name="com.pse.pse.ui.fragments.BoughtStocks"
         android:label="Bought Stocks"
         tools:layout="@layout/fragment_bought_stocks" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.chat.ChatFragment"
+        android:name="com.pse.pse.ui.fragments.chat.ChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat">
 
@@ -31,13 +31,13 @@
 
     <fragment
         android:id="@+id/forexInvestmentFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.ForexInvestmentFragment"
+        android:name="com.pse.pse.ui.fragments.ForexInvestmentFragment"
         android:label="Forex Investment"
         tools:layout="@layout/fragment_forex_investment" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.HomeFragment"
+        android:name="com.pse.pse.ui.fragments.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
         <action
@@ -128,31 +128,31 @@
 
     <fragment
         android:id="@+id/medicineInvestmenetPlanFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.MedicineInvestmentPlan"
+        android:name="com.pse.pse.ui.fragments.MedicineInvestmentPlan"
         android:label="Medicine Investment Plan"
         tools:layout="@layout/fragment_medicine_investment_plan" />
 
     <fragment
         android:id="@+id/withdrawAmountFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.WithdrawAmountFragment"
+        android:name="com.pse.pse.ui.fragments.WithdrawAmountFragment"
         android:label="Withdraw Amount"
         tools:layout="@layout/fragment_withdraw_amount" />
 
     <fragment
         android:id="@+id/depositAmountFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.DepositAmountFragment"
+        android:name="com.pse.pse.ui.fragments.DepositAmountFragment"
         android:label="Deposit Amount"
         tools:layout="@layout/fragment_deposit_amount" />
 
     <fragment
         android:id="@+id/newSupportRequestFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.NewSupportRequestFragment"
+        android:name="com.pse.pse.ui.fragments.NewSupportRequestFragment"
         android:label="New Support Request"
         tools:layout="@layout/fragment_new_support_request" />
 
     <fragment
         android:id="@+id/plansFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.PlansFragment"
+        android:name="com.pse.pse.ui.fragments.PlansFragment"
         android:label="@string/plans"
         tools:layout="@layout/fragment_plans">
         <action
@@ -180,7 +180,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.ProfileFragment"
+        android:name="com.pse.pse.ui.fragments.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile">
 
@@ -196,7 +196,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.SignInFragment"
+        android:name="com.pse.pse.ui.fragments.SignInFragment"
         android:label="@string/sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -221,7 +221,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.SignUpFragment"
+        android:name="com.pse.pse.ui.fragments.SignUpFragment"
         android:label="@string/sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -235,7 +235,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.SplashFragment"
+        android:name="com.pse.pse.ui.fragments.SplashFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_splash">
 
@@ -258,7 +258,7 @@
 
     <fragment
         android:id="@+id/stockInvestmentPlansFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.StockInvestmentPlansFragment"
+        android:name="com.pse.pse.ui.fragments.StockInvestmentPlansFragment"
         android:label="@string/stock_investment_plans"
         tools:layout="@layout/fragment_stock_investment_plan">
         <action
@@ -268,13 +268,13 @@
 
     <fragment
         android:id="@+id/supportChatFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.SupportChatFragment"
+        android:name="com.pse.pse.ui.fragments.SupportChatFragment"
         android:label="Support Chat"
         tools:layout="@layout/fragment_support_chat" />
 
     <fragment
         android:id="@+id/supportFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.SupportFragment"
+        android:name="com.pse.pse.ui.fragments.SupportFragment"
         android:label="@string/support"
         tools:layout="@layout/fragment_support">
         <action
@@ -287,7 +287,7 @@
 
     <fragment
         android:id="@+id/teamFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.TeamFragment"
+        android:name="com.pse.pse.ui.fragments.TeamFragment"
         android:label="@string/team"
         tools:layout="@layout/fragment_team">
         <action
@@ -300,7 +300,7 @@
 
     <fragment
         android:id="@+id/teamLevelsFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.TeamLevelsFragment"
+        android:name="com.pse.pse.ui.fragments.TeamLevelsFragment"
         android:label="@string/team"
         tools:layout="@layout/fragment_team_levels" >
         <action
@@ -310,31 +310,31 @@
 
     <fragment
         android:id="@+id/teamRankingFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.TeamRankingFragment"
+        android:name="com.pse.pse.ui.fragments.TeamRankingFragment"
         android:label="Team Ranking"
         tools:layout="@layout/fragment_team_ranking" />
 
 
     <fragment
         android:id="@+id/transactionHistoryFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.TransactionHistoryFragment"
+        android:name="com.pse.pse.ui.fragments.TransactionHistoryFragment"
         android:label="@string/history"
         tools:layout="@layout/fragment_transaction_history" />
 
     <fragment
         android:id="@+id/boughtForexFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.BoughtForexFragment"
+        android:name="com.pse.pse.ui.fragments.BoughtForexFragment"
         android:label="boughtForex"
         tools:layout="@layout/fragment_bought_forex" />
 
     <fragment
         android:id="@+id/boughtMedicinesFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.BoughtMedicinesFragment"
+        android:name="com.pse.pse.ui.fragments.BoughtMedicinesFragment"
         android:label="boughtMedicine"
         tools:layout="@layout/fragment_bought_medicines" />
     <fragment
         android:id="@+id/levelUsersFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.LevelUsersFragment"
+        android:name="com.pse.pse.ui.fragments.LevelUsersFragment"
         android:label="fragment_level_users"
         tools:layout="@layout/fragment_level_users" />
 

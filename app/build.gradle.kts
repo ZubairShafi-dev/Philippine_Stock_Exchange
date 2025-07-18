@@ -1,12 +1,14 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
+    // core Android + Kotlin plugins
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    // code‐gen, parcelize…
+    id("com.google.devtools.ksp")version "2.0.21-1.0.27"
     id("kotlin-parcelize")
-
-
-
+    // Firebase auto‐init
+    id("com.google.gms.google-services")version "4.4.2"
 }
+
 
 android {
     namespace = "com.pse.pse"
