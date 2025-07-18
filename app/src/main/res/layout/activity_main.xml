@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@drawable/glassy_drawer_bg"
+            android:background="@drawable/drawer_background"
             android:orientation="vertical"
             android:padding="24dp">
 

@@ -218,6 +218,7 @@ class HomeFragment : BaseFragment() {
                 }
             }
         })
+/*
         binding.inputReferral.apply {
             // 1) Display the link and keep it non-editable
             val referralLink = "http://aitrustledger.com/?ref=$userId"
@@ -255,15 +256,16 @@ class HomeFragment : BaseFragment() {
                 false
             }
         }
+*/
 
 // ─── Display raw referral code (userId) and set up “Copy Code” tap ────
-        binding.textReferralCode.text = userId
+        /*binding. textReferralCode.text = userId
         (binding.textReferralCode.parent as? View)?.setOnClickListener {
             val clipboard = requireContext().getSystemService(ClipboardManager::class.java)
             val clip = ClipData.newPlainText("Referral Code", userId)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireContext(), "Code copied to clipboard", Toast.LENGTH_SHORT).show()
-        }
+        }*/
 
         setupPullToRefresh()
     }

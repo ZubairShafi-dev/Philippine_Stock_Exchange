@@ -16,8 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        app:indicatorColor="@color/green"
+        app:indicatorColor="@color/white"
         app:indicatorSize="32dp"
-        app:trackColor="@color/green"
+        app:trackColor="@color/white"
         app:trackThickness="16dp" />
 </FrameLayout>

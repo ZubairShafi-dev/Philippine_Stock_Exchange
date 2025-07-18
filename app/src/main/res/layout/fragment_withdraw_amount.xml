@@ -58,7 +58,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 android:hint="Enter Wallet Address"
-                android:textColorHint="@color/light_green">
+                android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/walletAddress"

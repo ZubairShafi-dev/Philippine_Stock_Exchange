@@ -185,7 +185,7 @@ class TransactionHistoryFragment : BaseFragment() {
                 isChecked = index == currentIndex
                 setTextColor(ContextCompat.getColor(context, android.R.color.white))
                 buttonTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(context, R.color.dark_green))
+                    ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
                 textSize = 18f
                 gravity = Gravity.CENTER_VERTICAL
                 setPadding(24, 46, 24, 46)

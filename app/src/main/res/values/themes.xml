@@ -15,7 +15,7 @@
         <item name="boxCornerRadiusTopEnd">16dp</item>
         <item name="boxCornerRadiusBottomStart">16dp</item>
         <item name="boxCornerRadiusBottomEnd">16dp</item>
-        <item name="boxStrokeColor">@color/text_input_stroke</item>
+        <item name="boxStrokeColor">@color/white</item>
         <item name="hintTextColor">@color/white</item>
     </style>
 

@@ -497,7 +497,9 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="66dp"
+                        android:background="@drawable/gradient_bg"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -518,7 +520,7 @@
                             android:layout_marginHorizontal="26dp"
                             android:layout_marginTop="16dp"
                             android:text="See All"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -540,7 +542,9 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="66dp"
+                        android:background="@drawable/gradient_bg"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -561,7 +565,7 @@
                             android:layout_marginHorizontal="26dp"
                             android:layout_marginTop="16dp"
                             android:text="See All"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -584,7 +588,9 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="66dp"
+                        android:background="@drawable/gradient_bg"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -605,7 +611,7 @@
                             android:layout_marginHorizontal="26dp"
                             android:layout_marginTop="16dp"
                             android:text="See All"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -635,6 +641,7 @@
                             app:cardElevation="0dp"
                             app:strokeWidth="0dp"
                             >
+<!--
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -642,13 +649,13 @@
                                 android:elevation="4dp"
                                 android:orientation="vertical" android:padding="16dp">
 
-                                <!-- Top row: icon, label, referral code, copy button -->
+                                &lt;!&ndash; Top row: icon, label, referral code, copy button &ndash;&gt;
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="12dp">
 
-                                    <!-- Icon box -->
+                                    &lt;!&ndash; Icon box &ndash;&gt;
                                     <ImageView
                                         android:id="@+id/iconRef"
                                         android:layout_width="38dp"
@@ -660,7 +667,7 @@
                                         android:scaleType="centerInside"
                                         android:src="@drawable/ic_user_add" />
 
-                                    <!-- Referral Code Label and Number -->
+                                    &lt;!&ndash; Referral Code Label and Number &ndash;&gt;
                                     <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -673,7 +680,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom"
                                             android:text="Refferel Code"
-                                            android:textColor="#EDEDED"
+                                            android:textColor="@color/black"
                                             android:textSize="11sp" />
 
                                         <TextView
@@ -687,7 +694,7 @@
                                             android:textStyle="bold" />
                                     </LinearLayout>
 
-                                    <!-- Copy Code -->
+                                    &lt;!&ndash; Copy Code &ndash;&gt;
                                     <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -699,7 +706,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Copy Code"
-                                            android:textColor="#DDDDDD"
+                                            android:textColor="@color/white"
                                             android:textSize="13sp" />
 
                                         <ImageView
@@ -710,7 +717,7 @@
                                     </LinearLayout>
                                 </RelativeLayout>
 
-                                <!-- Input with right-end icon -->
+                                &lt;!&ndash; Input with right-end icon &ndash;&gt;
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -733,6 +740,7 @@
                                         android:textSize="13sp" />
                                 </RelativeLayout>
                             </LinearLayout>
+-->
                         </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
 

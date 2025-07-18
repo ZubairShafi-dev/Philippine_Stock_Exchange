@@ -28,7 +28,7 @@ class AuthRepository(application: Application) {
 
     // Function to generate a unique user ID
     private suspend fun generateUniqueUserId(): String {
-        val prefix = "U"  // Prefix for user ID
+        val prefix = "C"  // Prefix for user ID
         var userId: String
         var exists: Boolean
 

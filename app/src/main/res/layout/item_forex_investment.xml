@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/glassy_action_card_bg"
+        android:background="@drawable/gradient_bg"
         android:padding="16dp">
 
         <!-- Coin Icon -->
