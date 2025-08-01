@@ -1,5 +1,5 @@
 [versions]
-agp                         = "8.11.0"
+agp                         = "8.12.0"
 kotlin                      = "2.0.21"
 coreKtx                     = "1.16.0"
 core                        = "3.5.0"
@@ -45,6 +45,7 @@ ultraPtr                    = "1.0.11"
 common = "18.11.0"
 gridlayout = "1.1.0"  # ← newly added
 circleImageView = "3.1.0"
+firebaseFunctions = "22.0.0"
 
 
 [plugins]
@@ -106,3 +107,4 @@ firebase-functions-ktx                      = { module = "com.google.firebase:fi
 common = { group = "com.google.mlkit", name = "common", version.ref = "common" }
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleImageView" }
+firebase-functions = { group = "com.google.firebase", name = "firebase-functions", version.ref = "firebaseFunctions" }
