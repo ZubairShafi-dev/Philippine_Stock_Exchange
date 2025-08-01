@@ -3,32 +3,27 @@ package com.pse.pse.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
-import com.pse.pse.models.PlanModel
-import com.pse.pse.utils.Constants
+import com.pse.pse.models.Plan
+
+
 
 class PlanRepository {
 
+    private val firestore = FirebaseFirestore.getInstance()
 
-    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private var planListener: ListenerRegistration? = null
+    fun getPlans(): LiveData<List<Plan>> {
+        val plansLiveData = MutableLiveData<List<Plan>>()
 
-
-
-    fun     getPlans(): LiveData<List<PlanModel>> {
-        val plansLiveData = MutableLiveData<List<PlanModel>>()
-
-        planListener = db.collection(Constants.PLAN_COLLECTION)
-            .addSnapshotListener { snapshots, e ->
-                if (e != null) {
-                    plansLiveData.value = emptyList()
-                    return@addSnapshotListener
-                }
-                val recitations = snapshots?.documents?.mapNotNull { document ->
-                    document.toObject(PlanModel::class.java)
-                }
-                plansLiveData.value = recitations ?: emptyList()
+        firestore.collection("plans")
+            .get()
+            .addOnSuccessListener { result ->
+                val planList = result.map { it.toObject(Plan::class.java) }
+                plansLiveData.postValue(planList)
             }
+            .addOnFailureListener {
+                plansLiveData.postValue(emptyList())
+            }
+
         return plansLiveData
     }
 }
