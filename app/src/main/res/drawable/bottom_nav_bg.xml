@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-    <!-- Base dark green gradient background -->
-    <item>
-        <shape android:shape="rectangle">
-            <gradient
-                android:angle="0"
-                android:centerColor="#2196F3"
-                android:endColor="#2196F3"
-                android:startColor="#03A9F4" />
-        </shape>
-    </item>
+    <corners
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
 
-    <!-- Semi-transparent white overlay for frosted effect -->
-    <item>
-        <shape android:shape="rectangle">
-            <solid android:color="#33FFFFFF" /> <!-- 20% white -->
-        </shape>
-    </item>
+    <gradient
+        android:angle="25"
+        android:startColor="#0459B8"
+        android:centerColor="#055BBC"
+        android:endColor="#022C5B"
+        android:type="linear"
+        android:useLevel="false" />
 
-    <!-- Thin top highlight line -->
-    <item android:top="0dp">
-        <shape android:shape="rectangle">
-            <size android:height="1dp" />
-            <solid android:color="#44FFFFFF" /> <!-- faint white line -->
-        </shape>
-    </item>
 
-</layer-list>
+</shape>
