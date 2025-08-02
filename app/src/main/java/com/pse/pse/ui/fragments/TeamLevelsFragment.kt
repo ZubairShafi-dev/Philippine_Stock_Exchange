@@ -10,10 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pse.pse.R
+import com.pse.pse.adapters.TeamLevelAdapter
 import com.pse.pse.databinding.FragmentTeamLevelsBinding
 import com.pse.pse.ui.viewModels.TeamViewModel
 import com.pse.pse.utils.SharedPrefManager
-import com.pse.pse.adapters.TeamLevelAdapter
 
 class TeamLevelsFragment : BaseFragment() {
 
@@ -61,10 +61,10 @@ class TeamLevelsFragment : BaseFragment() {
 
         // ——— kick-off load ———
         val userId = SharedPrefManager(requireContext()).getId()
-        /*if (userId != null) {
+        if (userId != null) {
             teamViewModel.loadEverything(userId)
         }
-*/
+
         // ——— observe combined list (stats + lock state) ———
         teamViewModel.teamLevelsWithStats.observe(viewLifecycleOwner) { list ->
             teamLevelAdapter.submitList(list)
