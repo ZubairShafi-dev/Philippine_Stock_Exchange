@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.ui.fragments.chat
+package com.pse.pse.ui.fragments.chat
 
 import android.os.Bundle
 import android.util.Log
