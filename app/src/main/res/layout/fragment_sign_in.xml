@@ -69,7 +69,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="26dp"
                         android:text="@string/sign_in_to_your_account"
-                        android:textColor="@color/black"
+                        android:textColor="@color/Light_Grey"
                         android:textSize="14sp" />
 
                     <!-- Email -->
