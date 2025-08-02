@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.pse.pse" />
-                  <option name="mobileSdkAppId" value="1:347675643482:android:6c7b053b52b62a1e575263" />
-                  <option name="projectId" value="philippine-stock-exchang-296cd" />
-                  <option name="projectNumber" value="347675643482" />
+                  <option name="mobileSdkAppId" value="1:521125747682:android:86d57d4274f216adb3f7bb" />
+                  <option name="projectId" value="philippine-stock-exchange-db" />
+                  <option name="projectNumber" value="521125747682" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
