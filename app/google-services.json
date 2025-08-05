@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "521125747682",
-    "project_id": "philippine-stock-exchange-db",
-    "storage_bucket": "philippine-stock-exchange-db.firebasestorage.app"
+    "project_number": "324672116485",
+    "project_id": "philippine-stock-exchang-db",
+    "storage_bucket": "philippine-stock-exchang-db.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:521125747682:android:86d57d4274f216adb3f7bb",
+        "mobilesdk_app_id": "1:324672116485:android:4c267bb62516fdd9c9c96c",
+        "android_client_info": {
+          "package_name": "com.codingempire.adminpse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmQk6Lv7yaFXed6jyBsRb1EgZcA8hv1Zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324672116485:android:d494c0b8753f37b8c9c96c",
         "android_client_info": {
           "package_name": "com.pse.pse"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBwj2BSGA4PFQEdzXOCSb6XIt1clRLJGeg"
+          "current_key": "AIzaSyDmQk6Lv7yaFXed6jyBsRb1EgZcA8hv1Zk"
         }
       ],
       "services": {
