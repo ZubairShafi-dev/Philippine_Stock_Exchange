@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pse.pse.data.repository.TeamRepository
 import com.pse.pse.models.AchievementModel
 import com.pse.pse.models.TeamLevelStatus
 import com.pse.pse.models.TeamStats
-import com.pse.pse.data.repository.TeamRepository
 import kotlinx.coroutines.launch
 
 class TeamViewModel : ViewModel() {
@@ -26,7 +26,6 @@ class TeamViewModel : ViewModel() {
 
     val claimedRewards = mutableSetOf<Int>()
 
-/*
     fun loadEverything(userId: String) = viewModelScope.launch {
         try {
             val (levels, meta) = teamRepository.fetchLevelsAndMaybeCredit(userId)
@@ -43,7 +42,6 @@ class TeamViewModel : ViewModel() {
             Log.e("TeamVM", "❌ Cloud call failed", e)
         }
     }
-*/
 
     fun fetchTeamStats(userId: String) {
         viewModelScope.launch {
@@ -88,4 +86,3 @@ class TeamViewModel : ViewModel() {
         }
     }
 }
-

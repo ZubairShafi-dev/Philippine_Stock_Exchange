@@ -374,7 +374,9 @@ class HomeFragment : BaseFragment() {
         itemForexPlan.setOnClickListener { navigateToPlan("Forex") }
         withdrawAmount.itemWithdrawAmount.setOnClickListener { findNavController().navigate(R.id.action_home_to_withdrawAmount) }
         depositAmount.itemDepositAmount.setOnClickListener { findNavController().navigate(R.id.action_home_to_depositAmount) }
+/*
         boughtPlans.itemPlansBought.setOnClickListener { findNavController().navigate(R.id.action_home_to_plans) }
+*/
 
         notificationIcon.setOnClickListener { showNotificationsDialog() }
         seeAllStocks.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_stockInvestmentPlansFragment) }

@@ -40,13 +40,6 @@
         android:name="com.pse.pse.ui.fragments.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_home_to_plans"
-            app:destination="@id/plansFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
 
         <action
             android:id="@+id/action_home_to_chatBox"
@@ -124,6 +117,9 @@
         <action
             android:id="@+id/action_homeFragment_to_forexInvestmentFragment"
             app:destination="@id/forexInvestmentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_planFragment"
+            app:destination="@id/planFragment" />
     </fragment>
 
     <fragment
@@ -337,6 +333,10 @@
         android:name="com.pse.pse.ui.fragments.LevelUsersFragment"
         android:label="fragment_level_users"
         tools:layout="@layout/fragment_level_users" />
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.pse.pse.ui.fragments.PlanFragment"
+        android:label="PlanFragment" />
 
 
 </navigation>

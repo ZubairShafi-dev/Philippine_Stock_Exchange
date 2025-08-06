@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.common)
     implementation(libs.androidx.gridlayout)
+    implementation(libs.firebase.functions)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

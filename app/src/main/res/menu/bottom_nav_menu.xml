@@ -9,7 +9,7 @@
 
 
     <item
-        android:id="@+id/plansFragment"
+        android:id="@+id/planFragment"
         android:icon="@drawable/ic_plans"
         android:title="Plan" />
     <item
