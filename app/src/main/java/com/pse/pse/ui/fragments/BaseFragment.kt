@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.pse.pse.R
 import com.pse.pse.ui.MainActivity
 
@@ -59,5 +60,11 @@ open class BaseFragment : Fragment() {
     fun hideLoading() {
         Log.d("BaseFragment", "hideLoading called")
         loadingOverlay?.visibility = View.GONE
+    }
+
+    protected fun showError(message: String) {
+        view?.let { root ->
+            Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 }

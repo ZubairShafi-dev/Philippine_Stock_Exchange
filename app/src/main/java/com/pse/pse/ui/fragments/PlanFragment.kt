@@ -4,26 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pse.pse.adapters.PlanAdapter
-import com.pse.pse.data.repository.PlanRepository
 import com.pse.pse.databinding.FragmentPlanBinding
-import com.pse.pse.ui.viewModels.PlansViewModel
 import com.pse.pse.ui.viewModels.PlansViewModelFactory
+import com.yourpackage.data.repository.PlanRepository
+import com.yourpackage.ui.viewmodel.PlansViewModel
+import kotlinx.coroutines.flow.collectLatest
 
-
+/**
+ * Fragment that lists investment plans.
+ * Extends [BaseFragment] so we can reuse showLoading()/hideLoading()/showError().
+ */
 class PlanFragment : BaseFragment() {
 
-
-    private lateinit var plansViewModel: PlansViewModel
     private var _binding: FragmentPlanBinding? = null
     private val binding get() = _binding!!
-    private lateinit var planAdapter: PlanAdapter
 
+    private val viewModel: PlansViewModel by viewModels {
+        PlansViewModelFactory(PlanRepository())
+    }
+
+    private lateinit var adapter: PlanAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlanBinding.inflate(inflater, container, false)
@@ -31,19 +39,38 @@ class PlanFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val repository = PlanRepository()
-        plansViewModel = ViewModelProvider(this, PlansViewModelFactory(repository))[PlansViewModel::class.java]
+        super.onViewCreated(view, savedInstanceState)
 
-        planAdapter = PlanAdapter {}
+        // ─── RecyclerView setup ────────────────────────────────────────────────
+        adapter = PlanAdapter { plan ->
+            // TODO: navigate to Buy‑flow or bottom‑sheet
+            // findNavController().navigate(...)
+        }
         binding.allPlansRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = planAdapter
+            adapter = this@PlanFragment.adapter
         }
 
-        plansViewModel.fetchPlans()
-
-        plansViewModel.plans.observe(viewLifecycleOwner) {
-            planAdapter.submitList(it)
+        // ─── Collect StateFlow from ViewModel ─────────────────────────────────
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.state.collectLatest { state ->
+                when (state) {
+                    is PlansViewModel.UiState.Loading -> showLoading()
+                    is PlansViewModel.UiState.Success -> {
+                        hideLoading()
+                        adapter.submitList(state.plans)
+                    }
+                    is PlansViewModel.UiState.Error -> {
+                        hideLoading()
+                        showError(state.throwable.message ?: "Unknown error")
+                    }
+                }
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
