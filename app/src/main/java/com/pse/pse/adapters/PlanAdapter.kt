@@ -25,8 +25,8 @@ class PlanAdapter(
         fun bind(plan: Plan) {
             planName.text = plan.planName
             minAmount.text = "Min: Rs. ${plan.minAmount}"
-            totalPayout.text = "Total Payout: Rs. ${plan.totalPayout}"
-            dailyPercentage.text = "Daily ROI: ${"%.2f".format(plan.dailyPercentage)}%"
+            totalPayout.text = "Total Payout: Rs. ${plan.totalPayoutPercent}"
+            dailyPercentage.text = "Daily ROI: ${"%.2f".format(plan.roiPercent)}%"
 
             investBtn.setOnClickListener {
                 onInvestClick(plan)

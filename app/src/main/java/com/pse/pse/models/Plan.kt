@@ -1,12 +1,15 @@
 package com.pse.pse.models
 
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.PropertyName
+
 data class Plan(
     val planName: String = "",
-    val minAmount: Int = 0,
-    val maxAmount: Int = 0,
-    val dailyPercentage: Double = 0.0,
-    val directProfit: Int = 0,
-    val totalPayout: Int = 0,
-    val timestamp: String = "",
-    val docId: String = ""
+    val minAmount: Double = 0.0,
+    val maxAmount: Double = 0.0,
+    var roiPercent: Double = 0.0,
+    var directPercent: Double = 0.0,
+    var totalPayoutPercent: Double = 0.0,
+    val timestamp: Timestamp? = null,
+    var docId: String = ""
 )
