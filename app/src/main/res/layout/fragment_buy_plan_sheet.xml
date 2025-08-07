@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    tools:ignore="MissingClass">
+
+    <!-- Plan Name -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvPlanName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Daily ROI -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvDailyRoi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tvPlanName"
+        app:layout_constraintEnd_toEndOf="@+id/tvPlanName"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlanName"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Amount Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Min 0"
+        app:layout_constraintStart_toStartOf="@+id/tvDailyRoi"
+        app:layout_constraintEnd_toEndOf="@+id/tvDailyRoi"
+        app:layout_constraintTop_toBottomOf="@+id/tvDailyRoi"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Buy Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBuy"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Buy Plan"
+        app:layout_constraintStart_toStartOf="@+id/tilAmount"
+        app:layout_constraintEnd_toEndOf="@+id/tilAmount"
+        app:layout_constraintTop_toBottomOf="@+id/tilAmount"
+        android:layout_marginTop="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

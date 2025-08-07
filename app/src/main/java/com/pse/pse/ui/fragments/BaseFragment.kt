@@ -62,7 +62,7 @@ open class BaseFragment : Fragment() {
         loadingOverlay?.visibility = View.GONE
     }
 
-    protected fun showError(message: String) {
+    fun showError(message: String) {
         view?.let { root ->
             Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
         }

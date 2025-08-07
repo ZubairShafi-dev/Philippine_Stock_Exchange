@@ -168,6 +168,7 @@
                         android:padding="8dp"
                         android:scrollbars="none">
 
+<!--
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -275,7 +276,7 @@
                                     android:layout_height="match_parent"
                                     android:background="@drawable/glassy_action_card_bg">
 
-                                    <!-- Plan Name -->
+                                    &lt;!&ndash; Plan Name &ndash;&gt;
                                     <TextView
                                         android:id="@+id/planMedicineTitle"
                                         android:layout_width="wrap_content"
@@ -360,7 +361,7 @@
                                     android:layout_height="match_parent"
                                     android:background="@drawable/glassy_action_card_bg">
 
-                                    <!-- Plan Name -->
+                                    &lt;!&ndash; Plan Name &ndash;&gt;
                                     <TextView
                                         android:id="@+id/planForexTitle"
                                         android:layout_width="wrap_content"
@@ -429,6 +430,7 @@
                             </com.google.android.material.card.MaterialCardView>
 
                         </LinearLayout>
+-->
                     </HorizontalScrollView>
 
                     <RelativeLayout
@@ -495,7 +497,7 @@
                             app:layout_rowWeight="1" />
                     </androidx.gridlayout.widget.GridLayout>
 
-                    <RelativeLayout
+                  <!--  <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="66dp"
                         android:background="@drawable/gradient_bg"
@@ -641,7 +643,7 @@
                             app:cardElevation="0dp"
                             app:strokeWidth="0dp"
                             >
-<!--
+&lt;!&ndash;
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -740,9 +742,9 @@
                                         android:textSize="13sp" />
                                 </RelativeLayout>
                             </LinearLayout>
--->
+&ndash;&gt;
                         </com.google.android.material.card.MaterialCardView>
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <View
                         android:layout_width="match_parent"
