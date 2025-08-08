@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pse.pse.data.repository.TeamRepository
-import com.pse.pse.models.AchievementModel
 import com.pse.pse.models.TeamLevelStatus
 import com.pse.pse.models.TeamStats
 import kotlinx.coroutines.launch
@@ -53,36 +52,6 @@ class TeamViewModel : ViewModel() {
                     TeamStats(0.0, 0, 0.0, 0.0, emptyList())
                 )
             }
-        }
-    }
-
-    fun collectReward(model: AchievementModel) {
-        viewModelScope.launch {
-            val result = teamRepository.storeAchievementAndUpdateBalance(model)
-            _rewardResult.postValue(result)
-
-            // If successful, update in-memory state
-            if (result) {
-                claimedRewards.add(getLevelFromRank(model.rankName))
-                _teamStats.value?.let { oldStats ->
-                    val updated = oldStats.copy(
-                        currentInvestment = oldStats.currentInvestment + model.rewardAmount
-                    )
-                    _teamStats.postValue(updated)
-                }
-            }
-        }
-    }
-
-    private fun getLevelFromRank(rank: String): Int {
-        return when (rank) {
-            "Starter Squad" -> 1
-            "Growing Gang" -> 2
-            "Solid Circle" -> 3
-            "Power Pack" -> 4
-            "Elite Crew" -> 5
-            "Ultimate Force" -> 6
-            else -> -1
         }
     }
 }

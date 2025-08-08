@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Team"
+                android:text="Achievements"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -231,7 +231,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="25dp"
                                     android:layout_weight="1"
-                                    android:text="Risisng Star"
+                                    android:text="Astro Cadet"
                                     android:textColor="#FFFFFF"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -285,7 +285,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="25dp"
                                     android:layout_weight="1"
-                                    android:text="Elite Trailblazer"
+                                    android:text="Star Commander"
                                     android:textColor="#FFFFFF"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -338,7 +338,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="25dp"
                                     android:layout_weight="1"
-                                    android:text="Visionary Leader"
+                                    android:text="Galaxy Leader"
                                     android:textColor="#FFFFFF"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -391,7 +391,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="25dp"
                                     android:layout_weight="1"
-                                    android:text="Platinum Vanguard"
+                                    android:text="Nova Captain"
                                     android:textColor="#FFFFFF"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -444,278 +444,13 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="25dp"
                                     android:layout_weight="1"
-                                    android:text="Diamond Pioneer"
+                                    android:text="Solar General"
                                     android:textColor="#FFFFFF"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/eliteCrewLockedIcon"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="25dp"
-                                    android:src="@drawable/ic_lock" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/progress_blue"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:id="@+id/ultimateForceLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:text="6"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:background="@drawable/circle_bg"
-                                    android:src="@drawable/avatar" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="25dp"
-                                    android:layout_weight="1"
-                                    android:text="Ruby Champion"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="16dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/ultimateForceLockedIcon"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="25dp"
-                                    android:src="@drawable/ic_lock" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/progress_blue"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:id="@+id/emeraldTitan"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:text="7"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:background="@drawable/circle_bg"
-                                    android:src="@drawable/avatar" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="25dp"
-                                    android:layout_weight="1"
-                                    android:text="Emerald Titan"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="16dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/emeraldTitanLockedIcon"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="25dp"
-                                    android:src="@drawable/ic_lock" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/progress_blue"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:id="@+id/saphireMonarchLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:text="8"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:background="@drawable/circle_bg"
-                                    android:src="@drawable/avatar" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="25dp"
-                                    android:layout_weight="1"
-                                    android:text="Saphire Monarch"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="16dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/saphireMonarchLockIcon"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="25dp"
-                                    android:src="@drawable/ic_lock" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/progress_blue"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:id="@+id/titaniumOverLoadLAyout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:text="9"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:background="@drawable/circle_bg"
-                                    android:src="@drawable/avatar" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="25dp"
-                                    android:layout_weight="1"
-                                    android:text="Titanium Overload"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="16dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/titaniumOverLoadLockIcon"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginEnd="25dp"
-                                    android:src="@drawable/ic_lock" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/progress_blue"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="4dp">
-
-                            <LinearLayout
-                                android:id="@+id/supremeEmperorLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:padding="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:text="10"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:layout_width="35dp"
-                                    android:layout_height="35dp"
-                                    android:layout_marginEnd="12dp"
-                                    android:background="@drawable/circle_bg"
-                                    android:src="@drawable/avatar" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="25dp"
-                                    android:layout_weight="1"
-                                    android:text="Saphire Monarch"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="16dp"
-                                    android:textStyle="bold" />
-
-                                <ImageView
-                                    android:id="@+id/supremeEmperorLock"
                                     android:layout_width="32dp"
                                     android:layout_height="32dp"
                                     android:layout_marginEnd="25dp"
@@ -731,6 +466,5 @@
                 </ScrollView>
             </LinearLayout>
         </LinearLayout>
-
     </RelativeLayout>
 </FrameLayout>
