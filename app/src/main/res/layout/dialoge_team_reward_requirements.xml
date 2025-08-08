@@ -22,7 +22,7 @@
             android:background="@drawable/gradient_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingHorizontal="24dp">
+            android:padding="24dp">
 
             <TextView
                 android:id="@+id/teamRankingTitle"
