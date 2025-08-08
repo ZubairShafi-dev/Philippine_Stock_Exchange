@@ -97,6 +97,7 @@ class BuyPlanRepo(
                     return@runTransaction Status.FAILURE
                 }
                 val minInv = pkgSnap.getDouble("minAmount") ?: 0.0
+                val maxInv = pkgSnap.getDouble("maxAmount")
                 val roiPct = pkgSnap.getDouble("dailyPercentage") ?: 0.0
                 val dirPct = pkgSnap.getDouble("directProfit") ?: 0.0
                 val payoutPct =
@@ -138,7 +139,7 @@ class BuyPlanRepo(
                 // f) Create userPlan entry
                 val upRef = db.collection("userPlans")
                     .document(accountId)
-                    .collection("plans")
+                    .collection("boughtPlans")
                     .document()
                 tr.set(
                     upRef,
@@ -146,10 +147,12 @@ class BuyPlanRepo(
                         "pkgId" to pkgId,
                         "principal" to amount,
                         "roiPercent" to roiPct,
-                        "totalPayoutAmount" to (amount * payoutPct / 100),
-                        "earnedReferral" to if (isRefActive) amount * dirPct / 100 else 0.0,
+                        "totalPayoutAmount" to ((amount * payoutPct) / 100),
+                        "earnedReferral" to ((amount * dirPct) / 100),
                         "status" to "active",
-                        "buyDate" to FieldValue.serverTimestamp()
+                        "buyDate" to FieldValue.serverTimestamp(),
+                        "totalAccumulated" to 0.0,
+                        "lastCollectedDate" to FieldValue.serverTimestamp()
                     )
                 )
                 Log.d("BuyPlanRepo", "Created userPlan for accountId='$accountId'")
