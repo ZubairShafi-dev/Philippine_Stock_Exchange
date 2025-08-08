@@ -28,7 +28,9 @@ class PlansViewModel(
     private val _state = MutableStateFlow<UiState>(UiState.Loading)
     val state: StateFlow<UiState> = _state
 
-    init { subscribePlans() }
+    init {
+        subscribePlans()
+    }
 
     private fun subscribePlans() = viewModelScope.launch {
         repo.streamPlans()

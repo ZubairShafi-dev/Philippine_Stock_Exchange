@@ -69,7 +69,7 @@ class PlanFragment : Fragment() {
                         is PlansViewModel.UiState.Loading -> showLoading()
                         is PlansViewModel.UiState.Success -> {
                             hideLoading()
-                            planAdapter.submitList(ui.plans)
+                            planAdapter.submitList(ui.plans.sortedBy { it.minAmount })
                         }
                         is PlansViewModel.UiState.Error -> {
                             hideLoading()

@@ -17,16 +17,19 @@ class PlanAdapter(
 
     inner class PlanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val planName = itemView.findViewById<TextView>(R.id.coinName)
-        private val minAmount = itemView.findViewById<TextView>(R.id.coinUnit)
+        private val minAmount = itemView.findViewById<TextView>(R.id.minAmmount)
+        private val maxAmount = itemView.findViewById<TextView>(R.id.maxAmmount)
         private val totalPayout = itemView.findViewById<TextView>(R.id.coinPrice)
         private val dailyPercentage = itemView.findViewById<TextView>(R.id.coinPercent)
         private val investBtn = itemView.findViewById<MaterialButton>(R.id.investButton)
 
         fun bind(plan: Plan) {
             planName.text = plan.planName
-            minAmount.text = "Min: Rs. ${plan.minAmount}"
-            totalPayout.text = "Total Payout: Rs. ${plan.totalPayoutPercent}"
-            dailyPercentage.text = "Daily ROI: ${"%.2f".format(plan.roiPercent)}%"
+            minAmount.text = "Min: ${plan.minAmount}$"
+            maxAmount.text =
+                if (plan.maxAmount != null) "Max: ${plan.maxAmount}$" else "Max: Unlimited"
+            totalPayout.text = "Total Payout: ${plan.totalPayout}%"
+            dailyPercentage.text = "Daily ROI: ${"%.2f".format(plan.dailyPercentage)}%"
 
             investBtn.setOnClickListener {
                 onInvestClick(plan)
@@ -45,7 +48,9 @@ class PlanAdapter(
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Plan>() {
-        override fun areItemsTheSame(oldItem: Plan, newItem: Plan): Boolean = oldItem.docId == newItem.docId
+        override fun areItemsTheSame(oldItem: Plan, newItem: Plan): Boolean =
+            oldItem.docId == newItem.docId
+
         override fun areContentsTheSame(oldItem: Plan, newItem: Plan): Boolean = oldItem == newItem
     }
 }
