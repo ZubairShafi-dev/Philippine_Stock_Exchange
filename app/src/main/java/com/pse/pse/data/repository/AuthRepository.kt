@@ -3,11 +3,13 @@ package com.pse.pse.data.repository
 import UserModel
 import android.app.Application
 import android.util.Log
+import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.functions
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pse.pse.models.AccountModel
 import com.pse.pse.models.EarningsModel
@@ -92,6 +94,17 @@ class AuthRepository(application: Application) {
                 transaction.set(accountRef, account.toMap())
             }.await()
 
+            // ✅ Ensure salary profile at registration (starts 30-day window from createdAt)
+            try {
+                Firebase.functions
+                    .getHttpsCallable("ensureSalaryProfile")
+                    .call(mapOf("userId" to uniqueUserId))
+                    .await()
+                Log.d(TAG, "ensureSalaryProfile created for $uniqueUserId")
+            } catch (e: Exception) {
+                Log.w(TAG, "ensureSalaryProfile call failed (will try again on login): ${e.message}")
+            }
+
             firebaseUser
 
         } catch (e: FirebaseAuthUserCollisionException) {
@@ -138,6 +151,20 @@ class AuthRepository(application: Application) {
             // --- NEW: Update password in Firestore only on successful login ---
             db.collection("users").document(userDoc.id).update("password", password).await()
             Log.d(TAG, "✅ Password field updated in Firestore for $email")
+
+            // ✅ ENSURE salary profile exists on login (idempotent)
+            try {
+                val businessUid = userDoc.getString("uid") ?: ""
+                if (businessUid.isNotEmpty()) {
+                    Firebase.functions("us-central1")
+                        .getHttpsCallable("ensureSalaryProfile")
+                        .call(mapOf("userId" to businessUid))
+                        .await()
+                    Log.d(TAG, "✅ ensureSalaryProfile verified/created on login for $businessUid")
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "⚠️ ensureSalaryProfile on login failed: ${e.message}")
+            }
 
             Log.d(TAG, "✅ Login successful for $email")
             Pair(true, firebaseUser)

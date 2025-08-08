@@ -13,15 +13,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.pse.pse.R
 import com.pse.pse.adapters.NotificationAdapter
@@ -43,10 +46,10 @@ class ProfileFragment : BaseFragment() {
     private var originalPhoneNumber: String = ""
     private val storage = FirebaseStorage.getInstance()
     private val PICK_IMAGE_REQUEST = 1001
+
     companion object {
         private const val TAG_PROFILE = "ProfileFragment"
     }
-
 
 
     override fun onCreateView(
@@ -176,8 +179,7 @@ class ProfileFragment : BaseFragment() {
 
         // Logout click
         binding.logoutBtn.setOnClickListener {
-            sharedPref.clearUserData()
-            findNavController().navigate(R.id.action_profile_to_login)
+            showLogoutConfirmation()
         }
         binding.profileImage.setOnClickListener {
             selectProfileImageFromGallery()
@@ -192,8 +194,31 @@ class ProfileFragment : BaseFragment() {
     private fun updateButtons() {
         val edited = binding.editContact.text.toString() != originalPhoneNumber
         binding.updatePhoneNumberBtn.isVisible = edited
-        binding.logoutBtn.isVisible            = !edited
-        binding.updatePasswordBtn.isVisible    = true
+        binding.logoutBtn.isVisible = !edited
+        binding.updatePasswordBtn.isVisible = true
+    }
+
+    /** Show confirmation before logging out */
+    private fun showLogoutConfirmation() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirm Logout")
+            .setMessage("Are you sure you want to log out?")
+            .setPositiveButton("Yes") { _, _ -> logout() }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    /** Clears user data and navigates to SignUp, clearing backstack */
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        SharedPrefManager(requireContext()).clearUserData()
+        findNavController().navigate(
+            R.id.signInFragment,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(R.id.nav_graph, true)
+                .build()
+        )
     }
 
     private fun showNotificationsDialog() {
@@ -229,6 +254,7 @@ class ProfileFragment : BaseFragment() {
         dialog.setCancelable(true)
         dialog.show()
     }
+
     private fun selectProfileImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
@@ -250,7 +276,8 @@ class ProfileFragment : BaseFragment() {
                 ref.downloadUrl.addOnSuccessListener { downloadUrl ->
                     sharedPref.saveProfileImageUrl(downloadUrl.toString())
                     loadImageIntoProfileView(downloadUrl.toString())
-                    Toast.makeText(requireContext(), "Profile picture updated!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Profile picture updated!", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             .addOnFailureListener {

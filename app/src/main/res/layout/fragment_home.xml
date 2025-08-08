@@ -1,231 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ptr="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
-        android:id="@+id/ultra_ptr"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:ptr_ratio_of_header_height_to_refresh="1.2"
-        ptr:disableWhenHorizontalMove="true">
+        android:fillViewport="true"
+        android:nestedScrollingEnabled="false">
 
-        <ScrollView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:nestedScrollingEnabled="false">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Top Bar with Profile Title and Icons -->
+                <RelativeLayout
+                    android:id="@+id/topBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/menuIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/ic_menu" />
+
+                    <TextView
+                        android:id="@+id/profileTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/announcementIcon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="40dp"
+                        android:src="@drawable/announcement_icon" />
+
+                    <ImageView
+                        android:id="@+id/notificationIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_notification" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="16dp">
 
-                    <!-- Top Bar with Profile Title and Icons -->
-                    <RelativeLayout
-                        android:id="@+id/topBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:id="@+id/menuIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentStart="true"
-                            android:src="@drawable/ic_menu" />
-
-                        <TextView
-                            android:id="@+id/profileTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:id="@+id/announcementIcon"
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="40dp"
-                            android:src="@drawable/announcement_icon" />
-
-                        <ImageView
-                            android:id="@+id/notificationIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentEnd="true"
-                            android:src="@drawable/ic_notification" />
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="4dp"
-                        android:padding="16dp">
-
-                        <!-- Wallet Card -->
-                        <include
-                            android:id="@+id/walletCard"
-                            layout="@layout/item_home_wallet_card" />
-
-                    </LinearLayout>
-
-
-
-                    <!-- ────── Announcement Slider (ViewPager2 + TabLayout) ────── -->
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:layout_marginBottom="16dp"
-                        app:cardCornerRadius="12dp"
-                        android:id="@+id/viewpagerContainer"
-                        app:cardElevation="0dp"
-                        android:backgroundTint="@android:color/transparent">
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <!-- 1) The ViewPager2 for image swiping -->
-                            <androidx.viewpager2.widget.ViewPager2
-                                android:id="@+id/announcementSlider"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-
-                            <!-- 2) A TabLayout for indicator dots -->
-                            <com.google.android.material.tabs.TabLayout
-                                android:id="@+id/sliderDots"
-                                android:layout_width="match_parent"
-                                android:layout_height="8dp"
-                                android:layout_gravity="bottom"
-                                android:layout_marginBottom="8dp"
-                                android:background="@android:color/transparent"
-                                app:tabBackground="@drawable/tab_dot_selector"
-                                app:tabIndicatorHeight="0dp"
-                                app:tabIndicatorColor="@android:color/transparent"
-                                app:tabRippleColor="@android:color/transparent"
-                                app:tabGravity="center"
-                                app:tabMode="fixed"
-                                app:tabMinWidth="8dp"
-                                app:tabPaddingStart="2dp"
-                                app:tabPaddingEnd="0dp"/>
-                        </FrameLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <!-- … rest of your fragment_home.xml … -->
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                        <include
-                            android:id="@+id/depositAmount"
-                            layout="@layout/item_action_card_deposit" />
-
-                        <include
-                            android:id="@+id/withdrawAmount"
-                            layout="@layout/item_action_card_withdraw" />
-
-                        <include
-                            android:id="@+id/bought_plans"
-                            layout="@layout/item_action_card_plans" />
-                    </LinearLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginHorizontal="26dp"
-                            android:layout_marginTop="16dp"
-                            android:text="Earnings"
-                            android:textColor="@android:color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                    <androidx.gridlayout.widget.GridLayout
-                        android:id="@+id/earningsGrid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        app:alignmentMode="alignMargins"
-                        app:columnCount="2"
-                        app:orientation="horizontal"
-                        app:rowOrderPreserved="false">
-
-                        <include
-                            layout="@layout/item_earning_today"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:layout_columnSpan="1"
-                            app:layout_columnWeight="1"
-                            app:layout_rowWeight="1" />
-
-                        <include
-                            layout="@layout/item_earning_total"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:layout_columnSpan="1"
-                            app:layout_columnWeight="1"
-                            app:layout_rowWeight="1" />
-
-                        <include
-                            layout="@layout/item_earning_referal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:layout_columnSpan="1"
-                            app:layout_columnWeight="1"
-                            app:layout_rowWeight="1" />
-
-                        <include
-                            layout="@layout/item_earning_team"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            app:layout_columnSpan="1"
-                            app:layout_columnWeight="1"
-                            app:layout_rowWeight="1" />
-                    </androidx.gridlayout.widget.GridLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                    <!-- Wallet Card -->
+                    <include
+                        android:id="@+id/walletCard"
+                        layout="@layout/item_home_wallet_card" />
 
                 </LinearLayout>
 
-            </FrameLayout>
+
+                <!-- ────── Announcement Slider (ViewPager2 + TabLayout) ────── -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/viewpagerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- 1) The ViewPager2 for image swiping -->
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/announcementSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <!-- 2) A TabLayout for indicator dots -->
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/sliderDots"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="8dp"
+                            android:background="@android:color/transparent"
+                            app:tabBackground="@drawable/tab_dot_selector"
+                            app:tabGravity="center"
+                            app:tabIndicatorColor="@android:color/transparent"
+                            app:tabIndicatorHeight="0dp"
+                            app:tabMinWidth="8dp"
+                            app:tabMode="fixed"
+                            app:tabPaddingEnd="0dp"
+                            app:tabPaddingStart="2dp"
+                            app:tabRippleColor="@android:color/transparent" />
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- … rest of your fragment_home.xml … -->
 
 
-        </ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+                    <include
+                        android:id="@+id/depositAmount"
+                        layout="@layout/item_action_card_deposit" />
+
+                    <include
+                        android:id="@+id/withdrawAmount"
+                        layout="@layout/item_action_card_withdraw" />
+
+                    <include
+                        android:id="@+id/bought_plans"
+                        layout="@layout/item_action_card_plans" />
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginHorizontal="26dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Earnings"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <androidx.gridlayout.widget.GridLayout
+                    android:id="@+id/earningsGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    app:alignmentMode="alignMargins"
+                    app:columnCount="2"
+                    app:orientation="horizontal"
+                    app:rowOrderPreserved="false">
+
+                    <include
+                        layout="@layout/item_earning_today"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:layout_columnSpan="1"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <include
+                        layout="@layout/item_earning_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:layout_columnSpan="1"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <include
+                        layout="@layout/item_earning_referal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:layout_columnSpan="1"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <include
+                        layout="@layout/item_earning_team"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:layout_columnSpan="1"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+                </androidx.gridlayout.widget.GridLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+    </ScrollView>
 
     <FrameLayout
         android:id="@+id/noInternetOverlay"

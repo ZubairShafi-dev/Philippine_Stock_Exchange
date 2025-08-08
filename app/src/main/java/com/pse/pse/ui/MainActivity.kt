@@ -15,6 +15,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.pse.pse.R
 import com.pse.pse.databinding.ActivityMainBinding
 import com.pse.pse.ui.viewModels.ProfileViewModel
@@ -225,6 +226,7 @@ class MainActivity : AppCompatActivity() {
 
     /** Clears user data and navigates to SignUp, clearing backstack */
     private fun logout() {
+        FirebaseAuth.getInstance().signOut()
         SharedPrefManager(this).clearUserData()
         navController.navigate(
             R.id.signInFragment,
