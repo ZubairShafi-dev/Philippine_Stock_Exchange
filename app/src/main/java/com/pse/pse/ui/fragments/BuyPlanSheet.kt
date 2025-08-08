@@ -17,9 +17,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * Bottom sheet that collects an investment amount and performs the purchase.
+ * Bottom-sheet that collects an investment amount and performs the purchase.
+ *
+ * Validation logic honours:
+ *  • Minimum amount (always enforced)
+ *  • Maximum amount – only if the plan specifies one (null == unlimited)
  */
-
 class BuyPlanSheet(
     private val plan: Plan,
     private val repo: BuyPlanRepo,
@@ -41,70 +44,88 @@ class BuyPlanSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Start with the Buy button disabled
+        /* ---------- 1. Enable button only when amount is valid ---------- */
         binding.btnBuy.isEnabled = false
-
-        // Enable only when entered amount meets the minimum
         binding.etAmount.addTextChangedListener { input ->
             val amt = input.toString().toDoubleOrNull() ?: 0.0
-            binding.btnBuy.isEnabled = amt >= plan.minAmount
-            if (binding.tilAmount.error != null && amt >= plan.minAmount) {
+
+            val isAboveMin = amt >= plan.minAmount
+            val isBelowMax = plan.maxAmount?.let { amt <= it } ?: true   // ← NEW
+
+            binding.btnBuy.isEnabled = isAboveMin && isBelowMax
+
+            if (binding.tilAmount.error != null && isAboveMin && isBelowMax) {
                 binding.tilAmount.error = null
             }
         }
 
-        // Handle Buy click
+        /* ---------- 2. Validation on click ---------- */
         binding.btnBuy.setOnClickListener {
             val amount = binding.etAmount.text.toString().toDoubleOrNull() ?: 0.0
-            if (amount < plan.minAmount) {
-                binding.tilAmount.error = "Minimum Amount is Rs.${plan.minAmount}"
-                return@setOnClickListener
+
+            when {
+                amount < plan.minAmount -> {
+                    binding.tilAmount.error = "Minimum Amount is Rs.${plan.minAmount}"
+                    return@setOnClickListener
+                }
+
+                plan.maxAmount != null && amount > plan.maxAmount -> {    // ← NEW
+                    binding.tilAmount.error = "Maximum Amount is Rs.${plan.maxAmount}"
+                    return@setOnClickListener
+                }
+
+                else -> binding.tilAmount.error = null
             }
 
-            // Debug inputs
-            Log.d("BuyPlanSheet", "Calling buyPlan(uid='$uid', pkgId='${plan.docId}', amount=$amount)")
+            /* ---------- 3. Rest of your existing code (unchanged) ---------- */
+            Log.d(
+                "BuyPlanSheet",
+                "Calling buyPlan(uid='$uid', pkgId='${plan.docId}', amount=$amount)"
+            )
             Toast.makeText(
                 requireContext(),
                 "Calling buyPlan(uid='$uid', pkgId='${plan.docId}', amount=$amount)",
                 Toast.LENGTH_SHORT
             ).show()
 
-            // Launch on Main explicitly
             lifecycleScope.launch(Dispatchers.Main) {
-                // Perform purchase off the main thread
                 val status = withContext(Dispatchers.IO) {
                     repo.buyPlan(uid = uid, pkgId = plan.docId, amount = amount)
                 }
 
-                // Log & toast status
                 Log.d("BuyPlanSheet", "buyPlan returned: $status")
-                Toast.makeText(
-                    requireContext(),
-                    "Result: $status",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Result: $status", Toast.LENGTH_SHORT).show()
 
-                // Show detailed feedback
                 when (status) {
                     BuyPlanRepo.Status.SUCCESS -> {
                         Toast.makeText(
                             requireContext(),
-                            "🎉 Purchase successful!", Toast.LENGTH_LONG
+                            "🎉 Purchase successful!",
+                            Toast.LENGTH_LONG
                         ).show()
                         dismiss()
                     }
-                    BuyPlanRepo.Status.MIN_INVEST_ERROR -> Toast.makeText(
-                        requireContext(),
-                        "Minimum investment is Rs.${plan.minAmount}.", Toast.LENGTH_LONG
-                    ).show()
-                    BuyPlanRepo.Status.INSUFFICIENT_BALANCE -> Toast.makeText(
-                        requireContext(),
-                        "Insufficient balance. Please top up and try again.", Toast.LENGTH_LONG
-                    ).show()
-                    BuyPlanRepo.Status.FAILURE -> Toast.makeText(
-                        requireContext(),
-                        "Purchase failed. Please try again later.", Toast.LENGTH_LONG
-                    ).show()
+
+                    BuyPlanRepo.Status.MIN_INVEST_ERROR ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Minimum investment is Rs.${plan.minAmount}.",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                    BuyPlanRepo.Status.INSUFFICIENT_BALANCE ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Insufficient balance. Please top up and try again.",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                    BuyPlanRepo.Status.FAILURE ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Purchase failed. Please try again later.",
+                            Toast.LENGTH_LONG
+                        ).show()
                 }
             }
         }
