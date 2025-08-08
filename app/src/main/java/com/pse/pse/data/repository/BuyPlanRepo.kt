@@ -15,7 +15,7 @@ class BuyPlanRepo(
     enum class Status { SUCCESS, MIN_INVEST_ERROR, INSUFFICIENT_BALANCE, FAILURE }
 
     private object Paths {
-        val INVEST_CUR_BAL  = FieldPath.of("investment", "currentBalance")
+        val INVEST_CUR_BAL = FieldPath.of("investment", "currentBalance")
         val REFERRAL_PROFIT = FieldPath.of("earnings", "referralProfit")
     }
 
@@ -80,30 +80,34 @@ class BuyPlanRepo(
                         .limit(1)
                         .get().await()
                     isRefActive = !planQ.isEmpty
-                    Log.d("BuyPlanRepo", "isRefActive=$isRefActive for referrerAcct='$refAccountId'")
+                    Log.d(
+                        "BuyPlanRepo",
+                        "isRefActive=$isRefActive for referrerAcct='$refAccountId'"
+                    )
                 }
             }
 
             // 3️⃣ Transaction: debit purchaser, credit referral, create plan & audit
             return@withContext db.runTransaction { tr ->
                 // a) Load plan metadata
-                val pkgRef  = db.collection("plans").document(pkgId)
+                val pkgRef = db.collection("plans").document(pkgId)
                 val pkgSnap = tr.get(pkgRef)
                 if (!pkgSnap.exists()) {
                     Log.e("BuyPlanRepo", "FAILURE: Plan not found pkgId='$pkgId'")
                     return@runTransaction Status.FAILURE
                 }
-                val minInv    = pkgSnap.getDouble("minAmount") ?: 0.0
-                val roiPct    = pkgSnap.getDouble("dailyPercentage") ?: 0.0
-                val dirPct    = pkgSnap.getDouble("directProfit") ?: 0.0
-                val payoutPct = pkgSnap.getDouble("totalPayout") ?: return@runTransaction Status.FAILURE
+                val minInv = pkgSnap.getDouble("minAmount") ?: 0.0
+                val roiPct = pkgSnap.getDouble("dailyPercentage") ?: 0.0
+                val dirPct = pkgSnap.getDouble("directProfit") ?: 0.0
+                val payoutPct =
+                    pkgSnap.getDouble("totalPayout") ?: return@runTransaction Status.FAILURE
 
                 // b) Minimum investment check
                 if (amount < minInv) return@runTransaction Status.MIN_INVEST_ERROR
 
                 // c) Check purchaser balance
                 val buyerAccRef = db.collection("accounts").document(accountId)
-                val buyerSnap   = tr.get(buyerAccRef)
+                val buyerSnap = tr.get(buyerAccRef)
                 val curBal = (buyerSnap.get("investment") as? Map<*, *>)
                     ?.get("currentBalance") as? Number? ?: 0.0
                 Log.d("BuyPlanRepo", "CurrentBalance=$curBal, required=$amount")
@@ -117,7 +121,10 @@ class BuyPlanRepo(
                         Paths.REFERRAL_PROFIT,
                         FieldValue.increment(bonus)
                     )
-                    Log.d("BuyPlanRepo", "Credited referral bonus=$bonus to referrerAcct='$refAccountId'")
+                    Log.d(
+                        "BuyPlanRepo",
+                        "Credited referral bonus=$bonus to referrerAcct='$refAccountId'"
+                    )
                 }
 
                 // e) Debit purchaser balance
@@ -136,13 +143,13 @@ class BuyPlanRepo(
                 tr.set(
                     upRef,
                     mapOf(
-                        "pkgId"              to pkgId,
-                        "principal"          to amount,
-                        "roiPercent"         to roiPct,
-                        "totalPayoutAmount"  to (amount * payoutPct / 100),
-                        "earnedReferral"     to if (isRefActive) amount * dirPct / 100 else 0.0,
-                        "status"             to "active",
-                        "buyDate"            to FieldValue.serverTimestamp()
+                        "pkgId" to pkgId,
+                        "principal" to amount,
+                        "roiPercent" to roiPct,
+                        "totalPayoutAmount" to (amount * payoutPct / 100),
+                        "earnedReferral" to if (isRefActive) amount * dirPct / 100 else 0.0,
+                        "status" to "active",
+                        "buyDate" to FieldValue.serverTimestamp()
                     )
                 )
                 Log.d("BuyPlanRepo", "Created userPlan for accountId='$accountId'")
@@ -151,11 +158,11 @@ class BuyPlanRepo(
                 tr.set(
                     db.collection("transactions").document(),
                     mapOf(
-                        "uid"        to uid,
-                        "type"       to "Plan Purchase",
-                        "amount"     to amount,
-                        "timestamp"  to FieldValue.serverTimestamp(),
-                        "planId"     to pkgId,
+                        "uid" to uid,
+                        "type" to "Plan Purchase",
+                        "amount" to amount,
+                        "timestamp" to FieldValue.serverTimestamp(),
+                        "planId" to pkgId,
                         "referrerId" to (refAccountId ?: "")
                     )
                 )
