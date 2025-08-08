@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PSE" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
         <item name="android:statusBarColor">@color/status_bar</item>
-        <item name="colorPrimary">@color/white</item>
-    </style>
+        <item name="colorPrimary">@color/dark_green</item>
 
+    </style>
 
 
     <style name="Widget.AITrustLedger.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
@@ -19,10 +19,12 @@
         <item name="hintTextColor">@color/white</item>
     </style>
 
+
     <style name="FabShape.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item> <!-- Ensures perfect circle -->
     </style>
+
 
     <style name="NoActiveIndicator" parent="@style/Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@android:color/transparent</item>
@@ -34,6 +36,41 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
-    <style name="Theme.PSE" parent="Base.Theme.PSE" />
 
+    <style name="Row">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LabelText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/white_70</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ValueText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ValueTextBold" parent="ValueText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TierRow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">@color/white_80</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+
+    <style name="Theme.PSE" parent="Base.Theme.PSE" />
 </resources>

@@ -20,7 +20,6 @@ import com.pse.pse.databinding.ActivityMainBinding
 import com.pse.pse.ui.viewModels.ProfileViewModel
 import com.pse.pse.utils.RemoteUpdateManager
 import com.pse.pse.utils.SharedPrefManager
-import kotlin.getValue
 
 class MainActivity : AppCompatActivity() {
     private lateinit var updater: RemoteUpdateManager
@@ -125,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menuWithdraw to R.id.withdrawAmountFragment,
             R.id.menuTeam to R.id.teamRankingFragment,
             R.id.menuSupport to R.id.chatFragment,
-            R.id.menuProfile to R.id.profileFragment,
+            R.id.menuSalary to R.id.salaryIncomeFragment,
             R.id.menuTeamLevel to R.id.teamLevelsFragment,
             R.id.investmentPlans to R.id.plansFragment,
             R.id.txnHistory to R.id.transactionHistoryFragment

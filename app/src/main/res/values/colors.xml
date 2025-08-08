@@ -24,4 +24,14 @@
     <color name="progress_champagne">#E78C9D</color>
     <color name="skyblue">#4AC3FF</color>
 
+    <color name="white_90">#E6FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_12">#1FFFFFFF</color>
+
+    <color name="teal_accent">#1ED6C2</color>
+    <color name="purple_accent">#9B6DFF</color>
+
+
 </resources>

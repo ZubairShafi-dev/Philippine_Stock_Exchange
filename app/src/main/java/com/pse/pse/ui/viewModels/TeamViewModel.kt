@@ -6,52 +6,61 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pse.pse.data.repository.TeamRepository
+import com.pse.pse.models.SalaryProfile
 import com.pse.pse.models.TeamLevelStatus
 import com.pse.pse.models.TeamStats
 import kotlinx.coroutines.launch
 
 class TeamViewModel : ViewModel() {
 
-    private val teamRepository = TeamRepository()
+    private val repo = TeamRepository()
 
+    // ---------- Team Levels (unchanged) ----------
     private val _teamLevelsWithStats = MutableLiveData<List<TeamLevelStatus>>()
     val teamLevelsWithStats: LiveData<List<TeamLevelStatus>> = _teamLevelsWithStats
 
-    private val _teamStats = MutableLiveData<TeamStats>()
-    val teamStats: LiveData<TeamStats> get() = _teamStats
-
-    private val _rewardResult = MutableLiveData<Boolean>()
-    val rewardResult: LiveData<Boolean> get() = _rewardResult
-
-    val claimedRewards = mutableSetOf<Int>()
-
     fun loadEverything(userId: String) = viewModelScope.launch {
         try {
-            val (levels, meta) = teamRepository.fetchLevelsAndMaybeCredit(userId)
-
+            val (levels, meta) = repo.fetchLevelsAndMaybeCredit(userId)
             _teamLevelsWithStats.postValue(levels)
-
-            if (meta.booked) {
-                Log.d("TeamVM", "✅ Team profit +${meta.creditedAmount} credited for $userId")
-            } else {
-                Log.d("TeamVM", "ℹ️  No profit booked today for $userId")
-            }
+            if (meta.booked) Log.d("TeamVM", "profit +${meta.creditedAmount}")
         } catch (e: Exception) {
             _teamLevelsWithStats.postValue(emptyList())
-            Log.e("TeamVM", "❌ Cloud call failed", e)
+            Log.e("TeamVM", "cloud call failed", e)
         }
     }
 
-    fun fetchTeamStats(userId: String) {
-        viewModelScope.launch {
-            try {
-                val result = teamRepository.calculateTeamRanking(userId)
-                _teamStats.postValue(result)
-            } catch (e: Exception) {
-                _teamStats.postValue(
-                    TeamStats(0.0, 0, 0.0, 0.0, emptyList())
-                )
-            }
+    // ---------- Team Rankings (self-deposit only) ----------
+    private val _teamStats = MutableLiveData<TeamStats>()
+    val teamStats: LiveData<TeamStats> get() = _teamStats
+
+    fun fetchTeamStats(userId: String) = viewModelScope.launch {
+        try {
+            _teamStats.postValue(repo.calculateTeamRanking(userId))
+        } catch (e: Exception) {
+            _teamStats.postValue(TeamStats(0.0, unlockedLevels = emptyList()))
+        }
+    }
+
+    // ---------- Salary Program ----------
+    private val _salaryProfile = MutableLiveData<SalaryProfile?>()
+    val salaryProfile: LiveData<SalaryProfile?> get() = _salaryProfile
+
+    fun initSalary(userId: String) = viewModelScope.launch {
+        try {
+            repo.ensureSalaryProfile(userId)  // idempotent
+            _salaryProfile.postValue(repo.getSalaryProfile(userId))
+        } catch (e: Exception) {
+            Log.e("TeamVM", "initSalary failed", e)
+            _salaryProfile.postValue(null)
+        }
+    }
+
+    fun refreshSalary(userId: String) = viewModelScope.launch {
+        try {
+            _salaryProfile.postValue(repo.getSalaryProfile(userId))
+        } catch (e: Exception) {
+            Log.e("TeamVM", "refreshSalary failed", e)
         }
     }
 }

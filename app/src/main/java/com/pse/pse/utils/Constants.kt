@@ -12,11 +12,4 @@ object Constants {
 
 
 
-    const val STOCKS="Stocks"
-    const val MEDICINE="Medicine"
-    const val FOREX="Forex"
-
-
-
-
 }

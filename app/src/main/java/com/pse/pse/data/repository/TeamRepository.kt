@@ -5,7 +5,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.functions.functions
 import com.pse.pse.models.CreditMeta
+import com.pse.pse.models.EnsureSalaryResult
 import com.pse.pse.models.LevelCondition
+import com.pse.pse.models.SalaryProfile
 import com.pse.pse.models.TeamLevelModel
 import com.pse.pse.models.TeamLevelStatus
 import com.pse.pse.models.TeamStats
@@ -103,6 +105,43 @@ class TeamRepository {
         return TeamStats(
             currentInvestment = selfDeposit,
             unlockedLevels    = unlocked
+        )
+    }
+
+
+    suspend fun ensureSalaryProfile(userId: String): EnsureSalaryResult {
+        val data = hashMapOf("userId" to userId)
+        val raw = functions
+            .getHttpsCallable("ensureSalaryProfile")
+            .call(data).await().data as HashMap<*, *>
+        return EnsureSalaryResult(
+            ok = raw["ok"] as? Boolean ?: true,
+            existed = raw["existed"] as? Boolean ?: false
+        )
+    }
+
+    suspend fun getSalaryProfile(userId: String): SalaryProfile? {
+        val data = hashMapOf("userId" to userId)
+        val raw = functions
+            .getHttpsCallable("getSalaryProfile")
+            .call(data).await().data as HashMap<*, *>
+
+        val exists = raw["exists"] as? Boolean ?: false
+        if (!exists) return null
+
+        @Suppress("UNCHECKED_CAST")
+        val p = raw["profile"] as Map<String, *>
+        return SalaryProfile(
+            userId = p["userId"] as? String ?: userId,
+            status = p["status"] as? String ?: "",
+            windowStart = p["windowStart"] as? com.google.firebase.Timestamp,
+            windowEnd = p["windowEnd"] as? com.google.firebase.Timestamp,
+            snapshotDirectBusiness = (p["snapshotDirectBusiness"] as? Number)?.toDouble() ?: 0.0,
+            tier = (p["tier"] as? Number)?.toInt() ?: 0,
+            salaryAmount = (p["salaryAmount"] as? Number)?.toDouble() ?: 0.0,
+            nextPayoutAt = p["nextPayoutAt"] as? com.google.firebase.Timestamp,
+            lastPayoutAt = p["lastPayoutAt"] as? com.google.firebase.Timestamp,
+            reason = p["reason"] as? String
         )
     }
 }

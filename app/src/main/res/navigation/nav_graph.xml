@@ -5,15 +5,10 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
-    <fragment
-        android:id="@+id/boughtStocksFragment"
-        android:name="com.pse.pse.ui.fragments.BoughtStocks"
-        android:label="Bought Stocks"
-        tools:layout="@layout/fragment_bought_stocks" />
 
     <fragment
         android:id="@+id/detailChatFragment"
-        android:name="com.trustledger.aitrustledger.ui.fragments.chat.DetailChatFragment"
+        android:name="com.pse.pse.ui.fragments.chat.DetailChatFragment"
         android:label="Detail Chat"
         tools:layout="@layout/fragment_detail_chat" />
 
@@ -28,12 +23,6 @@
             app:destination="@id/detailChatFragment" />
 
     </fragment>
-
-    <fragment
-        android:id="@+id/forexInvestmentFragment"
-        android:name="com.pse.pse.ui.fragments.ForexInvestmentFragment"
-        android:label="Forex Investment"
-        tools:layout="@layout/fragment_forex_investment" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -75,58 +64,11 @@
             app:exitAnim="@anim/slide_out_bottom"
             app:popEnterAnim="@anim/slide_in_bottom"
             app:popExitAnim="@anim/slide_out_top" />
-        <action
-            android:id="@+id/action_home_to_stockPlans"
-            app:destination="@id/stockInvestmentPlansFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
-        <action
-            android:id="@+id/action_home_to_medicinePlans"
-            app:destination="@id/medicineInvestmenetPlanFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
-        <action
-            android:id="@+id/action_home_to_forexPlans"
-            app:destination="@id/forexInvestmentFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
 
-        <action
-            android:id="@+id/action_homeFragment_to_boughtStocksFragment"
-            app:destination="@id/boughtStocksFragment" />
-
-        <action
-            android:id="@+id/action_homeFragment_to_boughtMedicinesFragment"
-            app:destination="@id/boughtMedicinesFragment" />
-
-        <action
-            android:id="@+id/action_homeFragment_to_boughtForexFragment"
-            app:destination="@id/boughtForexFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_stockInvestmentPlansFragment"
-            app:destination="@id/stockInvestmentPlansFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_medicineInvestmenetPlanFragment"
-            app:destination="@id/medicineInvestmenetPlanFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_forexInvestmentFragment"
-            app:destination="@id/forexInvestmentFragment" />
         <action
             android:id="@+id/action_homeFragment_to_planFragment"
             app:destination="@id/planFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/medicineInvestmenetPlanFragment"
-        android:name="com.pse.pse.ui.fragments.MedicineInvestmentPlan"
-        android:label="Medicine Investment Plan"
-        tools:layout="@layout/fragment_medicine_investment_plan" />
 
     <fragment
         android:id="@+id/withdrawAmountFragment"
@@ -148,31 +90,9 @@
 
     <fragment
         android:id="@+id/plansFragment"
-        android:name="com.pse.pse.ui.fragments.PlansFragment"
+        android:name="com.pse.pse.ui.fragments.PlanFragment"
         android:label="@string/plans"
-        tools:layout="@layout/fragment_plans">
-        <action
-            android:id="@+id/action_plansFragment_to_stockInvestmentPlansFragment"
-            app:destination="@id/stockInvestmentPlansFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
-        <action
-            android:id="@+id/action_plansFragment_to_medicineInvestmenetPlanFragment"
-            app:destination="@id/medicineInvestmenetPlanFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
-        <action
-            android:id="@+id/action_plansFragment_to_forexInvestmentFragment"
-            app:destination="@id/forexInvestmentFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
-    </fragment>
+        tools:layout="@layout/fragment_plans" />
 
     <fragment
         android:id="@+id/profileFragment"
@@ -253,16 +173,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/stockInvestmentPlansFragment"
-        android:name="com.pse.pse.ui.fragments.StockInvestmentPlansFragment"
-        android:label="@string/stock_investment_plans"
-        tools:layout="@layout/fragment_stock_investment_plan">
-        <action
-            android:id="@+id/action_stockInvestmentPlansFragment_to_boughtStocksFragment"
-            app:destination="@id/boughtStocksFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/supportChatFragment"
         android:name="com.pse.pse.ui.fragments.SupportChatFragment"
         android:label="Support Chat"
@@ -298,7 +208,7 @@
         android:id="@+id/teamLevelsFragment"
         android:name="com.pse.pse.ui.fragments.TeamLevelsFragment"
         android:label="@string/team"
-        tools:layout="@layout/fragment_team_levels" >
+        tools:layout="@layout/fragment_team_levels">
         <action
             android:id="@+id/action_teamLevelsFragment_to_levelUsersFragment"
             app:destination="@id/levelUsersFragment" />
@@ -318,25 +228,15 @@
         tools:layout="@layout/fragment_transaction_history" />
 
     <fragment
-        android:id="@+id/boughtForexFragment"
-        android:name="com.pse.pse.ui.fragments.BoughtForexFragment"
-        android:label="boughtForex"
-        tools:layout="@layout/fragment_bought_forex" />
-
-    <fragment
-        android:id="@+id/boughtMedicinesFragment"
-        android:name="com.pse.pse.ui.fragments.BoughtMedicinesFragment"
-        android:label="boughtMedicine"
-        tools:layout="@layout/fragment_bought_medicines" />
-    <fragment
         android:id="@+id/levelUsersFragment"
         android:name="com.pse.pse.ui.fragments.LevelUsersFragment"
         android:label="fragment_level_users"
         tools:layout="@layout/fragment_level_users" />
-    <fragment
-        android:id="@+id/planFragment"
-        android:name="com.pse.pse.ui.fragments.PlanFragment"
-        android:label="PlanFragment" />
 
+    <fragment
+        android:id="@+id/salaryIncomeFragment"
+        android:name="com.pse.pse.ui.fragments.SalaryIncomeFragment"
+        android:label="Salary Income"
+        tools:layout="@layout/fragment_salary_income" />
 
 </navigation>
