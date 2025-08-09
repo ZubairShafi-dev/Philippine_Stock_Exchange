@@ -94,7 +94,7 @@ class PlanFragment : Fragment() {
         null
 
     private fun hideLoading() =
-        null
+        null 
 
     override fun onDestroyView() {
         super.onDestroyView()

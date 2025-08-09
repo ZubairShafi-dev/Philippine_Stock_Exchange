@@ -16,12 +16,14 @@ class BuyPlanRepo(
 
     private object Paths {
         val INVEST_CUR_BAL = FieldPath.of("investment", "currentBalance")
+        val INVEST_REMAINING_BAL = FieldPath.of("investment", "remainingBalance") // optional
         val REFERRAL_PROFIT = FieldPath.of("earnings", "referralProfit")
     }
 
     /**
      * @param uid   – the custom userId field ("userId") stored in accounts and users docs (e.g. "C6756")
      * @param pkgId – the Firestore document ID of the plan to buy
+     * @param amount – amount to invest
      */
     suspend fun buyPlan(
         uid: String,
@@ -36,7 +38,7 @@ class BuyPlanRepo(
         }
 
         try {
-            // 0️⃣ Lookup account document by custom userId field
+            // 0) Find account doc by custom userId
             val accountQuery = db.collection("accounts")
                 .whereEqualTo("userId", uid)
                 .limit(1)
@@ -49,7 +51,7 @@ class BuyPlanRepo(
             val accountId = accountDoc.id
             Log.d("BuyPlanRepo", "Found accountId='$accountId' for userId='$uid'")
 
-            // 1️⃣ Load user document to get referralCode
+            // 1) Load user doc to get referralCode
             val userQuery = db.collection("users")
                 .whereEqualTo("uid", uid)
                 .limit(1)
@@ -62,8 +64,9 @@ class BuyPlanRepo(
             val refCode = userSnap.getString("referralCode")?.takeIf { it.isNotBlank() }
             Log.d("BuyPlanRepo", "referralCode='$refCode'")
 
-            // 2️⃣ Check referrer's account & active plan
+            // 2) Check referrer's account & active plan (flat userPlans collection)
             var refAccountId: String? = null
+            var refUserId: String? = null
             var isRefActive = false
             if (refCode != null) {
                 val refAcctQ = db.collection("accounts")
@@ -71,23 +74,23 @@ class BuyPlanRepo(
                     .limit(1)
                     .get().await()
                 if (!refAcctQ.isEmpty) {
-                    refAccountId = refAcctQ.documents.first().id
-                    Log.d("BuyPlanRepo", "referrer accountId='$refAccountId'")
+                    val refAcctDoc = refAcctQ.documents.first()
+                    refAccountId = refAcctDoc.id
+                    refUserId = refAcctDoc.getString("userId") // should equal refCode
+                    Log.d("BuyPlanRepo", "referrer accountId='$refAccountId', refUserId='$refUserId'")
+
+                    // because userPlans is now a flat collection we check it here
                     val planQ = db.collection("userPlans")
-                        .document(refAccountId)
-                        .collection("plans")
+                        .whereEqualTo("accountId", refAccountId)
                         .whereEqualTo("status", "active")
                         .limit(1)
                         .get().await()
                     isRefActive = !planQ.isEmpty
-                    Log.d(
-                        "BuyPlanRepo",
-                        "isRefActive=$isRefActive for referrerAcct='$refAccountId'"
-                    )
+                    Log.d("BuyPlanRepo", "isRefActive=$isRefActive for referrerAcct='$refAccountId'")
                 }
             }
 
-            // 3️⃣ Transaction: debit purchaser, credit referral, create plan & audit
+            // 3) Transaction: debit purchaser, credit referral (if eligible), create plan & audit
             return@withContext db.runTransaction { tr ->
                 // a) Load plan metadata
                 val pkgRef = db.collection("plans").document(pkgId)
@@ -97,66 +100,98 @@ class BuyPlanRepo(
                     return@runTransaction Status.FAILURE
                 }
                 val minInv = pkgSnap.getDouble("minAmount") ?: 0.0
-                val maxInv = pkgSnap.getDouble("maxAmount")
                 val roiPct = pkgSnap.getDouble("dailyPercentage") ?: 0.0
                 val dirPct = pkgSnap.getDouble("directProfit") ?: 0.0
-                val payoutPct =
-                    pkgSnap.getDouble("totalPayout") ?: return@runTransaction Status.FAILURE
+                val payoutPct = pkgSnap.getDouble("totalPayout") ?: return@runTransaction Status.FAILURE
 
                 // b) Minimum investment check
-                if (amount < minInv) return@runTransaction Status.MIN_INVEST_ERROR
+                if (amount < minInv) {
+                    Log.e("BuyPlanRepo", "MIN INVEST ERROR: amount=$amount < minInv=$minInv")
+                    return@runTransaction Status.MIN_INVEST_ERROR
+                }
 
-                // c) Check purchaser balance
+                // c) Check purchaser balances (currentBalance mandatory, remainingBalance optional)
                 val buyerAccRef = db.collection("accounts").document(accountId)
                 val buyerSnap = tr.get(buyerAccRef)
-                val curBal = (buyerSnap.get("investment") as? Map<*, *>)
-                    ?.get("currentBalance") as? Number? ?: 0.0
-                Log.d("BuyPlanRepo", "CurrentBalance=$curBal, required=$amount")
 
+                val curBalNum = (buyerSnap.get("investment") as? Map<*, *>)?.get("currentBalance") as? Number?
+                val curBal = curBalNum?.toDouble() ?: 0.0
 
-                // d) Credit referral bonus
-                if (isRefActive && refAccountId != null) {
-                    val bonus = amount * dirPct / 100
+                val remBalNum = (buyerSnap.get("investment") as? Map<*, *>)?.get("remainingBalance") as? Number?
+                val remBal: Double? = remBalNum?.toDouble()
+
+                Log.d("BuyPlanRepo", "Balances for accountId='$accountId' -> current=$curBal, remaining=$remBal")
+
+                // Primary rule: currentBalance must be >= amount (do not allow negative)
+                if (curBal < amount) {
+                    Log.e("BuyPlanRepo", "INSUFFICIENT_BALANCE: current=$curBal, required=$amount")
+                    return@runTransaction Status.INSUFFICIENT_BALANCE
+                }
+
+                // If remainingBalance exists and your business requires it to cover investment, enforce it too
+                // (If you prefer different behavior, change this check)
+                if (remBal != null && remBal < amount) {
+                    Log.e("BuyPlanRepo", "INSUFFICIENT_BALANCE: remaining=$remBal, required=$amount")
+                    return@runTransaction Status.INSUFFICIENT_BALANCE
+                }
+
+                // d) Credit referral bonus if eligible
+                val isReferralReceivesDirectProfit = (isRefActive && refAccountId != null)
+                if (isReferralReceivesDirectProfit && refAccountId != null) {
+                    val bonus = amount * dirPct / 100.0
                     tr.update(
                         db.collection("accounts").document(refAccountId),
                         Paths.REFERRAL_PROFIT,
                         FieldValue.increment(bonus)
                     )
-                    Log.d(
-                        "BuyPlanRepo",
-                        "Credited referral bonus=$bonus to referrerAcct='$refAccountId'"
-                    )
+                    Log.d("BuyPlanRepo", "Credited referral bonus=$bonus to referrerAcct='$refAccountId'")
+                } else {
+                    Log.d("BuyPlanRepo", "No referral credit: isRefActive=$isRefActive, refAccountId=$refAccountId")
                 }
 
-                // e) Debit purchaser balance
+                // e) Debit purchaser balance(s) — keep them >= 0
+                // Update currentBalance
                 tr.update(
                     buyerAccRef,
                     Paths.INVEST_CUR_BAL,
                     FieldValue.increment(-amount)
                 )
-                Log.d("BuyPlanRepo", "Debited amount=$amount from accountId='$accountId'")
+                Log.d("BuyPlanRepo", "Debited amount=$amount from investment.currentBalance for accountId='$accountId'")
 
-                // f) Create userPlan entry
-                val upRef = db.collection("userPlans")
-                    .document(accountId)
-                    .collection("boughtPlans")
-                    .document()
+                // If remainingBalance exists, update it similarly
+                if (remBal != null) {
+                    tr.update(
+                        buyerAccRef,
+                        Paths.INVEST_REMAINING_BAL,
+                        FieldValue.increment(-amount)
+                    )
+                    Log.d("BuyPlanRepo", "Debited amount=$amount from investment.remainingBalance for accountId='$accountId'")
+                }
+
+                // f) Create userPlan entry in flat 'userPlans' collection
+                val upRef = db.collection("userPlans").document()
                 tr.set(
                     upRef,
                     mapOf(
                         "pkgId" to pkgId,
                         "principal" to amount,
                         "roiPercent" to roiPct,
-                        "roiAmount" to ((amount * roiPct) / 100),
-                        "totalPayoutAmount" to ((amount * payoutPct) / 100),
-                        "uplineReferralBonus" to ((amount * dirPct) / 100),
+                        "roiAmount" to ((amount * roiPct) / 100.0),
+                        "totalPayoutAmount" to ((amount * payoutPct) / 100.0),
+                        "uplineReferralBonus" to ((amount * dirPct) / 100.0),
                         "status" to "active",
                         "buyDate" to FieldValue.serverTimestamp(),
                         "totalAccumulated" to 0.0,
-                        "lastCollectedDate" to FieldValue.serverTimestamp()
+                        "lastCollectedDate" to FieldValue.serverTimestamp(),
+                        // NEW: referral tracking
+                        "referrerId" to (refUserId ?: ""), // empty string if not present; change to null if you prefer
+                        "referralReceivedDirectProfit" to isReferralReceivesDirectProfit,
+                        // traceability
+                        "userId" to uid,
+                        "accountId" to accountId
                     )
                 )
-                Log.d("BuyPlanRepo", "Created userPlan for accountId='$accountId'")
+                Log.d("BuyPlanRepo", "Created userPlan doc=${upRef.id} for accountId='$accountId' and uid='$uid' (refReceived=$isReferralReceivesDirectProfit)")
 
                 // g) Audit log
                 tr.set(
@@ -167,7 +202,7 @@ class BuyPlanRepo(
                         "amount" to amount,
                         "timestamp" to FieldValue.serverTimestamp(),
                         "planId" to pkgId,
-                        "referrerId" to (refAccountId ?: "")
+                        "referrerId" to (refUserId ?: "")
                     )
                 )
                 Log.d("BuyPlanRepo", "Audit log entry created")

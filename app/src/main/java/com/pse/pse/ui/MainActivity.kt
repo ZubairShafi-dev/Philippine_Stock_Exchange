@@ -101,6 +101,12 @@ class MainActivity : AppCompatActivity() {
 
         // Bottom Nav logic
         binding.bottomNavBar.setOnItemSelectedListener { item ->
+            val currentDestinationId = navController.currentDestination?.id
+            if (item.itemId == currentDestinationId) {
+                // Already on that fragment → do nothing
+                return@setOnItemSelectedListener true
+            }
+
             if (item.itemId == R.id.homeFragment) {
                 navController.popBackStack(R.id.homeFragment, false)
             } else {
@@ -127,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menuSupport to R.id.chatFragment,
             R.id.menuSalary to R.id.salaryIncomeFragment,
             R.id.menuTeamLevel to R.id.teamLevelsFragment,
-            R.id.investmentPlans to R.id.plansFragment,
+            R.id.investmentPlans to R.id.planFragment,
             R.id.txnHistory to R.id.transactionHistoryFragment
         )
 

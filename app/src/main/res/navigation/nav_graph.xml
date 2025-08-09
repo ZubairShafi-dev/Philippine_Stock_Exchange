@@ -68,6 +68,7 @@
         <action
             android:id="@+id/action_homeFragment_to_planFragment"
             app:destination="@id/planFragment" />
+
     </fragment>
 
     <fragment
@@ -89,10 +90,10 @@
         tools:layout="@layout/fragment_new_support_request" />
 
     <fragment
-        android:id="@+id/plansFragment"
+        android:id="@+id/planFragment"
         android:name="com.pse.pse.ui.fragments.PlanFragment"
         android:label="@string/plans"
-        tools:layout="@layout/fragment_plans" />
+        tools:layout="@layout/fragment_plan" />
 
     <fragment
         android:id="@+id/profileFragment"

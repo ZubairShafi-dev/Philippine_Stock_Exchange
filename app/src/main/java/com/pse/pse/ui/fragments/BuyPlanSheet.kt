@@ -77,16 +77,12 @@ class BuyPlanSheet(
                 else -> binding.tilAmount.error = null
             }
 
-            /* ---------- 3. Rest of your existing code (unchanged) ---------- */
+          /*  *//* ---------- 3. Rest of your existing code (unchanged) ---------- *//*
             Log.d(
                 "BuyPlanSheet",
                 "Calling buyPlan(uid='$uid', pkgId='${plan.docId}', amount=$amount)"
             )
-            Toast.makeText(
-                requireContext(),
-                "Calling buyPlan(uid='$uid', pkgId='${plan.docId}', amount=$amount)",
-                Toast.LENGTH_SHORT
-            ).show()
+           */
 
             lifecycleScope.launch(Dispatchers.Main) {
                 val status = withContext(Dispatchers.IO) {
