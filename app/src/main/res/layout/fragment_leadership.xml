@@ -137,7 +137,6 @@
                     android:nestedScrollingEnabled="false"
                     android:overScrollMode="never" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

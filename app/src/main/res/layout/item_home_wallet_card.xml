@@ -12,18 +12,31 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:background="@drawable/gradient_bg"
-        android:padding="18dp">
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/walletName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Wallet"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- User Name -->
         <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_below="@+id/walletName"
+            android:layout_marginStart="4dp"
             android:text="User Name"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <!-- Balance Amount -->
@@ -33,24 +46,20 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/userName"
             android:layout_marginTop="12dp"
+            android:layout_marginStart="4dp"
             android:text="$0.00"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-
+            android:textSize="16sp" />
 
         <!-- Toggle/Brand Icon (e.g. Mastercard) -->
         <ImageView
             android:id="@+id/iconToggle"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="55dp"
+            android:layout_height="80dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="18dp"
-            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/card_chip" />
-
 
 
     </RelativeLayout>

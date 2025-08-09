@@ -186,7 +186,7 @@ class HomeFragment : BaseFragment() {
             fun rs(v: Double) = "Rs. ${moneyFmt.format(v)}"
 
             // Top bar
-            binding.profileTitle.text = "My Wallet"
+            binding.profileTitle.text = "Home"
 
             // Wallet card
             binding.walletCard.userName.text = "ID: ${account.accountId}"

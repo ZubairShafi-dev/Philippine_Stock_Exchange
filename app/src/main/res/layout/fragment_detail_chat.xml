@@ -83,7 +83,7 @@
             android:background="@drawable/et_message_bg"
             android:hint="Write a message"
             android:textColor="@android:color/white"
-            android:textColorHint="@color/text_hint"
+            android:textColorHint="@color/white_80"
             android:textSize="14sp" />
 
         <ImageButton
