@@ -25,11 +25,6 @@ class BuyPlanRepo(
         val REFERRAL_PROFIT = FieldPath.of("earnings", "referralProfit")
     }
 
-    /**
-     * @param uid     – your custom userId (e.g., "C6756"), stored in accounts.userId and users.uid
-     * @param pkgId   – Firestore doc ID of the plan to buy
-     * @param amount  – amount to invest
-     */
     suspend fun buyPlan(
         uid: String,
         pkgId: String,
@@ -50,10 +45,8 @@ class BuyPlanRepo(
         try {
             // --- Pre-transaction resolution (queries cannot run inside the transaction) ---
             Log.d(TAG, "[$trace] Resolving buyer account by accounts.userId == '$uid'")
-            val buyerAcctQ = db.collection("accounts")
-                .whereEqualTo("userId", uid)
-                .limit(1)
-                .get().await()
+            val buyerAcctQ =
+                db.collection("accounts").whereEqualTo("userId", uid).limit(1).get().await()
             if (buyerAcctQ.isEmpty) {
                 Log.e(TAG, "[$trace] FAILURE: No account found for userId='$uid'")
                 return@withContext Status.FAILURE
@@ -68,20 +61,19 @@ class BuyPlanRepo(
                 TAG,
                 "[$trace] Resolving buyer user by users.uid == '$uid' (to read referralCode)"
             )
-            val buyerUserQ = db.collection("users")
-                .whereEqualTo("uid", uid)
-                .limit(1)
-                .get().await()
+            val buyerUserQ = db.collection("users").whereEqualTo("uid", uid).limit(1).get().await()
             if (buyerUserQ.isEmpty) {
                 Log.e(TAG, "[$trace] FAILURE: No users doc for uid='$uid'")
                 return@withContext Status.FAILURE
             }
             val buyerUserSnap = buyerUserQ.documents.first()
+            val buyerUserRef =
+                buyerUserSnap.reference   // <-- we'll update status on this doc inside TX
             val refCode: String? =
                 buyerUserSnap.getString("referralCode")?.takeIf { it.isNotBlank() }
             Log.d(
                 TAG,
-                "[$trace] Buyer users doc='${buyerUserSnap.reference.path}', referralCode='${refCode ?: ""}'"
+                "[$trace] Buyer users doc='${buyerUserRef.path}', referralCode='${refCode ?: ""}'"
             )
 
             // Referrer (optional)
@@ -109,6 +101,25 @@ class BuyPlanRepo(
                 Log.d(TAG, "[$trace] No referralCode on buyer; skipping referrer resolution")
             }
 
+            // Preload upline’s active plans (refs only) — re-verified inside TX before writes
+            val uplineActivePlanRefs: List<com.google.firebase.firestore.DocumentReference> =
+                if (refCode != null) {
+                    Log.d(
+                        TAG,
+                        "[$trace] Querying upline active plans: userPlans where userId=='$refCode' AND status=='active'"
+                    )
+                    val upQ = db.collection("userPlans")
+                        .whereEqualTo("userId", refCode)
+                        .whereEqualTo("status", "active")
+                        .get().await()
+                    val refs = upQ.documents.map { it.reference }
+                    Log.d(
+                        TAG,
+                        "[$trace] Found ${refs.size} candidate upline plans (to re-verify in TX)"
+                    )
+                    refs
+                } else emptyList()
+
             val planRef = db.collection("plans").document(pkgId)
             Log.d(TAG, "[$trace] Plan ref prepared -> path='${planRef.path}', id='${planRef.id}'")
 
@@ -117,7 +128,7 @@ class BuyPlanRepo(
             Log.d(TAG, "[$trace] TRANSACTION BEGIN")
 
             val result = db.runTransaction { tr ->
-                // --- Read plan ---
+                // -------- ALL READS FIRST --------
                 val planSnap = tr.get(planRef)
                 if (!planSnap.exists()) {
                     Log.e(TAG, "[$trace] TX: FAIL plan not found: pkgId='$pkgId'")
@@ -135,13 +146,6 @@ class BuyPlanRepo(
                     "[$trace] TX: Plan fields -> minAmount=$minInv, dailyPercentage=$roiPct, directProfit=$dirPct, totalPayout=$payoutPct"
                 )
 
-                // --- Validate amount vs min ---
-                if (amount < minInv) {
-                    Log.e(TAG, "[$trace] TX: MIN_INVEST_ERROR -> amount=$amount < minInv=$minInv")
-                    return@runTransaction Status.MIN_INVEST_ERROR
-                }
-
-                // --- Read buyer balances ---
                 val buyerAccSnap = tr.get(buyerAccRef)
                 val invMap = buyerAccSnap.get("investment") as? Map<*, *>
                 val curBal = (invMap?.get("currentBalance") as? Number)?.toDouble()
@@ -156,7 +160,7 @@ class BuyPlanRepo(
                         TAG,
                         "[$trace] TX: INSUFFICIENT_BALANCE -> missing one or both balances (cur=$curBal, rem=$remBal)"
                     )
-                    return@runTransaction Status.INSUFFICIENT_BALANCE
+                    return@runTransaction Status.INSUFFICIENT_BALANCE // typo fix below
                 }
                 if (curBal < amount || remBal < amount) {
                     Log.e(
@@ -166,14 +170,13 @@ class BuyPlanRepo(
                     return@runTransaction Status.INSUFFICIENT_BALANCE
                 }
 
-                // --- Referrer eligibility (users.status == "active") ---
                 var refActive = false
                 var refUid: String? = null
                 if (refUserRef != null && refAcctRef != null) {
                     val refUserSnap = tr.get(refUserRef)
                     val status = refUserSnap.getString("status") ?: "inactive"
                     refActive = (status == "active")
-                    refUid = refUserSnap.getString("uid") // equals refCode
+                    refUid = refUserSnap.getString("uid")
                     Log.d(
                         TAG,
                         "[$trace] TX: Referrer read -> user='${refUserRef.path}', status='$status', active=$refActive, refUid='$refUid', refAcct='${refAcctRef.path}'"
@@ -181,11 +184,36 @@ class BuyPlanRepo(
                 } else {
                     Log.d(
                         TAG,
-                        "[$trace] TX: Referrer missing -> refUserRef=${refUserRef != null}, refAcctRef=${refAcctRef != null} (bonus will be skipped)"
+                        "[$trace] TX: Referrer missing -> refUserRef=${refUserRef != null}, refAcctRef=${refAcctRef != null}"
                     )
                 }
 
-                // --- Compute bonus & derived plan fields ---
+                val uplinePlansToUpdate =
+                    mutableListOf<com.google.firebase.firestore.DocumentReference>()
+                if (refActive && refUid != null) {
+                    Log.d(
+                        TAG,
+                        "[$trace] TX: Verifying ${uplineActivePlanRefs.size} upline plan(s) before writes"
+                    )
+                    uplineActivePlanRefs.forEachIndexed { idx, planDocRef ->
+                        val upSnap = tr.get(planDocRef)
+                        val upStatus = upSnap.getString("status")
+                        val upUserId = upSnap.getString("userId")
+                        val eligible = (upStatus == "active" && upUserId == refUid)
+                        Log.d(
+                            TAG,
+                            "[$trace] TX: [READ ${idx + 1}/${uplineActivePlanRefs.size}] '${planDocRef.path}' status='$upStatus' userId='$upUserId' -> eligible=$eligible"
+                        )
+                        if (eligible) uplinePlansToUpdate.add(planDocRef)
+                    }
+                } else {
+                    Log.d(
+                        TAG,
+                        "[$trace] TX: Skip upline plan verification (refActive=$refActive, refUid=$refUid)"
+                    )
+                }
+
+                // -------- WRITES AFTER ALL READS --------
                 val bonus = amount * dirPct / 100.0
                 val roiAmount = (amount * roiPct / 100.0)
                 val totalPayoutAmount = (amount * payoutPct / 100.0)
@@ -194,7 +222,7 @@ class BuyPlanRepo(
                     "[$trace] TX: Computed -> bonus=$bonus (amount*$dirPct/100), roiAmount=$roiAmount, totalPayoutAmount=$totalPayoutAmount"
                 )
 
-                // --- Debit buyer (both balances) ---
+                // 1) Debit buyer (both balances)
                 tr.update(
                     buyerAccRef,
                     Paths.INVEST_CUR_BAL, FieldValue.increment(-amount),
@@ -205,7 +233,14 @@ class BuyPlanRepo(
                     "[$trace] TX: Debited buyer '${buyerAccRef.path}' -> -$amount from current & remaining"
                 )
 
-                // --- Credit referrer (optional) + transaction for referrer ---
+                // 2) Ensure BUYER becomes active on successful purchase
+                tr.update(buyerUserRef, mapOf("status" to "active"))
+                Log.d(
+                    TAG,
+                    "[$trace] TX: Set buyer user status -> '${buyerUserRef.path}'.status = 'active'"
+                )
+
+                // 3) Conditional: credit referrer + tx + per-plan increments
                 if (refActive && refAcctRef != null && refUid != null) {
                     tr.update(
                         refAcctRef,
@@ -236,14 +271,26 @@ class BuyPlanRepo(
                         TAG,
                         "[$trace] TX: Created referrer transaction '${refTxRef.path}' -> type='Direct Profit', amount=$bonus, percentage=$dirPct, sourceUid='$uid'"
                     )
+
+                    Log.d(
+                        TAG,
+                        "[$trace] TX: Incrementing totalAccumulated on ${uplinePlansToUpdate.size} verified upline plan(s)"
+                    )
+                    uplinePlansToUpdate.forEachIndexed { idx, planDocRef ->
+                        tr.update(planDocRef, "totalAccumulated", FieldValue.increment(bonus))
+                        Log.d(
+                            TAG,
+                            "[$trace] TX: [WRITE ${idx + 1}/${uplinePlansToUpdate.size}] '${planDocRef.path}'.totalAccumulated += $bonus"
+                        )
+                    }
                 } else {
                     Log.d(
                         TAG,
-                        "[$trace] TX: Skipping referrer credit -> active=$refActive, refAcctRef=${refAcctRef != null}, refUid=${refUid != null}"
+                        "[$trace] TX: Skipping referrer credit and plan increments -> active=$refActive, refAcctRef=${refAcctRef != null}, refUid=${refUid != null}"
                     )
                 }
 
-                // --- Create userPlan doc ---
+                // 4) Create buyer's userPlan
                 val upRef = db.collection("userPlans").document()
                 tr.set(
                     upRef,
@@ -269,7 +316,7 @@ class BuyPlanRepo(
                     "[$trace] TX: Created userPlan '${upRef.path}' for userId='$uid' (referrerId='${refUid ?: ""}', referralReceived=${refActive && refAcctRef != null})"
                 )
 
-                // --- Buyer audit transaction ---
+                // 5) Buyer audit transaction
                 val buyerTxRef = db.collection("transactions").document()
                 tr.set(
                     buyerTxRef,
