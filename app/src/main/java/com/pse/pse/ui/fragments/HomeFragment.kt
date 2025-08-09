@@ -137,7 +137,6 @@ class HomeFragment : BaseFragment() {
     }
 
 
-
     private fun showNotificationsDialog() {
         Log.d(TAG_PROFILE, "showNotificationsDialog called")
 
@@ -183,13 +182,13 @@ class HomeFragment : BaseFragment() {
             val inv = account.investment
             val earn = account.earnings
 
-            fun rs(v: Double) = "Rs. ${moneyFmt.format(v)}"
+            fun rs(v: Double) = "$${moneyFmt.format(v)}"
 
             // Top bar
             binding.profileTitle.text = "Home"
 
             // Wallet card
-            binding.walletCard.userName.text = "ID: ${account.accountId}"
+            binding.walletCard.userName.text = "ID: ${account.userId}"
             binding.walletCard.tvAmount.text = rs(inv.currentBalance)
 
             // Earnings cards
@@ -206,7 +205,12 @@ class HomeFragment : BaseFragment() {
             binding.earningTeamCard.earningAmount.text = rs(earn.teamProfit)
 
             // Optional progress mapping: part / totalEarned
-            setEarningProgress(earn.dailyProfit, earn.referralProfit, earn.teamProfit, earn.totalEarned)
+            setEarningProgress(
+                earn.dailyProfit,
+                earn.referralProfit,
+                earn.teamProfit,
+                earn.totalEarned
+            )
         }
     }
 
