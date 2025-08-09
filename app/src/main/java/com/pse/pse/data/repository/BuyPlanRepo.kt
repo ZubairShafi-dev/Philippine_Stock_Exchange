@@ -23,6 +23,7 @@ class BuyPlanRepo(
         val INVEST_CUR_BAL = FieldPath.of("investment", "currentBalance")
         val INVEST_REMAINING_BAL = FieldPath.of("investment", "remainingBalance")
         val REFERRAL_PROFIT = FieldPath.of("earnings", "referralProfit")
+        val TOTAL_EARNED = FieldPath.of("earnings", "totalEarned")
     }
 
     suspend fun buyPlan(
@@ -245,12 +246,13 @@ class BuyPlanRepo(
                     tr.update(
                         refAcctRef,
                         Paths.REFERRAL_PROFIT, FieldValue.increment(bonus),
+                        Paths.TOTAL_EARNED, FieldValue.increment(bonus),
                         Paths.INVEST_CUR_BAL, FieldValue.increment(bonus),
                         Paths.INVEST_REMAINING_BAL, FieldValue.increment(bonus)
                     )
                     Log.d(
                         TAG,
-                        "[$trace] TX: Credited referrer '${refAcctRef.path}' -> +$bonus to earnings.referralProfit & investment balances"
+                        "[$trace] TX: Credited referrer '${refAcctRef.path}' -> +$bonus to earnings & investment balances"
                     )
 
                     val refTxRef = db.collection("transactions").document()
