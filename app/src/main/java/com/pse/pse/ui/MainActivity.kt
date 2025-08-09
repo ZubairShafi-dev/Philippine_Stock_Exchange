@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menuTeam to R.id.teamRankingFragment,
             R.id.menuSupport to R.id.chatFragment,
             R.id.menuSalary to R.id.salaryIncomeFragment,
-            R.id.menuTeamLevel to R.id.teamLevelsFragment,
+            R.id.menuLeaderShip to R.id.leadershipFragment,
             R.id.investmentPlans to R.id.planFragment,
             R.id.txnHistory to R.id.transactionHistoryFragment
         )

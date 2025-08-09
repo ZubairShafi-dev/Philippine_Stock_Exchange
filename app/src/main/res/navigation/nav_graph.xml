@@ -240,4 +240,10 @@
         android:label="Salary Income"
         tools:layout="@layout/fragment_salary_income" />
 
+    <fragment
+        android:id="@+id/leadershipFragment"
+        android:name="com.pse.pse.ui.fragments.LeadershipFragment"
+        android:label="Leadership"
+        tools:layout="@layout/fragment_leadership" />
+
 </navigation>
