@@ -8,13 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pse.pse.R
 
-
-/**
- * A simple ViewPager2 adapter that takes a list of image URLs
- * and loads them (via Glide) into an ImageView for each page.
- */
 class AnnouncementSliderAdapter(
-    private val imageUrls: List<String>
+    private val imageUrls: MutableList<String> = mutableListOf()
 ) : RecyclerView.Adapter<AnnouncementSliderAdapter.SliderViewHolder>() {
 
     inner class SliderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,8 +29,15 @@ class AnnouncementSliderAdapter(
         Glide.with(holder.itemView.context)
             .load(url)
             .centerCrop()
-            .placeholder(R.drawable.glassy_action_card_bg)    // optional placeholder
-            .error(R.drawable.error_image)                // optional error image
+            .placeholder(R.drawable.glassy_action_card_bg)
+            .error(R.drawable.error_image)
             .into(holder.imageView)
+    }
+
+    /** 🔧 Allow HomeFragment to refresh images without replacing the adapter */
+    fun updateData(newUrls: List<String>) {
+        imageUrls.clear()
+        imageUrls.addAll(newUrls)
+        notifyDataSetChanged()
     }
 }

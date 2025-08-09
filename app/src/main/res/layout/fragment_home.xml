@@ -169,6 +169,7 @@
                     app:rowOrderPreserved="false">
 
                     <include
+                        android:id="@+id/earningTodayCard"
                         layout="@layout/item_earning_today"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -178,6 +179,7 @@
                         app:layout_rowWeight="1" />
 
                     <include
+                        android:id="@+id/earningTotalCard"
                         layout="@layout/item_earning_total"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -187,6 +189,7 @@
                         app:layout_rowWeight="1" />
 
                     <include
+                        android:id="@+id/earningReferralCard"
                         layout="@layout/item_earning_referal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -196,6 +199,7 @@
                         app:layout_rowWeight="1" />
 
                     <include
+                        android:id="@+id/earningTeamCard"
                         layout="@layout/item_earning_team"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

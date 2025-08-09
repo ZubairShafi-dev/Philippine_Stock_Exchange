@@ -17,7 +17,7 @@ class AccountViewModel : ViewModel() {
 
     var hasShownAnnouncement = false
 
-    fun getAccount(uId: String): LiveData<AccountModel?> {
+    fun getAccount(uId: String?): LiveData<AccountModel?> {
         return repository.getAccount(uId)
     }
     fun getAnnouncements() {

@@ -12,7 +12,7 @@ class AccountRepository {
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun getAccount(uId: String): LiveData<AccountModel?> {
+    fun getAccount(uId: String?): LiveData<AccountModel?> {
         val accountLiveData = MutableLiveData<AccountModel?>()
 
         db.collection("accounts")
