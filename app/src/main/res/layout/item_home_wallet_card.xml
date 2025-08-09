@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="200dp"
         android:background="@drawable/gradient_bg"
         android:padding="16dp">
 
@@ -20,10 +20,11 @@
             android:id="@+id/walletName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Wallet"
-            android:layout_centerHorizontal="true"
+            android:text="Wallet"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="6dp"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <!-- User Name -->
@@ -31,7 +32,7 @@
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="72dp"
             android:layout_below="@+id/walletName"
             android:layout_marginStart="4dp"
             android:text="User Name"
@@ -55,10 +56,10 @@
         <ImageView
             android:id="@+id/iconToggle"
             android:layout_width="55dp"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="14dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/card_chip" />
 
 
