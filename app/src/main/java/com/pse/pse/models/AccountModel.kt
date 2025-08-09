@@ -9,6 +9,7 @@ data class AccountModel(
     val createdAt: Timestamp? = Timestamp.now(),
     val investment: InvestmentModel = InvestmentModel(),
     val earnings: EarningsModel = EarningsModel()
+
 ) {
     fun toMap(): Map<String, Any> {
         return mapOf(

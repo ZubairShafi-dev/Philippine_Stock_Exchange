@@ -1,6 +1,5 @@
 package com.pse.pse.data.repository
 
-import UserModel
 import android.app.Application
 import android.util.Log
 import com.google.firebase.Firebase
@@ -14,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.pse.pse.models.AccountModel
 import com.pse.pse.models.EarningsModel
 import com.pse.pse.models.InvestmentModel
+import com.pse.pse.models.UserModel
 import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await

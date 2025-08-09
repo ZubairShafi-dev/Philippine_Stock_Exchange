@@ -1,6 +1,5 @@
 package com.pse.pse.ui.fragments
 
-import UserModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.navigation.findNavController
 import com.google.firebase.Timestamp
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentSignUpBinding
+import com.pse.pse.models.UserModel
 import com.pse.pse.ui.viewModels.AuthViewModel
 import com.pse.pse.utils.SharedPrefManager
 

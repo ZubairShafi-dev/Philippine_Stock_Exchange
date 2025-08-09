@@ -1,7 +1,6 @@
 package com.pse.pse.ui.fragments
 
 
-import UserModel
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -29,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.pse.pse.R
 import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.databinding.FragmentProfileBinding
+import com.pse.pse.models.UserModel
 import com.pse.pse.ui.viewModels.ProfileViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.pse.pse.models.AccountModel
 import com.pse.pse.models.AnnouncementModel
 import com.pse.pse.data.repository.AccountRepository
+import com.pse.pse.models.AccountWithUser
 
 class AccountViewModel : ViewModel() {
     private val repository = AccountRepository()
@@ -30,4 +31,9 @@ class AccountViewModel : ViewModel() {
             _announcementImageUrls.postValue(urls)
         }
     }
+
+    fun getAccountWithUser(uId: String?): LiveData<AccountWithUser?> {
+        return repository.getAccountWithUser(uId)
+    }
+
 }

@@ -3,9 +3,12 @@ package com.pse.pse.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.pse.pse.models.AccountModel
+import com.pse.pse.models.AccountWithUser
 import com.pse.pse.models.AnnouncementModel
+import com.pse.pse.models.UserModel
 import java.util.Calendar
 
 class AccountRepository {
@@ -33,6 +36,59 @@ class AccountRepository {
 
         return accountLiveData
     }
+
+
+
+    // AccountRepository.kt (add this method)
+    fun getAccountWithUser(uId: String?): LiveData<AccountWithUser?> {
+        val live = MutableLiveData<AccountWithUser?>()
+        if (uId.isNullOrEmpty()) {
+            live.postValue(null)
+            return live
+        }
+
+        var userReg: ListenerRegistration? = null
+
+        db.collection("accounts")
+            .whereEqualTo("userId", uId)
+            .addSnapshotListener { accSnap, accErr ->
+                if (accErr != null) {
+                    live.postValue(null)
+                    userReg?.remove()
+                    userReg = null
+                    return@addSnapshotListener
+                }
+
+                val account = accSnap?.documents?.firstOrNull()?.toObject(AccountModel::class.java)
+
+                // If account missing, stop listening to user and emit null
+                if (account == null) {
+                    live.postValue(AccountWithUser(null, null))
+                    userReg?.remove()
+                    userReg = null
+                    return@addSnapshotListener
+                }
+
+                // (Re)attach a user listener bound to account.userId (same as uId)
+                userReg?.remove()
+                userReg = db.collection("users")
+                    .whereEqualTo("uid", account.userId)
+                    .addSnapshotListener { userSnap, userErr ->
+                        if (userErr != null) {
+                            live.postValue(AccountWithUser(account, null))
+                            return@addSnapshotListener
+                        }
+                        val user = userSnap?.documents?.firstOrNull()?.toObject(UserModel::class.java)
+                        live.postValue(AccountWithUser(account, user))
+                    }
+            }
+
+        return live
+    }
+
+
+
+
 
     fun getAnnouncements(callback: (List<AnnouncementModel>?) -> Unit) {
         val db = FirebaseFirestore.getInstance()

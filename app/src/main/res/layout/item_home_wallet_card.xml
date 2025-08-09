@@ -22,20 +22,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="5dp"
-            android:text="Wallet"
+            android:text="Name"
             android:textColor="@android:color/white"
             android:textSize="21sp"
             android:textStyle="bold" />
 
         <!-- User Name -->
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/userId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/walletName"
             android:layout_marginStart="4dp"
             android:layout_marginTop="72dp"
-            android:text="User Name"
+            android:text="User ID"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -45,7 +45,7 @@
             android:id="@+id/tvAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/userName"
+            android:layout_below="@id/userId"
             android:layout_marginStart="4dp"
             android:layout_marginTop="12dp"
             android:text="$0.00"

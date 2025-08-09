@@ -173,25 +173,31 @@ class HomeFragment : BaseFragment() {
 
 
     /** Observe account data and update UI */
+// HomeFragment.kt (replace observeAccountData with the combined one)
     private fun observeAccountData(userId: String?) {
         showLoading()
-        accountViewModel.getAccount(userId).observe(viewLifecycleOwner) { account ->
+        accountViewModel.getAccountWithUser(userId).observe(viewLifecycleOwner) { combo ->
             hideLoading()
+            val account = combo?.account
+            val user = combo?.user
+
             if (account == null) return@observe
 
             val inv = account.investment
             val earn = account.earnings
-
             fun rs(v: Double) = "$${moneyFmt.format(v)}"
 
             // Top bar
             binding.profileTitle.text = "Home"
 
-            // Wallet card
-            binding.walletCard.userName.text = "ID: ${account.userId}"
-            binding.walletCard.tvAmount.text = rs(inv.currentBalance)
+            // Show user info if available
+            binding.walletCard.walletName.text =
+                listOfNotNull(user?.name, user?.lastName).joinToString(" ").ifBlank { "User" }
 
-            // Earnings cards
+            binding.walletCard.userId.text = "ID: ${account.userId}"
+            binding.walletCard.tvAmount.text = rs(account.investment.currentBalance)
+
+            // Earnings
             binding.earningTodayCard.earningTitle.text = "Today's Earning"
             binding.earningTodayCard.earningAmount.text = rs(earn.dailyProfit)
 
@@ -204,7 +210,6 @@ class HomeFragment : BaseFragment() {
             binding.earningTeamCard.earningTitle.text = "Team Profit"
             binding.earningTeamCard.earningAmount.text = rs(earn.teamProfit)
 
-            // Optional progress mapping: part / totalEarned
             setEarningProgress(
                 earn.dailyProfit,
                 earn.referralProfit,

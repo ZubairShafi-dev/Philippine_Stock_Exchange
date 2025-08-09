@@ -1,11 +1,11 @@
 package com.pse.pse.ui.viewModels
 
-import UserModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.pse.pse.data.repository.AuthRepository
+import com.pse.pse.models.UserModel
 import kotlinx.coroutines.launch
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {

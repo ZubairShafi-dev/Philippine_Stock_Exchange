@@ -1,12 +1,12 @@
 package com.pse.pse.ui.viewModels
 
-import UserModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.pse.pse.data.repository.AuthRepository
+import com.pse.pse.models.UserModel
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
