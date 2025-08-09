@@ -72,49 +72,13 @@
                             android:layout_weight="1"
                             android:text="Qualification Window (30 days)"
                             android:textColor="@color/white_90"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tvCountdown"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_pill_primary"
-                            android:paddingStart="10dp"
-                            android:paddingTop="4dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="4dp"
-                            android:text="--:--:--"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
 
-                        <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:id="@+id/progressDays"
-                            style="@style/Widget.Material3.LinearProgressIndicator"
-                            android:layout_width="0dp"
-                            android:layout_height="8dp"
-                            android:layout_weight="1"
-                            app:indicatorColor="@color/teal_accent"
-                            app:trackColor="@color/white_20"
-                            app:trackThickness="8dp" />
-
-                        <TextView
-                            android:id="@+id/tvDaysPct"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="0%"
-                            android:textColor="@color/white_80"
-                            android:textStyle="bold" />
-                    </LinearLayout>
 
                     <!-- Dates -->
                     <LinearLayout
@@ -161,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Live Preview (locks at day 30)"
-                        android:textColor="@color/white_80"
+                        android:textColor="@color/white_90"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -179,15 +143,65 @@
                             style="@style/ValueText"
                             android:text="$0" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvPreviewTier"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Tier not locked yet"
-                        android:textColor="@color/white_70" />
+                        android:layout_marginTop="4dp">
+
+                        <TextView
+                            android:id="@+id/tvPreviewTier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="Tier not locked yet"
+                            android:textColor="@color/white_70"
+                            android:layout_marginTop="2dp" />
+
+                        <TextView
+                            android:id="@+id/tvCountdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/bg_pill_primary"
+                            android:paddingStart="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="4dp"
+                            android:text="--:--:--"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progressDays"
+                            style="@style/Widget.Material3.LinearProgressIndicator"
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_weight="1"
+                            app:indicatorColor="@color/teal_accent"
+                            app:trackColor="@color/white_20"
+                            app:trackThickness="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvDaysPct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="0%"
+                            android:textColor="@color/white_80"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
+
 
                 <!-- ───────── Status: Active (Locked) ───────── -->
                 <LinearLayout
@@ -212,7 +226,7 @@
                             android:layout_weight="1"
                             android:text="Salary Program — Active"
                             android:textColor="@color/white_90"
-                            android:textSize="16sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -227,34 +241,6 @@
                             android:text="Tier ?"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/Row"
-                        android:layout_marginTop="8dp">
-
-                        <TextView
-                            style="@style/LabelText"
-                            android:text="Locked Active Direct Business" />
-
-                        <TextView
-                            android:id="@+id/tvLockedAdb"
-                            style="@style/ValueText"
-                            android:text="$0" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/Row"
-                        android:layout_marginTop="4dp">
-
-                        <TextView
-                            style="@style/LabelText"
-                            android:text="Monthly Salary" />
-
-                        <TextView
-                            android:id="@+id/tvSalary"
-                            style="@style/ValueTextBold"
-                            android:text="$0" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -284,6 +270,33 @@
                             style="@style/ValueText"
                             android:text="—" />
                     </LinearLayout>
+                    <LinearLayout
+                        style="@style/Row"
+                        android:layout_marginTop="4dp">
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Monthly Salary" />
+
+                        <TextView
+                            android:id="@+id/tvSalary"
+                            style="@style/ValueTextBold"
+                            android:text="$0" />
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/Row"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            style="@style/LabelText"
+                            android:text="Locked Active Direct Business" />
+
+                        <TextView
+                            android:id="@+id/tvLockedAdb"
+                            style="@style/ValueText"
+                            android:text="$0" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <!-- ───────── Status: Ended ───────── -->
@@ -318,7 +331,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/glassy_action_card_bg"
                     android:orientation="vertical"
                     android:padding="14dp">
@@ -326,26 +339,36 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Salary Tiers (Active Direct Business → Monthly Salary)"
+                        android:text="Salary Tiers "
+                        android:textColor="@color/light_blue"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Active Direct Business → Monthly Salary"
                         android:textColor="@color/white_90"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        style="@style/TierRow"
-                        android:text="$1,500  →  $50 / month" />
 
                     <TextView
                         style="@style/TierRow"
-                        android:text="$2,000  →  $100 / month" />
+                        android:text="$1,500   →    $50 / month" />
 
                     <TextView
                         style="@style/TierRow"
-                        android:text="$4,000  →  $250 / month" />
+                        android:text="$2,000   →   $100 / month" />
 
                     <TextView
                         style="@style/TierRow"
-                        android:text="$7,000  →  $500 / month" />
+                        android:text="$4,000   →    $250 / month" />
+
+                    <TextView
+                        style="@style/TierRow"
+                        android:text="$7,000   →    $500 / month" />
 
                     <TextView
                         style="@style/TierRow"
@@ -353,11 +376,11 @@
 
                     <TextView
                         style="@style/TierRow"
-                        android:text="$30,000 →  $2,500 / month" />
+                        android:text="$30,000 →   $2,500 / month" />
 
                     <TextView
                         style="@style/TierRow"
-                        android:text="$50,000 →  $5,000 / month" />
+                        android:text="$50,000 →   $5,000 / month" />
 
                     <TextView
                         style="@style/TierRow"
