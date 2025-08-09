@@ -5,24 +5,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.FrameLayout
+import android.widget.ScrollView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
+import com.pse.pse.R
 import com.pse.pse.data.repository.BuyPlanRepo
 import com.pse.pse.databinding.BuyPlanSheetBinding
 import com.pse.pse.models.Plan
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.DecimalFormat
 
-/**
- * Bottom-sheet that collects an investment amount and performs the purchase.
- *
- * Validation logic honours:
- *  • Minimum amount (always enforced)
- *  • Maximum amount – only if the plan specifies one (null == unlimited)
- */
 class BuyPlanSheet(
     private val plan: Plan,
     private val repo: BuyPlanRepo,
@@ -31,6 +28,9 @@ class BuyPlanSheet(
 
     private var _binding: BuyPlanSheetBinding? = null
     private val binding get() = _binding!!
+
+    private var loadingOverlay: View? = null
+    private val df = DecimalFormat("#.##") // format to 2 decimal places
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,13 +44,33 @@ class BuyPlanSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /* ---------- 1. Enable button only when amount is valid ---------- */
+        // ---------- Setup Loading Overlay ----------
+        var container: ViewGroup = binding.root
+        if (binding.root is ScrollView && binding.root.childCount == 1) {
+            val originalChild = binding.root.getChildAt(0)
+            (binding.root as ScrollView).removeView(originalChild)
+            val frameLayout = FrameLayout(requireContext())
+            frameLayout.layoutParams = originalChild.layoutParams
+            frameLayout.addView(originalChild)
+            (binding.root as ScrollView).addView(frameLayout)
+            container = frameLayout
+        }
+        loadingOverlay = LayoutInflater.from(context)
+            .inflate(R.layout.loading_overlay, container, false)
+        container.addView(loadingOverlay)
+        hideLoading()
+
+        // ---------- Set plan details ----------
+        binding.tvPlanName.text = plan.planName
+        binding.tvDailyRoi.text = "${df.format(plan.dailyPercentage)}% ROI"
+        binding.etAmount.hint = "Min: Rs.${plan.minAmount}"
+
+        // ---------- Enable/Disable buy button ----------
         binding.btnBuy.isEnabled = false
         binding.etAmount.addTextChangedListener { input ->
             val amt = input.toString().toDoubleOrNull() ?: 0.0
-
             val isAboveMin = amt >= plan.minAmount
-            val isBelowMax = plan.maxAmount?.let { amt <= it } ?: true   // ← NEW
+            val isBelowMax = plan.maxAmount?.let { amt <= it } ?: true
 
             binding.btnBuy.isEnabled = isAboveMin && isBelowMax
 
@@ -59,7 +79,7 @@ class BuyPlanSheet(
             }
         }
 
-        /* ---------- 2. Validation on click ---------- */
+        // ---------- Buy button click ----------
         binding.btnBuy.setOnClickListener {
             val amount = binding.etAmount.text.toString().toDoubleOrNull() ?: 0.0
 
@@ -68,63 +88,55 @@ class BuyPlanSheet(
                     binding.tilAmount.error = "Minimum Amount is Rs.${plan.minAmount}"
                     return@setOnClickListener
                 }
-
-                plan.maxAmount != null && amount > plan.maxAmount -> {    // ← NEW
+                plan.maxAmount != null && amount > plan.maxAmount -> {
                     binding.tilAmount.error = "Maximum Amount is Rs.${plan.maxAmount}"
                     return@setOnClickListener
                 }
-
                 else -> binding.tilAmount.error = null
             }
 
-          /*  *//* ---------- 3. Rest of your existing code (unchanged) ---------- *//*
-            Log.d(
-                "BuyPlanSheet",
-                "Calling buyPlan(uid='$uid', pkgId='${plan.docId}', amount=$amount)"
-            )
-           */
+            showLoading()
+            binding.btnBuy.isEnabled = false
 
             lifecycleScope.launch(Dispatchers.Main) {
                 val status = withContext(Dispatchers.IO) {
                     repo.buyPlan(uid = uid, pkgId = plan.docId, amount = amount)
                 }
 
-                Log.d("BuyPlanSheet", "buyPlan returned: $status")
-                Toast.makeText(requireContext(), "Result: $status", Toast.LENGTH_SHORT).show()
+                hideLoading()
+                binding.btnBuy.isEnabled = true
 
                 when (status) {
                     BuyPlanRepo.Status.SUCCESS -> {
-                        Toast.makeText(
-                            requireContext(),
-                            "🎉 Purchase successful!",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        showSnack("🎉 Purchase successful!")
                         dismiss()
                     }
-
                     BuyPlanRepo.Status.MIN_INVEST_ERROR ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Minimum investment is Rs.${plan.minAmount}.",
-                            Toast.LENGTH_LONG
-                        ).show()
-
+                        showSnack("Minimum investment is Rs.${plan.minAmount}.")
                     BuyPlanRepo.Status.INSUFFICIENT_BALANCE ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Insufficient balance. Please top up and try again.",
-                            Toast.LENGTH_LONG
-                        ).show()
-
+                        showSnack("Insufficient balance. Please top up and try again.")
                     BuyPlanRepo.Status.FAILURE ->
-                        Toast.makeText(
-                            requireContext(),
-                            "Purchase failed. Please try again later.",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        showSnack("Purchase failed. Please try again later.")
                 }
             }
         }
+    }
+
+    private fun showSnack(message: String) {
+        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
+    }
+
+    private fun showLoading() {
+        loadingOverlay?.apply {
+            visibility = View.VISIBLE
+            bringToFront()
+            elevation = 100f
+            requestLayout()
+        }
+    }
+
+    private fun hideLoading() {
+        loadingOverlay?.visibility = View.GONE
     }
 
     override fun onDestroyView() {
