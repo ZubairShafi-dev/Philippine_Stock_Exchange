@@ -16,6 +16,7 @@ import com.pse.pse.ui.viewModels.PlansViewModelFactory
 import com.pse.pse.utils.SharedPrefManager
 import com.yourpackage.data.repository.PlanRepository
 import com.yourpackage.ui.viewmodel.PlansViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -24,13 +25,13 @@ class MyPlansFragment : BaseFragment() {
     private var _b: FragmentMyPlansBinding? = null
     private val b get() = _b!!
 
-    // Reuse existing VM + factory
     private val vm: PlansViewModel by viewModels {
         PlansViewModelFactory(PlanRepository())
     }
 
     private lateinit var adapter: UserPlanAdapter
-    private var currentTab = 0 // 0 active, 1 expired
+    private var currentTab = 0 // 0 = active, 1 = expired
+    private var collectJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,36 +48,42 @@ class MyPlansFragment : BaseFragment() {
 
         adapter = UserPlanAdapter()
         b.rvMyPlans.layoutManager = LinearLayoutManager(requireContext())
+        b.rvMyPlans.setHasFixedSize(true)
         b.rvMyPlans.adapter = adapter
 
         val uid = SharedPrefManager(requireContext()).getId().orEmpty()
+        if (uid.isEmpty()) {
+            render(false, emptyList())
+            return
+        }
         vm.bindUser(uid)
 
-        fun collectActive() {
-            viewLifecycleOwner.lifecycleScope.launch {
+        fun startCollectActive() {
+            collectJob?.cancel()
+            collectJob = viewLifecycleOwner.lifecycleScope.launch {
                 vm.activeUserPlans(uid).collectLatest { list ->
                     render(list.isNotEmpty(), list)
                 }
             }
         }
 
-        fun collectExpired() {
-            viewLifecycleOwner.lifecycleScope.launch {
+        fun startCollectExpired() {
+            collectJob?.cancel()
+            collectJob = viewLifecycleOwner.lifecycleScope.launch {
                 vm.expiredUserPlans(uid).collectLatest { list ->
                     render(list.isNotEmpty(), list)
                 }
             }
         }
 
-        // default tab = Active
-        collectActive()
+        // Default: Active
+        startCollectActive()
 
         b.tabPlans.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 currentTab = tab.position
-                if (currentTab == 0) collectActive() else collectExpired()
+                if (currentTab == 0) startCollectActive() else startCollectExpired()
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
@@ -90,6 +97,7 @@ class MyPlansFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        collectJob?.cancel()
         _b = null
     }
 }
