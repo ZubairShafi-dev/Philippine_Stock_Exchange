@@ -15,7 +15,7 @@ class Fcm {
         targetDeviceToken: String, title: String, body: String, accessToken: String
     ) {
         val url =
-            "https://fcm.googleapis.com/v1/projects/aitrustledger-3fe07/messages:send" // Replace with your project ID
+            "https://fcm.googleapis.com/v1/projects/philippine-stock-exchang-db/messages:send" // Replace with your project ID
 
         val client = OkHttpClient()
 

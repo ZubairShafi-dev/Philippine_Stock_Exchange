@@ -43,12 +43,16 @@ class NotificationService : FirebaseMessagingService() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(message: RemoteMessage) {
         Log.d("MYTAG", "onMessageReceived: ${message.data}")
-        val title =message.data["title"]
+        val title = message.data["title"]
         val body = message.data["body"]
         val userId = SharedPrefManager(this).getId()
-        val notification= NotificationModel(title.toString(), body.toString(),timestamp = System.currentTimeMillis())
+        val notification = NotificationModel(
+            title.toString(),
+            body.toString(),
+            timestamp = System.currentTimeMillis()
+        )
         if (title != null && body != null && userId != null) {
-           notificationPreferences.saveNotification(userId,notification)
+            notificationPreferences.saveNotification(userId, notification)
         }
         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager?
         manager?.let {
