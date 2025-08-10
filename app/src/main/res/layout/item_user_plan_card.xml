@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
+    android:elevation="0dp"
     app:cardCornerRadius="16dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    app:strokeColor="@android:color/transparent"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +47,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Numbers (2 columns only) -->
+        <!-- Numbers (2 columns) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,29 +121,40 @@
             app:trackCornerRadius="8dp"
             app:trackThickness="8dp" />
 
-        <!-- Footer -->
-        <LinearLayout
+        <!-- Meta as chips (wraps on small screens) -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipsMeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            app:singleLine="false"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp">
 
-            <TextView
-                android:id="@+id/tvBuyDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Bought — "
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/tvLastCollect"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipBought"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Last ROI — "
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+                android:text="Bought • Aug 10, 2025"
+                android:textColor="@android:color/white"
+                app:chipMinHeight="32dp"
+                app:chipBackgroundColor="#1FFFFFFF"
+                app:chipStrokeWidth="1dp"
+                app:chipStrokeColor="#33FFFFFF" />
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipLastRoi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last ROI • Aug 11, 2025"
+                android:textColor="@android:color/white"
+                app:chipMinHeight="32dp"
+                app:chipBackgroundColor="#1FFFFFFF"
+                app:chipStrokeWidth="1dp"
+                app:chipStrokeColor="#33FFFFFF" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Footer -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
