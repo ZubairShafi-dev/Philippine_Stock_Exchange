@@ -1,4 +1,4 @@
-package com.trustledger.aitrustledger.utils
+package com.pse.pse.utils
 
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.content.edit
-import com.pse.pse.utils.UpdateInstaller
 
 /**
  * Receives DownloadManager COMPLETE event (foreground, background or killed).
