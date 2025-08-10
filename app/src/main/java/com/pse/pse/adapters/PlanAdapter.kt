@@ -25,9 +25,9 @@ class PlanAdapter(
 
         fun bind(plan: Plan) {
             planName.text = plan.planName
-            minAmount.text = "Min: ${plan.minAmount}$"
+            minAmount.text = "Min: $${plan.minAmount}"
             maxAmount.text =
-                if (plan.maxAmount != null) "Max: ${plan.maxAmount}$" else "Max: Unlimited"
+                if (plan.maxAmount != null) "Max: $${plan.maxAmount}" else "Max: Unlimited"
             totalPayout.text = "Total Payout: ${plan.totalPayout}%"
             dailyPercentage.text = "Daily ROI: ${"%.2f".format(plan.dailyPercentage)}%"
 

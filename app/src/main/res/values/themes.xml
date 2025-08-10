@@ -1,15 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.PSE" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
+    <!-- Base app theme -->
+    <style name="Base.Theme.PSE" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/status_bar</item>
         <item name="colorPrimary">@color/white</item>
 
+        <!-- Apply our BottomSheet overlay -->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.PSE.BottomSheet</item>
     </style>
 
+    <style name="Theme.PSE" parent="Base.Theme.PSE"/>
 
+    <!-- BottomSheet overlay: shape + scoped colors -->
+    <style name="ThemeOverlay.PSE.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <!-- Rounded shape for the sheet -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.PSE.Rounded24</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.PSE.Rounded24</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.PSE.Rounded24</item>
+
+        <!-- Scoped colors so the Buy button isn't white-on-light -->
+        <item name="colorPrimary">@color/brand_primary_sheet</item>
+        <item name="colorOnPrimary">@color/brand_on_primary_sheet</item>
+    </style>
+
+    <!-- 24dp rounded shape (use Material3 parent; if unresolved, switch to MaterialComponents) -->
+    <style name="ShapeAppearance.PSE.Rounded24" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!-- Your existing styles -->
     <style name="Widget.AITrustLedger.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">16dp</item>
         <item name="boxCornerRadiusTopEnd">16dp</item>
@@ -19,12 +39,10 @@
         <item name="hintTextColor">@color/white</item>
     </style>
 
-
     <style name="FabShape.Circle" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item> <!-- Ensures perfect circle -->
+        <item name="cornerSize">50%</item>
     </style>
-
 
     <style name="NoActiveIndicator" parent="@style/Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@android:color/transparent</item>
@@ -70,7 +88,4 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-
-
-    <style name="Theme.PSE" parent="Base.Theme.PSE" />
 </resources>
