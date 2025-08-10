@@ -245,6 +245,8 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() = binding.drawerLayout.openDrawer(GravityCompat.START)
 
+
+
     override fun onResume() {
         super.onResume()
         Log.d("UpdateMgr", "MainActivity onResume - About to call checkForUpdate()")
