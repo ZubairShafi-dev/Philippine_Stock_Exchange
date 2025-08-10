@@ -96,7 +96,6 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/white"
         android:text="Invest"
-        android:textColor="@color/dark_green"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPerYear" />
