@@ -5,6 +5,8 @@ import com.google.firebase.Timestamp
 /**
  * Data model representing a deposit or withdrawal transaction.
  */
+// com.pse.pse.models.TransactionModel
+// com/pse/pse/models/TransactionModel.kt
 data class TransactionModel(
     val rankName: String = "",
     val transactionId: String = "",
@@ -14,7 +16,7 @@ data class TransactionModel(
     val address: String = "",
     val status: String = STATUS_PENDING,
     val balanceUpdated: Boolean = false,
-    val timestamp: Timestamp? = Timestamp.now()
+    val timestamp: com.google.firebase.Timestamp? = com.google.firebase.Timestamp.now()
 ) {
     fun toMap(): Map<String, Comparable<*>?> = mapOf(
         FIELD_ID to transactionId,
@@ -38,14 +40,17 @@ data class TransactionModel(
         const val FIELD_BALANCE_UPDATED = "balanceUpdated"
         const val FIELD_TIMESTAMP = "timestamp"
 
-        // Transaction types
+        // ✅ Keep these (existing flows)
         const val TYPE_WITHDRAW = "withdraw"
         const val TYPE_DEPOSIT = "deposit"
-        const val TYPE_ACHIEVEMENT = "achievement"
-        const val TYPE_INVESTMENT_BOUGHT = "investmentBought"
-        const val TYPE_INVESTMENT_SOLD = "investmentSold"
-        const val TYPE_TEAM = "teamReward"
-        const val TYPE_REFERRAL = "referralReward"
+
+        // ✅ New types from your current backend
+        const val TYPE_DAILY_ROI = "dailyRoi"
+        const val TYPE_TEAM_PROFIT = "teamProfit"
+        const val TYPE_LEADERSHIP = "leadership_bonus"
+        const val TYPE_SALARY = "salary"
+        const val TYPE_PLAN_PURCHASE = "Plan Purchase"  // exact string used in BuyPlanRepo
+        const val TYPE_DIRECT_PROFIT = "Direct Profit"  // exact string used in BuyPlanRepo
 
         // Status values
         const val STATUS_PENDING = "pending"
@@ -56,5 +61,8 @@ data class TransactionModel(
         const val STATUS_BOUGHT = "bought"
         const val STATUS_SOLD = "sold"
 
+        // ✅ Add to support new docs
+        const val STATUS_COMPLETED = "completed"
+        const val STATUS_CREDITED = "credited"
     }
 }

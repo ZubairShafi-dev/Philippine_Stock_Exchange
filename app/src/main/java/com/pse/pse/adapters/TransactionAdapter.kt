@@ -44,19 +44,29 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
         private val monthFmt = SimpleDateFormat("MMMM", Locale.getDefault())
         private val dateFmt = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-        fun bind(tx: TransactionModel) {/* ---------- DATE ---------- */
-            // `createdAt` is a Timestamp; fall back to now if null
-            val date: Date = tx.timestamp?.toDate() ?: Date()
-            tvMonth.text =
-                if (tx.type == TransactionModel.TYPE_ACHIEVEMENT || tx.type == TransactionModel.TYPE_TEAM || tx.type == TransactionModel.TYPE_INVESTMENT_SOLD || tx.type == TransactionModel.TYPE_INVESTMENT_BOUGHT || tx.type == TransactionModel.TYPE_REFERRAL) {
-                    "${tx.address}"
-                } else {
-                    monthFmt.format(date)
-                }
 
+        fun bind(tx: TransactionModel) {
+            val date: Date = tx.timestamp?.toDate() ?: Date()
+            val monthName = monthFmt.format(date)   // e.g., "August"
+
+            // ---------- TITLE (tvMonth) ----------
+            val title = when (tx.type) {
+                TransactionModel.TYPE_DEPOSIT -> "Deposit ($monthName)"
+                TransactionModel.TYPE_WITHDRAW -> "Withdraw ($monthName)"
+                TransactionModel.TYPE_DAILY_ROI -> "ROI (all active plans)"
+                TransactionModel.TYPE_TEAM_PROFIT -> "Team Profit (Levels 1–8)"
+                TransactionModel.TYPE_LEADERSHIP -> "Leadership Bonus"
+                TransactionModel.TYPE_SALARY -> "Salary Program"
+                TransactionModel.TYPE_PLAN_PURCHASE -> tx.address.ifBlank { "Plan Purchase" } // plan name
+                TransactionModel.TYPE_DIRECT_PROFIT -> tx.address.ifBlank { "Direct Profit" } // Direct Profit (uid)
+                else -> monthName
+            }
+            tvMonth.text = title
+
+            // ---------- DATE ----------
             tvDate.text = dateFmt.format(date)
 
-            /* ---------- STATUS ---------- */
+            // ---------- STATUS ----------
             tvStatus.text = tx.status.replaceFirstChar { it.uppercase() }
             val colorRes = when (tx.status.lowercase(Locale.getDefault())) {
                 TransactionModel.STATUS_APPROVED.lowercase() -> R.color.green
@@ -65,12 +75,13 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
                 TransactionModel.STATUS_BOUGHT.lowercase() -> R.color.skyblue
                 TransactionModel.STATUS_SOLD.lowercase() -> R.color.green
                 TransactionModel.STATUS_RECEIVED.lowercase() -> R.color.green
-
-                else -> R.color.bright_red    // pending
+                TransactionModel.STATUS_COMPLETED.lowercase() -> R.color.green
+                TransactionModel.STATUS_CREDITED.lowercase() -> R.color.green
+                else -> R.color.bright_red // pending / unknown
             }
             tvStatus.setTextColor(itemView.context.getColor(colorRes))
 
-            /* ---------- AMOUNT ---------- */
+            // ---------- AMOUNT ----------
             tvAmount.text = "$${"%,.2f".format(Locale.getDefault(), tx.amount)}"
         }
     }

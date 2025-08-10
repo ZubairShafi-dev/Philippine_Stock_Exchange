@@ -18,13 +18,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.pse.pse.R
-import com.pse.pse.databinding.FragmentTransactionHistoryBinding
 import com.pse.pse.adapters.NotificationAdapter
-import com.trustledger.aitrustledger.adapters.TransactionAdapter
+import com.pse.pse.databinding.FragmentTransactionHistoryBinding
 import com.pse.pse.models.TransactionModel
 import com.pse.pse.ui.viewModels.TransactionViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
+import com.trustledger.aitrustledger.adapters.TransactionAdapter
 
 
 class TransactionHistoryFragment : BaseFragment() {
@@ -128,11 +128,8 @@ class TransactionHistoryFragment : BaseFragment() {
 
 //        val typeFilteredList = statusFiltered.filter { it.type == typeFilter }
 
-        val timeSorted = if (typeFilter == TransactionModel.TYPE_ACHIEVEMENT) {
-            typeFilteredList.sortedBy { it.timestamp?.seconds ?: 0 } // ascending
-        } else {
-            typeFilteredList.sortedByDescending { it.timestamp?.seconds ?: 0 } // default
-        }
+        // In applyFilters(...)
+        val timeSorted = typeFilteredList.sortedByDescending { it.timestamp?.seconds ?: 0 }
         adapter.setData(timeSorted)
 
     }
@@ -140,32 +137,34 @@ class TransactionHistoryFragment : BaseFragment() {
     /**
      * Shows a single-choice dialog to select transaction type filter.
      */
+    // com/pse/pse/ui/fragments/TransactionHistoryFragment.kt
     private fun showTypeFilterDialog() {
         val types = arrayOf(
             "Deposit History",
             "Withdraw History",
-            "Team Rewards History",
-            "Achievement History",
-            "Bought Investment History",
-            "Sold Investment History",
-            "Referral History"
+            "Daily ROI",
+            "Team Profit",
+            "Leadership Bonus",
+            "Salary",
+            "Plan Purchases",
+            "Direct Profit"
         )
 
         val currentIndex = when (typeFilter) {
             TransactionModel.TYPE_DEPOSIT -> 0
             TransactionModel.TYPE_WITHDRAW -> 1
-            TransactionModel.TYPE_TEAM -> 2
-            TransactionModel.TYPE_ACHIEVEMENT -> 3
-            TransactionModel.TYPE_INVESTMENT_BOUGHT -> 4
-            TransactionModel.TYPE_INVESTMENT_SOLD -> 5
-            TransactionModel.TYPE_REFERRAL -> 6
+            TransactionModel.TYPE_DAILY_ROI -> 2
+            TransactionModel.TYPE_TEAM_PROFIT -> 3
+            TransactionModel.TYPE_LEADERSHIP -> 4
+            TransactionModel.TYPE_SALARY -> 5
+            TransactionModel.TYPE_PLAN_PURCHASE -> 6
+            TransactionModel.TYPE_DIRECT_PROFIT -> 7
             else -> 0
         }
 
         val dialogView =
             LayoutInflater.from(requireContext()).inflate(R.layout.material_dialog, null)
         val container = dialogView.findViewById<LinearLayout>(R.id.dialogContainer)
-
         val radioGroup = RadioGroup(requireContext()).apply {
             orientation = RadioGroup.VERTICAL
             gravity = Gravity.CENTER_HORIZONTAL
@@ -174,12 +173,10 @@ class TransactionHistoryFragment : BaseFragment() {
         val dialog = MaterialAlertDialogBuilder(
             requireContext(),
             com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
-        )
-            .setView(dialogView)
-            .create() // no .setNegativeButton()
+        ).setView(dialogView).create()
 
         types.forEachIndexed { index, label ->
-            val radioButton = RadioButton(requireContext()).apply {
+            val rb = RadioButton(requireContext()).apply {
                 text = label
                 id = View.generateViewId()
                 isChecked = index == currentIndex
@@ -189,37 +186,32 @@ class TransactionHistoryFragment : BaseFragment() {
                 textSize = 18f
                 gravity = Gravity.CENTER_VERTICAL
                 setPadding(24, 46, 24, 46)
-
                 layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    topMargin = 16
-                    bottomMargin = 16
-                    gravity = Gravity.CENTER
+                    topMargin = 16; bottomMargin = 16; gravity = Gravity.CENTER
+                }
+                setOnClickListener {
+                    typeFilter = when (index) {
+                        0 -> TransactionModel.TYPE_DEPOSIT
+                        1 -> TransactionModel.TYPE_WITHDRAW
+                        2 -> TransactionModel.TYPE_DAILY_ROI
+                        3 -> TransactionModel.TYPE_TEAM_PROFIT
+                        4 -> TransactionModel.TYPE_LEADERSHIP
+                        5 -> TransactionModel.TYPE_SALARY
+                        6 -> TransactionModel.TYPE_PLAN_PURCHASE
+                        7 -> TransactionModel.TYPE_DIRECT_PROFIT
+                        else -> TransactionModel.TYPE_DEPOSIT
+                    }
+                    applyFilters(
+                        selectedTab = binding.tabStatus.selectedTabPosition,
+                        typeFilter = typeFilter
+                    )
+                    dialog.dismiss()
                 }
             }
-
-            radioButton.setOnClickListener {
-                typeFilter = when (index) {
-                    0 -> TransactionModel.TYPE_DEPOSIT
-                    1 -> TransactionModel.TYPE_WITHDRAW
-                    2 -> TransactionModel.TYPE_TEAM
-                    3 -> TransactionModel.TYPE_ACHIEVEMENT
-                    4 -> TransactionModel.TYPE_INVESTMENT_BOUGHT
-                    5 -> TransactionModel.TYPE_INVESTMENT_SOLD
-                    6 -> TransactionModel.TYPE_REFERRAL
-                    else -> TransactionModel.TYPE_DEPOSIT
-                }
-
-                applyFilters(
-                    selectedTab = binding.tabStatus.selectedTabPosition,
-                    typeFilter = typeFilter
-                )
-                dialog.dismiss()
-            }
-
-            radioGroup.addView(radioButton)
+            radioGroup.addView(rb)
         }
 
         container.addView(radioGroup)
