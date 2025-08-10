@@ -245,13 +245,13 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() = binding.drawerLayout.openDrawer(GravityCompat.START)
 
-    /*override fun onBackPressed() {
+    override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
-    }*/
+    }
 
     override fun onResume() {
         super.onResume()
