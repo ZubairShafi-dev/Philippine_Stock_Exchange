@@ -3,10 +3,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     // code‐gen, parcelize…
-    id("com.google.devtools.ksp")version "2.0.21-1.0.27"
+    id("com.google.devtools.ksp") version "2.0.21-1.0.27"
     id("kotlin-parcelize")
     // Firebase auto‐init
-    id("com.google.gms.google-services")version "4.4.2"
+    id("com.google.gms.google-services") version "4.4.2"
 }
 
 
@@ -28,8 +28,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -114,14 +113,14 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:$nav_version")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
-    implementation ("com.airbnb.android:lottie:6.5.2")
+    implementation("com.airbnb.android:lottie:6.5.2")
 // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.3.0"))
 // Firebase Storage
     implementation("com.google.firebase:firebase-storage-ktx:21.0.2")
-    implementation ("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
 
     implementation(libs.circleimageview)
     implementation(libs.google.auth.library.oauth2.http)
@@ -148,11 +147,9 @@ dependencies {
     implementation(libs.grpc.core)
 
     // Add in dependencies section
-    testImplementation (libs.junit)
-    testImplementation (libs.mockito.core)
-    testImplementation( libs.mockito.kotlin)
-    testImplementation (libs.kotlinx.coroutines.test)
-    implementation (libs.firebase.functions.ktx)
-
-
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(libs.firebase.functions.ktx)
 }
