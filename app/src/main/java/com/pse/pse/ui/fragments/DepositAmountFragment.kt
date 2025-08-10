@@ -145,7 +145,7 @@ class DepositAmountFragment : BaseFragment() {
                 }
 
                 val request = Request.Builder()
-                    .url("https://ailedgerdeposit.onrender.com/api/create-transaction")
+                    .url("https://psedeposit-main.onrender.com/api/create-transaction")
                     .post(json.toString().toRequestBody("application/json".toMediaType()))
                     .build()
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,16 +25,18 @@ import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.databinding.FragmentHomeBinding
 import com.pse.pse.models.AnnouncementModel
 import com.pse.pse.ui.viewModels.AccountViewModel
+import com.pse.pse.ui.viewModels.TransactionViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
 import java.text.DecimalFormat
+import kotlin.getValue
 import kotlin.math.roundToInt
 
 class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
+    private val txnVM: TransactionViewModel by viewModels()
     private lateinit var accountViewModel: AccountViewModel
     private lateinit var sliderAdapter: AnnouncementSliderAdapter
     private val sliderHandler = Handler(Looper.getMainLooper())
@@ -271,6 +274,16 @@ class HomeFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        txnVM.startBalanceSync()            // start real‑time listener
+    }
+
+    override fun onStop() {
+        txnVM.stopBalanceSync()
+        super.onStop()
     }
 
     override fun onDestroyView() {
