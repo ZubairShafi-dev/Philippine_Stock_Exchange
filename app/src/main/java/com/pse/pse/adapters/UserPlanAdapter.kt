@@ -1,9 +1,9 @@
 package com.pse.pse.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.pse.pse.databinding.ItemUserPlanCardBinding
 import com.pse.pse.models.UserPlanUi
 import java.text.SimpleDateFormat
@@ -23,29 +23,45 @@ class UserPlanAdapter(
     }
 
     inner class VH(val b: ItemUserPlanCardBinding) : RecyclerView.ViewHolder(b.root) {
+
         fun bind(item: UserPlanUi) {
             val up = item.userPlan
+
+            // Header
             b.tvPlanName.text = item.planName.ifBlank { "Plan" }
             b.tvStatus.text = if (item.isActive) "ACTIVE" else "EXPIRED"
+
+            // Numbers
             b.tvPrincipal.text = "$${trim(up.principal)}"
             b.tvRoi.text = "${trim(up.roiPercent)}% | $${trim(up.roiAmount)}"
-            b.tvTotalPayout.text = "$${trim(up.totalPayoutAmount)}"
 
+            // Footer left: Total Payout
+            b.tvTotalPayout.text = "Total Payout: $${trim(up.totalPayoutAmount)}"
+
+            // Progress
             val pct = (item.progress * 100.0).toInt()
             b.tvProgressPct.text = "$pct% completed"
-            (b.progress as LinearProgressIndicator).setProgressCompat(pct, true)
+            b.progress.setProgressCompat(pct, true)
 
+            // Dates
             b.tvBuyDate.text = "Bought — " + (up.buyDate?.toDate()?.let(df::format) ?: "—")
-            b.tvLastCollect.text =
-                "Last ROI — " + (up.lastCollectedDate?.toDate()?.let(df::format) ?: "—")
+            b.tvLastCollect.text = "Last ROI — " + (up.lastCollectedDate?.toDate()?.let(df::format) ?: "—")
 
-            b.tvDirectBadge.text = item.directPercent?.let { "Direct: ${trim(it)}%" } ?: ""
+            // Referral badge → show only when we have a percent
+            val direct = item.directPercent
+            if (direct != null) {
+                b.tvDirectBadge.visibility = View.VISIBLE
+                b.tvDirectBadge.text = "Referral Bonus: ${trim(direct)}%"
+            } else {
+                b.tvDirectBadge.visibility = View.GONE
+            }
 
             b.root.setOnClickListener { onClick(item) }
         }
 
         private fun trim(v: Double): String {
-            return if (v % 1.0 == 0.0) v.toInt().toString() else String.format(Locale.US, "%.2f", v)
+            return if (v % 1.0 == 0.0) v.toInt().toString()
+            else String.format(Locale.US, "%.2f", v)
         }
     }
 
@@ -56,5 +72,6 @@ class UserPlanAdapter(
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(items[position])
+
     override fun getItemCount(): Int = items.size
 }
