@@ -1,60 +1,95 @@
 package com.pse.pse.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.pse.pse.R
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.pse.pse.adapters.UserPlanAdapter
+import com.pse.pse.databinding.FragmentMyPlansBinding
+import com.pse.pse.ui.viewModels.PlansViewModelFactory
+import com.pse.pse.utils.SharedPrefManager
+import com.yourpackage.data.repository.PlanRepository
+import com.yourpackage.ui.viewmodel.PlansViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MyPlansFragment : BaseFragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MyPlansFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MyPlansFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _b: FragmentMyPlansBinding? = null
+    private val b get() = _b!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    // Reuse existing VM + factory
+    private val vm: PlansViewModel by viewModels {
+        PlansViewModelFactory(PlanRepository())
     }
+
+    private lateinit var adapter: UserPlanAdapter
+    private var currentTab = 0 // 0 active, 1 expired
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_plans, container, false)
+    ): View {
+        _b = FragmentMyPlansBinding.inflate(inflater, container, false)
+        return b.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyPlansFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyPlansFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupDrawerTrigger(view)
+
+        adapter = UserPlanAdapter()
+        b.rvMyPlans.layoutManager = LinearLayoutManager(requireContext())
+        b.rvMyPlans.adapter = adapter
+
+        val uid = SharedPrefManager(requireContext()).getId().orEmpty()
+        vm.bindUser(uid)
+
+        fun collectActive() {
+            viewLifecycleOwner.lifecycleScope.launch {
+                vm.activeUserPlans(uid).collectLatest { list ->
+                    render(list.isNotEmpty(), list)
                 }
             }
+        }
+
+        fun collectExpired() {
+            viewLifecycleOwner.lifecycleScope.launch {
+                vm.expiredUserPlans(uid).collectLatest { list ->
+                    render(list.isNotEmpty(), list)
+                }
+            }
+        }
+
+        // default tab = Active
+        collectActive()
+
+        b.tabPlans.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                currentTab = tab.position
+                if (currentTab == 0) collectActive() else collectExpired()
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+    }
+
+    private fun render(hasData: Boolean, list: List<com.pse.pse.models.UserPlanUi>) {
+        b.emptyState.isVisible = !hasData
+        b.rvMyPlans.isGone = !hasData
+        if (hasData) adapter.submit(list)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _b = null
     }
 }
