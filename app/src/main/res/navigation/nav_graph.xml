@@ -66,8 +66,8 @@
             app:popExitAnim="@anim/slide_out_top" />
 
         <action
-            android:id="@+id/action_homeFragment_to_planFragment"
-            app:destination="@id/planFragment" />
+            android:id="@+id/action_homeFragment_to_myPlansFragment"
+            app:destination="@id/myPlansFragment" />
 
     </fragment>
 

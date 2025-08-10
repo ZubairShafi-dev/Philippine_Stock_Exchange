@@ -29,7 +29,6 @@ import com.pse.pse.ui.viewModels.TransactionViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
 import java.text.DecimalFormat
-import kotlin.getValue
 import kotlin.math.roundToInt
 
 class HomeFragment : BaseFragment() {
@@ -81,7 +80,7 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.action_home_to_withdrawAmount)
         }
         binding.boughtPlans.root.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_planFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_myPlansFragment)
         }
         binding.notificationIcon.setOnClickListener {
             showNotificationsDialog()
