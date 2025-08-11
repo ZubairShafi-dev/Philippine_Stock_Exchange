@@ -200,12 +200,22 @@ class ProfileFragment : BaseFragment() {
 
     /** Show confirmation before logging out */
     private fun showLogoutConfirmation() {
-        AlertDialog.Builder(requireContext())
+        val dlg = AlertDialog.Builder(requireContext())
             .setTitle("Confirm Logout")
             .setMessage("Are you sure you want to log out?")
             .setPositiveButton("Yes") { _, _ -> logout() }
             .setNegativeButton("Cancel", null)
-            .show()
+            .create()
+
+        dlg.setOnShowListener {
+            val teal =
+                androidx.core.content.ContextCompat.getColor(requireContext(), R.color.teal_accent)
+            val faint =
+                androidx.core.content.ContextCompat.getColor(requireContext(), R.color.white_80)
+            dlg.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(teal)
+            dlg.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(faint)
+        }
+        dlg.show()
     }
 
     /** Clears user data and navigates to SignUp, clearing backstack */
@@ -268,42 +278,57 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
+    private fun loadProfileImageFromLocalOrRemote(uid: String) {
+        val cachedUrl = sharedPref.getProfileImageUrl()
+        if (!cachedUrl.isNullOrBlank()) {
+            if (_binding != null) loadProfileImageIntoProfileView(cachedUrl)
+            return
+        }
+
+        val ref = storage.reference.child("profile_pics/$uid.jpg")
+        ref.downloadUrl
+            .addOnSuccessListener { uri ->
+                sharedPref.saveProfileImageUrl(uri.toString())
+                if (_binding != null) loadProfileImageIntoProfileView(uri.toString())
+            }
+            .addOnFailureListener {
+                // optional: log or ignore if image doesn’t exist yet
+            }
+    }
+
+
     private fun uploadProfileImageToFirebase(imageUri: Uri) {
         val uid = sharedPref.getId() ?: return
         val ref = storage.reference.child("profile_pics/$uid.jpg")
+
         ref.putFile(imageUri)
             .addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener { downloadUrl ->
                     sharedPref.saveProfileImageUrl(downloadUrl.toString())
-                    loadImageIntoProfileView(downloadUrl.toString())
-                    Toast.makeText(requireContext(), "Profile picture updated!", Toast.LENGTH_SHORT)
-                        .show()
+                    if (_binding != null) {                    // view still alive?
+                        loadProfileImageIntoProfileView(downloadUrl.toString())
+                    }
+                    context?.let {
+                        Toast.makeText(
+                            it,
+                            "Profile picture updated!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Upload failed!", Toast.LENGTH_SHORT).show()
+                context?.let { Toast.makeText(it, "Upload failed!", Toast.LENGTH_SHORT).show() }
             }
     }
 
-    private fun loadProfileImageFromLocalOrRemote(uid: String) {
-        val cachedUrl = sharedPref.getProfileImageUrl()
-        if (!cachedUrl.isNullOrBlank()) {
-            loadImageIntoProfileView(cachedUrl)
-        } else {
-            val ref = storage.reference.child("profile_pics/$uid.jpg")
-            ref.downloadUrl.addOnSuccessListener { uri ->
-                sharedPref.saveProfileImageUrl(uri.toString())
-                loadImageIntoProfileView(uri.toString())
-            }
-        }
-    }
-
-    private fun loadImageIntoProfileView(url: String) {
-        Glide.with(this)
+    private fun loadProfileImageIntoProfileView(url: String) {
+        val b = _binding ?: return                      // view already destroyed
+        Glide.with(b.profileImage)                      // <-- view-scoped lifecycle
             .load(url)
             .placeholder(R.drawable.ic_user)
             .circleCrop()
-            .into(binding.profileImage)
+            .into(b.profileImage)
     }
 
     override fun onDestroyView() {

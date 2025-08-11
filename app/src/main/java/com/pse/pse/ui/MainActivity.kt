@@ -187,6 +187,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDrawerOpened(drawerView: View) {
                 refreshHeader()
+                refreshDrawerAvatarImage()
                 viewModel.user.value?.let { user ->
                     binding.customDrawerHeader.userNameTextView.text =
                         "${user.name} ${user.lastName.orEmpty()}".trim()
@@ -222,12 +223,20 @@ class MainActivity : AppCompatActivity() {
 
     /** Show confirmation before logging out */
     private fun showLogoutConfirmation() {
-        AlertDialog.Builder(this)
+        val dlg = AlertDialog.Builder(this)
             .setTitle("Confirm Logout")
             .setMessage("Are you sure you want to log out?")
             .setPositiveButton("Yes") { _, _ -> logout() }
             .setNegativeButton("Cancel", null)
-            .show()
+            .create()
+
+        dlg.setOnShowListener {
+            val teal = androidx.core.content.ContextCompat.getColor(this, R.color.teal_accent)
+            val faint = androidx.core.content.ContextCompat.getColor(this, R.color.white_80)
+            dlg.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(teal)
+            dlg.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(faint)
+        }
+        dlg.show()
     }
 
     /** Clears user data and navigates to SignUp, clearing backstack */
@@ -245,10 +254,21 @@ class MainActivity : AppCompatActivity() {
 
     fun openDrawer() = binding.drawerLayout.openDrawer(GravityCompat.START)
 
+    private fun refreshDrawerAvatarImage() {
+        val url = SharedPrefManager(this).getProfileImageUrl()
+        val imageView = binding.customDrawerHeader.drawerProfileImageView
+        Glide.with(imageView)
+            .load(url)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .circleCrop()
+            .into(imageView)
+    }
 
 
     override fun onResume() {
         super.onResume()
+        refreshDrawerAvatarImage()
         Log.d("UpdateMgr", "MainActivity onResume - About to call checkForUpdate()")
         updater.checkForUpdate()
     }

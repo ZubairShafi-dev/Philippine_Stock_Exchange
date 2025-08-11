@@ -62,35 +62,31 @@ class TeamLevelAdapter(
         }
 
         fun bind(status: TeamLevelStatus) = with(status.teamLevel) {
-            /* ----- text fields ----- */
+            // Header
             levelTxt.text = "Level $level"
-            required.text = "Required\n$requiredMembers"
-            profitPct.text = "Profit\n${profitPercentage.toInt()}%"
-            totalUser.text = "Total Users\n$totalUsers"
-            active.text = "Active \n$activeUsers"
-            inactive.text = "Inactive \n$inactiveUsers"
-            deposit.text = "Total Deposit\n$${"%,.0f".format(totalDeposit)}"
 
-            /* ----- visuals for lock / unlock ----- */
+            // ✅ Values ONLY (no labels, no "\n")
+            required.text   = requiredMembers.toString()
+            profitPct.text  = "${profitPercentage.toInt()}%"
+            totalUser.text  = totalUsers.toString()
+            active.text     = activeUsers.toString()
+            inactive.text   = inactiveUsers.toString()
+            deposit.text    = "$" + String.format("%,.0f", totalDeposit) // e.g., $0
+
+            // Lock visuals
             if (status.levelUnlocked) {
                 lockImg.visibility = View.GONE
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    card.setRenderEffect(null)
-                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) card.setRenderEffect(null)
                 card.foreground = null
             } else {
                 lockImg.visibility = View.VISIBLE
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    card.setRenderEffect(
-                        RenderEffect.createBlurEffect(4f, 4f, Shader.TileMode.CLAMP)
-                    )
+                    card.setRenderEffect(RenderEffect.createBlurEffect(4f, 4f, Shader.TileMode.CLAMP))
                 }
                 card.foreground = ColorDrawable(Color.argb(64, 0, 0, 0))
             }
 
-            lockImg.setColorFilter(
-                ContextCompat.getColor(itemView.context, R.color.Light_Grey)
-            )
+            lockImg.setColorFilter(ContextCompat.getColor(itemView.context, R.color.Light_Grey))
         }
     }
 
