@@ -212,16 +212,26 @@ class HomeFragment : BaseFragment() {
             binding.earningTeamCard.earningTitle.text = "Team Profit"
             binding.earningTeamCard.earningAmount.text = rs(earn.teamProfit)
 
+            binding.roiTotalCard.roiTitle.text = "Total ROI"
+            binding.roiTotalCard.roiAmount.text = rs(earn.totalRoi)
+
             setEarningProgress(
                 earn.dailyProfit,
                 earn.referralProfit,
                 earn.teamProfit,
-                earn.totalEarned
+                earn.totalEarned,
+                earn.totalRoi
             )
         }
     }
 
-    private fun setEarningProgress(today: Double, referral: Double, team: Double, total: Double) {
+    private fun setEarningProgress(
+        today: Double,
+        referral: Double,
+        team: Double,
+        total: Double,
+        roi: Double
+    ) {
         val denom = if (total <= 0.0) 1.0 else total
 
         fun pct(part: Double): Int {
@@ -232,7 +242,8 @@ class HomeFragment : BaseFragment() {
         binding.earningTodayCard.earningProgress.progress = pct(today)
         binding.earningReferralCard.earningProgress.progress = pct(referral)
         binding.earningTeamCard.earningProgress.progress = pct(team)
-        binding.earningTotalCard.earningProgress.progress = 70
+        binding.earningTotalCard.earningProgress.progress = 100
+        binding.roiTotalCard.roiProgress.progress = pct(roi)
     }
 
     /** Setup slider adapter and auto-scroll */

@@ -178,8 +178,8 @@
                         app:layout_rowWeight="1" />
 
                     <include
-                        android:id="@+id/earningTotalCard"
-                        layout="@layout/item_earning_total"
+                        android:id="@+id/earningReferralCard"
+                        layout="@layout/item_earning_referal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -188,8 +188,18 @@
                         app:layout_rowWeight="1" />
 
                     <include
-                        android:id="@+id/earningReferralCard"
-                        layout="@layout/item_earning_referal"
+                        android:id="@+id/roiTotalCard"
+                        layout="@layout/item_roi_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        app:layout_columnSpan="1"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1" />
+
+                    <include
+                        android:id="@+id/earningTotalCard"
+                        layout="@layout/item_earning_total"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -206,6 +216,7 @@
                         app:layout_columnSpan="1"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" />
+
                 </androidx.gridlayout.widget.GridLayout>
 
 
