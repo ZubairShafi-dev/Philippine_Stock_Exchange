@@ -232,7 +232,7 @@ class HomeFragment : BaseFragment() {
         binding.earningTodayCard.earningProgress.progress = pct(today)
         binding.earningReferralCard.earningProgress.progress = pct(referral)
         binding.earningTeamCard.earningProgress.progress = pct(team)
-        binding.earningTotalCard.earningProgress.progress = 100
+        binding.earningTotalCard.earningProgress.progress = 70
     }
 
     /** Setup slider adapter and auto-scroll */
