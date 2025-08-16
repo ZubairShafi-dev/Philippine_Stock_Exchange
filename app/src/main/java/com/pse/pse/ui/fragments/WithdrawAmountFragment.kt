@@ -103,15 +103,16 @@ class WithdrawAmountFragment : BaseFragment() {
                 Toast.makeText(requireContext(), "Insufficient Balance", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (amt<20) {
-                Toast.makeText(requireContext(), "Minimum withdrawal amount is $20", Toast.LENGTH_SHORT).show()
+            if (amt < 20) {
+                Toast.makeText(
+                    requireContext(), "Minimum withdrawal amount is $20", Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             showLoading()
             viewModel.submitWithdrawal(amt, addr)
         }
-
     }
 
     private fun showCustomDialog(layoutId: Int, subtitleText: String) {
