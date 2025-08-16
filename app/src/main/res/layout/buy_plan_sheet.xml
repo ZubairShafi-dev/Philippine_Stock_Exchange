@@ -1,215 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/buyPlanRoot"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/gradient_bg">
 
-    <!-- Card container so content sits on a soft surface over the gradient -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/sheetCard"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:strokeWidth="0dp"
-        app:cardBackgroundColor="?attr/colorSurface">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
 
-        <ScrollView
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:id="@+id/topBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/backIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:contentDescription="Back"
+                android:src="@drawable/arrow_back" />
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_centerInParent="true"
+                android:text="Buy Plan"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
-                <!-- Drag handle -->
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="4dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/shape_drag_handle"
-                    android:alpha="0.6"
-                    android:layout_marginBottom="12dp" />
+        <!-- Card container -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sheetCard"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:strokeWidth="0dp">
 
-                <!-- Header -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="8dp">
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_ethereum" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvPlanName"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textColor="?attr/colorOnSurface"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:layout_weight="1" />
-                </LinearLayout>
-
-                <!-- KPI chips -->
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipsGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:singleLine="true"
-                    app:singleSelection="false">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipDailyRoi"
-                        style="@style/Widget.Material3.Chip.Assist"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Daily ROI" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipTotalPayout"
-                        style="@style/Widget.Material3.Chip.Assist"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total Payout" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <!-- Limits card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="?attr/colorSurfaceVariant">
-
+                    <!-- Header -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
+                        android:gravity="center_vertical"
+                        android:paddingBottom="8dp">
 
-                        <LinearLayout
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_ethereum" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvPlanName"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Min"
-                                android:textSize="12sp"
-                                android:alpha="0.7" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvMin"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Max"
-                                android:textSize="12sp"
-                                android:alpha="0.7" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tvMax"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp" />
-                        </LinearLayout>
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Amount -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilAmount"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter amount"
-                    app:boxCornerRadiusTopStart="14dp"
-                    app:boxCornerRadiusTopEnd="14dp"
-                    app:boxCornerRadiusBottomStart="14dp"
-                    app:boxCornerRadiusBottomEnd="14dp"
-                    app:prefixText="$"
-                    app:endIconMode="clear_text"
-                    app:helperTextEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etAmount"
+                    <!-- KPI chips -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipsGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="12dp"
+                        app:singleLine="true"
+                        app:singleSelection="false">
 
-                <!-- Quick fill amounts (FIXED: width/height added) -->
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipsQuickFill"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:singleLine="true"
-                    app:singleSelection="false">
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipDailyRoi"
+                            style="@style/Widget.Material3.Chip.Assist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily ROI" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMin"
-                        style="@style/Widget.Material3.Chip.Suggestion"
-                        android:layout_width="wrap_content"
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTotalPayout"
+                            style="@style/Widget.Material3.Chip.Assist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Payout" />
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <!-- Limits card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Min" />
+                        android:layout_marginBottom="12dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip2xMin"
-                        style="@style/Widget.Material3.Chip.Suggestion"
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:alpha="0.7"
+                                    android:text="Min"
+                                    android:textSize="12sp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvMin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:alpha="0.7"
+                                    android:text="Max"
+                                    android:textSize="12sp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvMax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Amount -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilAmount"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="2× Min" />
+                        android:hint="Enter amount"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:endIconMode="clear_text"
+                        app:helperTextEnabled="true"
+                        app:prefixText="$">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMax"
-                        style="@style/Widget.Material3.Chip.Suggestion"
-                        android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Quick fill amounts -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipsQuickFill"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Max" />
-                </com.google.android.material.chip.ChipGroup>
+                        android:layout_marginTop="10dp"
+                        app:singleLine="true"
+                        app:singleSelection="false">
 
-                <!-- CTA -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnBuy"
-                    style="@style/Widget.Material3.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="18dp"
-                    android:enabled="false"
-                    android:text="Buy Plan"
-                    app:cornerRadius="28dp" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMin"
+                            style="@style/Widget.Material3.Chip.Suggestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Min" />
 
-            </LinearLayout>
-        </ScrollView>
-    </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip2xMin"
+                            style="@style/Widget.Material3.Chip.Suggestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2× Min" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMax"
+                            style="@style/Widget.Material3.Chip.Suggestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Max" />
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <!-- CTA -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBuy"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="18dp"
+                        android:enabled="false"
+                        android:text="Buy Plan"
+                        app:cornerRadius="28dp" />
+
+                </LinearLayout>
+            </ScrollView>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </FrameLayout>
