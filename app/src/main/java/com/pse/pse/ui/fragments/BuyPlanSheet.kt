@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -59,9 +60,7 @@ class BuyPlanSheet(
         // Quick fill chips
         binding.chipMin.setOnClickListener { binding.etAmount.setText("${plan.minAmount}") }
         binding.chip2xMin.setOnClickListener { binding.etAmount.setText("${plan.minAmount * 2}") }
-        binding.chipMax.setOnClickListener {
-            plan.maxAmount?.let { binding.etAmount.setText("$it") }
-        }
+        binding.chipMax.setOnClickListener { plan.maxAmount?.let { binding.etAmount.setText("$it") } }
 
         // Enable/disable CTA
         binding.btnBuy.isEnabled = false
@@ -77,7 +76,7 @@ class BuyPlanSheet(
             }
         }
 
-        // Buy click (same logic as you had)
+        // Buy click
         binding.btnBuy.setOnClickListener {
             val amount = binding.etAmount.text?.toString()?.toDoubleOrNull() ?: 0.0
             val aboveMin = amount >= plan.minAmount
@@ -96,7 +95,13 @@ class BuyPlanSheet(
 
                 when (status) {
                     BuyPlanRepo.Status.SUCCESS -> {
-                        showSnack("🎉 Purchase successful!"); dismiss()
+                        // Notify parent (PlanFragment) then dismiss
+                        parentFragmentManager.setFragmentResult(
+                            PlanFragment.BUY_RESULT_KEY,
+                            bundleOf(PlanFragment.BUY_RESULT_SUCCESS to true)
+                        )
+                        showSnack("🎉 Purchase successful!")
+                        dismiss()
                     }
 
                     BuyPlanRepo.Status.MIN_INVEST_ERROR ->
@@ -131,7 +136,7 @@ class BuyPlanSheet(
             com.google.android.material.R.id.design_bottom_sheet
         ) ?: return
 
-        // Transparent bottom sheet background so your gradient + card show nicely
+        // Transparent sheet background
         bs.setBackgroundResource(android.R.color.transparent)
 
         com.google.android.material.bottomsheet.BottomSheetBehavior.from(bs).apply {

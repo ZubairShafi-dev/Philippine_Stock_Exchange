@@ -10,7 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pse.pse.R
 import com.pse.pse.adapters.PlanAdapter
 import com.pse.pse.data.repository.BuyPlanRepo
 import com.pse.pse.databinding.FragmentPlanBinding
@@ -54,6 +57,24 @@ class PlanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Listen for buy result from BottomSheet
+        parentFragmentManager.setFragmentResultListener(
+            BUY_RESULT_KEY, viewLifecycleOwner
+        ) { _, bundle ->
+            val success = bundle.getBoolean(BUY_RESULT_SUCCESS, false)
+            if (success) {
+                // Navigate to MyPlans and POP PlanFragment
+                val options = NavOptions.Builder()
+                    .setPopUpTo(R.id.planFragment, /*inclusive=*/true)
+                    .build()
+                findNavController().navigate(
+                    R.id.planFragment_to_myPlansFragment,
+                    null,
+                    options
+                )
+            }
+        }
+
         // RecyclerView setup
         planAdapter = PlanAdapter { plan -> onPlanClicked(plan) }
         binding.allPlansRecyclerView.apply {
@@ -71,6 +92,7 @@ class PlanFragment : Fragment() {
                             hideLoading()
                             planAdapter.submitList(ui.plans.sortedBy { it.minAmount })
                         }
+
                         is PlansViewModel.UiState.Error -> {
                             hideLoading()
                             Toast.makeText(requireContext(), ui.msg, Toast.LENGTH_LONG).show()
@@ -84,20 +106,22 @@ class PlanFragment : Fragment() {
     /** Show the BottomSheet that now handles the entire buy flow */
     private fun onPlanClicked(plan: Plan) {
         BuyPlanSheet(
-            plan     = plan,
-            repo     = buyRepo,
-            uid      = userId
+            plan = plan,
+            repo = buyRepo,
+            uid = userId
         ).show(parentFragmentManager, "BuyPlanSheet")
     }
 
-    private fun showLoading() =
-        null
-
-    private fun hideLoading() =
-        null 
+    private fun showLoading() = Unit
+    private fun hideLoading() = Unit
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val BUY_RESULT_KEY = "buy_plan_result"
+        const val BUY_RESULT_SUCCESS = "success"
     }
 }

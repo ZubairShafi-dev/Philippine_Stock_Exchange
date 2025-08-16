@@ -90,12 +90,6 @@
         tools:layout="@layout/fragment_new_support_request" />
 
     <fragment
-        android:id="@+id/planFragment"
-        android:name="com.pse.pse.ui.fragments.PlanFragment"
-        android:label="@string/plans"
-        tools:layout="@layout/fragment_plan" />
-
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.pse.pse.ui.fragments.ProfileFragment"
         android:label="@string/profile"
@@ -245,6 +239,19 @@
         android:name="com.pse.pse.ui.fragments.LeadershipFragment"
         android:label="Leadership"
         tools:layout="@layout/fragment_leadership" />
+
+
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.pse.pse.ui.fragments.PlanFragment"
+        android:label="@string/plans"
+        tools:layout="@layout/fragment_plan">
+
+        <action
+            android:id="@+id/planFragment_to_myPlansFragment"
+            app:destination="@id/myPlansFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/myPlansFragment"
