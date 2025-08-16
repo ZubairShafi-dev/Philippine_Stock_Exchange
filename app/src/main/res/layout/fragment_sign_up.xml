@@ -161,7 +161,9 @@
                             android:id="@+id/referralInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
+                            android:digits="ABCDEFGHJKLMNPQRSTUVWXYZ23456789-"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="10"
                             android:textColor="@android:color/white" />
                     </com.google.android.material.textfield.TextInputLayout>
 

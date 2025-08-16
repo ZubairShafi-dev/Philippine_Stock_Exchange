@@ -12,6 +12,13 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val authRepository = AuthRepository(application)
 
+    // AuthViewModel.kt
+    fun checkReferrer(refUid: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            onResult(AuthRepository(getApplication()).referrerExists(refUid))
+        }
+    }
+
     fun registerUser(userModel: UserModel, onResult: (FirebaseUser?) -> Unit) {
         viewModelScope.launch {
             val user = authRepository.registerUser(userModel)

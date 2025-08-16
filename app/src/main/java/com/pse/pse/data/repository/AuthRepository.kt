@@ -7,7 +7,9 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.functions.functions
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pse.pse.models.AccountModel
@@ -18,7 +20,12 @@ import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import kotlin.random.Random
+import java.security.SecureRandom
+
+private const val UID_PREFIX = "PSE-"
+private const val UID_LEN = 6
+private const val UID_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789" // no O/0/I/1
+private val secureRandom = SecureRandom()
 
 class AuthRepository(application: Application) {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -28,24 +35,59 @@ class AuthRepository(application: Application) {
         private const val TAG = "AuthRepository"
     }
 
-    // Function to generate a unique user ID
+    suspend fun referrerExists(refUid: String): Boolean {
+        // because your users docId == uid
+        val snap = db.collection("users").document(refUid).get().await()
+        if (snap.exists()) return true
+
+        // fallback if older users had docId != uid
+        val q = db.collection("users").whereEqualTo("uid", refUid).limit(1).get().await()
+        return !q.isEmpty
+    }
+
+    private fun randomUidBody(): String {
+        val sb = StringBuilder(UID_LEN)
+        repeat(UID_LEN) {
+            sb.append(UID_ALPHABET[secureRandom.nextInt(UID_ALPHABET.length)])
+        }
+        return sb.toString()
+    }
+
     private suspend fun generateUniqueUserId(): String {
-        val prefix = "C"  // Prefix for user ID
-        var userId: String
-        var exists: Boolean
+        val reservations = db.collection("uidReservations")
 
-        // Keep generating until a unique ID is found
-        do {
-            val randomDigits = Random.nextInt(1000, 9999)  // Generate a 4-digit number
-            userId = "$prefix$randomDigits"  // Combine prefix and random digits
+        while (true) {
+            val candidate = UID_PREFIX + randomUidBody()
+            val ref = reservations.document(candidate)
 
-            // Check if the generated user ID already exists in Firestore
-            val userQuery = db.collection("users").whereEqualTo("uid", userId).get().await()
+            try {
+                // Transaction = atomic “create if not exists”
+                db.runTransaction { tx ->
+                    val snap = tx.get(ref)
+                    if (snap.exists()) {
+                        // signal collision so we retry outside
+                        throw FirebaseFirestoreException(
+                            "UID already exists",
+                            FirebaseFirestoreException.Code.ALREADY_EXISTS
+                        )
+                    }
+                    tx.set(ref, mapOf("createdAt" to FieldValue.serverTimestamp()))
+                    // no suspend/await inside the transaction block
+                }.await()
 
-            exists = userQuery.size() > 0 // If the query returns a result, the ID is taken
-        } while (exists)
+                return candidate // success!
 
-        return userId  // Return the unique user ID
+            } catch (e: FirebaseFirestoreException) {
+                if (e.code == FirebaseFirestoreException.Code.ALREADY_EXISTS) {
+                    // collision — loop and try a new one
+                    continue
+                } else {
+                    // transient contention can also show up as ABORTED; feel free to `continue`
+                    if (e.code == FirebaseFirestoreException.Code.ABORTED) continue
+                    throw e
+                }
+            }
+        }
     }
 
     suspend fun registerUser(userModel: UserModel): FirebaseUser? {
@@ -62,7 +104,7 @@ class AuthRepository(application: Application) {
             sharedPrefManager.clearUserData()
             sharedPrefManager.saveId(uniqueUserId)
 
-            val userDocRef = db.collection("users").document()
+            val userDocRef = db.collection("users").document(uniqueUserId)
             val accountRef = db.collection("accounts").document()
 
             val user = userModel.copy(
@@ -96,15 +138,12 @@ class AuthRepository(application: Application) {
 
             // ✅ Ensure salary profile at registration (starts 30-day window from createdAt)
             try {
-                Firebase.functions
-                    .getHttpsCallable("ensureSalaryProfile")
-                    .call(mapOf("userId" to uniqueUserId))
-                    .await()
+                Firebase.functions.getHttpsCallable("ensureSalaryProfile")
+                    .call(mapOf("userId" to uniqueUserId)).await()
                 Log.d(TAG, "ensureSalaryProfile created for $uniqueUserId")
             } catch (e: Exception) {
                 Log.w(
-                    TAG,
-                    "ensureSalaryProfile call failed (will try again on login): ${e.message}"
+                    TAG, "ensureSalaryProfile call failed (will try again on login): ${e.message}"
                 )
             }
 
@@ -159,10 +198,8 @@ class AuthRepository(application: Application) {
             try {
                 val businessUid = userDoc.getString("uid") ?: ""
                 if (businessUid.isNotEmpty()) {
-                    Firebase.functions("us-central1")
-                        .getHttpsCallable("ensureSalaryProfile")
-                        .call(mapOf("userId" to businessUid))
-                        .await()
+                    Firebase.functions("us-central1").getHttpsCallable("ensureSalaryProfile")
+                        .call(mapOf("userId" to businessUid)).await()
                     Log.d(TAG, "✅ ensureSalaryProfile verified/created on login for $businessUid")
                 }
             } catch (e: Exception) {
