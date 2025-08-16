@@ -37,6 +37,7 @@ class TransactionRepository(
         private const val TAG = "TransactionRepo"
         private const val COLL_TRANSACTIONS = "transactions"
         private const val COLL_ACCOUNTS = "accounts"
+        private const val WITHDRAW_FEE = 4.0
     }
 
     /**
@@ -76,10 +77,15 @@ class TransactionRepository(
                     if (curBal < amount || remBal < amount) throw Exception("Insufficient funds")
 
                     val txRef = db.collection(COLL_TRANSACTIONS).document()
+
+                    // net amount written to the transactions collection
+                    val netAmount = amount - WITHDRAW_FEE
+                    if (netAmount <= 0.0) throw Exception("Amount too low after fee")
+
                     val tx = TransactionModel(
                         transactionId = txRef.id,
                         userId = userId,
-                        amount = amount,
+                        amount = netAmount, // <-- store net (A - 4)
                         type = TransactionModel.TYPE_WITHDRAW,
                         address = address,
                         status = TransactionModel.STATUS_PENDING,
@@ -183,20 +189,17 @@ class TransactionRepository(
             val docs = (q1.documents + q2.documents).associateBy { it.id }.values.toList()
 
             // Collect planIds for Plan Purchase -> title = plan name
-            val planIds = docs
-                .filter { (it.getString("type") ?: "") == TransactionModel.TYPE_PLAN_PURCHASE }
-                .mapNotNull { it.getString("planId") }
-                .toSet()
+            val planIds =
+                docs.filter { (it.getString("type") ?: "") == TransactionModel.TYPE_PLAN_PURCHASE }
+                    .mapNotNull { it.getString("planId") }.toSet()
 
             // Fetch plan names in chunks of 10
             val planNames = mutableMapOf<String, String>()
             for (chunk in planIds.chunked(10)) {
-                val snap = db.collection("plans")
-                    .whereIn(FieldPath.documentId(), chunk)
-                    .get().await()
+                val snap =
+                    db.collection("plans").whereIn(FieldPath.documentId(), chunk).get().await()
                 for (d in snap.documents) {
-                    val name = d.getString("planName")
-                        ?: d.id
+                    val name = d.getString("planName") ?: d.id
                     planNames[d.id] = name
                 }
             }
@@ -210,9 +213,7 @@ class TransactionRepository(
     }
 
     private fun mapDocToTx(
-        doc: DocumentSnapshot,
-        fallbackUserId: String,
-        planNames: Map<String, String>
+        doc: DocumentSnapshot, fallbackUserId: String, planNames: Map<String, String>
     ): TransactionModel {
         val txId = doc.getString("transactionId") ?: doc.getString("id") ?: doc.id
         val typeRaw = (doc.getString("type") ?: "").ifBlank { "unknown" }
@@ -294,11 +295,9 @@ class TransactionRepository(
             db.collection(COLL_TRANSACTIONS).whereEqualTo(TransactionModel.FIELD_USER_ID, userId)
                 .whereIn(
                     TransactionModel.FIELD_STATUS, listOf(
-                        TransactionModel.STATUS_APPROVED,
-                        TransactionModel.STATUS_REJECTED
+                        TransactionModel.STATUS_APPROVED, TransactionModel.STATUS_REJECTED
                     )
-                )
-                .whereEqualTo(TransactionModel.FIELD_BALANCE_UPDATED, false)
+                ).whereEqualTo(TransactionModel.FIELD_BALANCE_UPDATED, false)
                 .addSnapshotListener { snap, err ->
                     if (err != null || snap == null || snap.isEmpty) return@addSnapshotListener
 
@@ -377,9 +376,11 @@ class TransactionRepository(
                         TransactionModel.TYPE_WITHDRAW -> {
                             val curStatus = txDoc.getString(TransactionModel.FIELD_STATUS)
                             if (curStatus == TransactionModel.STATUS_REJECTED) {
-                                // Refund
-                                newCurBal += amount
-                                newRemBal += amount
+                                // tx.amount is NET (A - 4). Refund must be FULL A = net + 4
+                                val refund = amount + WITHDRAW_FEE
+
+                                newCurBal += refund
+                                newRemBal += refund
 
                                 tr.update(
                                     accRef, mapOf(
@@ -389,7 +390,7 @@ class TransactionRepository(
                                 )
 
                                 newStatus = TransactionModel.STATUS_REJECTED
-                                Log.d(TAG, "✅ Refunded $amount for rejected tx ${txSnap.id}")
+                                Log.d(TAG, "✅ Refunded $refund for rejected tx ${txSnap.id}")
                             } else {
                                 // No deduction here — already deducted during request
                                 newStatus = TransactionModel.STATUS_APPROVED

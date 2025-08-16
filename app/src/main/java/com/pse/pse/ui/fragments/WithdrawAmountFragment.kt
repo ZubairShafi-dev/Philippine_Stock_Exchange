@@ -57,7 +57,7 @@ class WithdrawAmountFragment : BaseFragment() {
             binding.activeBalance.text = "Active Balance  $formatted"
         }
 
-        val hint = SpannableString("Min. 10").apply {
+        val hint = SpannableString("Min. 20").apply {
             setSpan(RelativeSizeSpan(0.6f), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         binding.amountValue.hint = hint
@@ -96,8 +96,8 @@ class WithdrawAmountFragment : BaseFragment() {
                 Toast.makeText(requireContext(), "Insufficient Balance", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (amt<10) {
-                Toast.makeText(requireContext(), "Minimum withdrawal amount is $10", Toast.LENGTH_SHORT).show()
+            if (amt<20) {
+                Toast.makeText(requireContext(), "Minimum withdrawal amount is $20", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
