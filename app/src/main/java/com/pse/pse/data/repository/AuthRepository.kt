@@ -82,7 +82,7 @@ class AuthRepository(application: Application) {
                 ),
                 earnings = EarningsModel(
                     dailyProfit = 0.0,
-                    buyingProfit = 0.0,
+                    totalRoi = 0.0,
                     referralProfit = 0.0,
                     totalEarned = 0.0,
                     teamProfit = 0.0
@@ -102,7 +102,10 @@ class AuthRepository(application: Application) {
                     .await()
                 Log.d(TAG, "ensureSalaryProfile created for $uniqueUserId")
             } catch (e: Exception) {
-                Log.w(TAG, "ensureSalaryProfile call failed (will try again on login): ${e.message}")
+                Log.w(
+                    TAG,
+                    "ensureSalaryProfile call failed (will try again on login): ${e.message}"
+                )
             }
 
             firebaseUser
