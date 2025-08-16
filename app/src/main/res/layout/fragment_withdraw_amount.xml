@@ -153,6 +153,16 @@
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
+            <!-- You'll receive (live net after $4 fee) -->
+            <TextView
+                android:id="@+id/youReceive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="You’ll receive —  (fee $4.00)"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
             <!-- Withdraw Request Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWithdrawRequest"

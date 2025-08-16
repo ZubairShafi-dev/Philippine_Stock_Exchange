@@ -49,12 +49,19 @@ class WithdrawAmountFragment : BaseFragment() {
         binding.amountValue.addTextChangedListener {
             val raw = it.toString().replace("$", "").replace(",", "")
             val amt = raw.toDoubleOrNull() ?: 0.0
+
             val current = viewModel.currentBalance.value ?: 0.0
             val newBal = current - amt
 
-            val formatted = "$${"%,.2f".format(newBal)}"
-            binding.cardBalance.text = formatted
-            binding.activeBalance.text = "Active Balance  $formatted"
+            // Update balance preview (deduct full amount)
+            val formattedBal = "$${"%,.2f".format(newBal)}"
+            binding.cardBalance.text = formattedBal
+            binding.activeBalance.text = "Active Balance  $formattedBal"
+
+            // Show what the user will actually receive after the fixed $4 fee
+            val net = if (amt >= 20.0) amt - 4.0 else 0.0  // respect your $20 min
+            val formattedNet = "$${"%,.2f".format(net)}"
+            binding.youReceive.text = "You’ll receive $formattedNet  (fee $4.00)"
         }
 
         val hint = SpannableString("Min. 20").apply {
