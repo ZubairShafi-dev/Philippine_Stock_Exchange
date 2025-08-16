@@ -12,7 +12,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        android:padding="4dp">
 
         <!-- Top-right chip/brand -->
         <ImageView
