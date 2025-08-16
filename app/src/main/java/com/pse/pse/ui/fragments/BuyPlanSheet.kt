@@ -100,7 +100,6 @@ class BuyPlanSheet(
                             PlanFragment.BUY_RESULT_KEY,
                             bundleOf(PlanFragment.BUY_RESULT_SUCCESS to true)
                         )
-                        showSnack("🎉 Purchase successful!")
                         dismiss()
                     }
 

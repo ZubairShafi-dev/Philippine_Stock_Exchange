@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.pse.pse.R
 import com.pse.pse.adapters.PlanAdapter
 import com.pse.pse.data.repository.BuyPlanRepo
@@ -63,6 +64,11 @@ class PlanFragment : Fragment() {
         ) { _, bundle ->
             val success = bundle.getBoolean(BUY_RESULT_SUCCESS, false)
             if (success) {
+
+                // 1) show a host-level snackbar (persists across navigate)
+                val hostRoot = requireActivity().findViewById<View>(android.R.id.content)
+                Snackbar.make(hostRoot, "🎉 Purchase successful!", Snackbar.LENGTH_LONG).show()
+
                 // Navigate to MyPlans and POP PlanFragment
                 val options = NavOptions.Builder()
                     .setPopUpTo(R.id.planFragment, /*inclusive=*/true)
