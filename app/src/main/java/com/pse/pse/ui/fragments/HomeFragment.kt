@@ -196,7 +196,7 @@ class HomeFragment : BaseFragment() {
             binding.walletCard.walletName.text =
                 listOfNotNull(user?.name, user?.lastName).joinToString(" ").ifBlank { "User" }
 
-            binding.walletCard.userId.text = "ID: ${account.userId}"
+            binding.walletCard.userId.text = "${account.userId}"
             binding.walletCard.tvAmount.text = rs(account.investment.currentBalance)
 
             // Earnings
