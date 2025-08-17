@@ -138,7 +138,7 @@ class AuthRepository(application: Application) {
 
             // ✅ Ensure salary profile at registration (starts 30-day window from createdAt)
             try {
-                Firebase.functions.getHttpsCallable("ensureSalaryProfile")
+                Firebase.functions("us-central1").getHttpsCallable("ensureSalaryProfile")
                     .call(mapOf("userId" to uniqueUserId)).await()
                 Log.d(TAG, "ensureSalaryProfile created for $uniqueUserId")
             } catch (e: Exception) {

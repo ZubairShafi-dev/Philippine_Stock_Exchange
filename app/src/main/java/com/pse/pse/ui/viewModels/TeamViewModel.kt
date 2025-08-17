@@ -9,6 +9,10 @@ import com.pse.pse.data.repository.TeamRepository
 import com.pse.pse.models.SalaryProfile
 import com.pse.pse.models.TeamLevelStatus
 import com.pse.pse.models.TeamStats
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 class TeamViewModel : ViewModel() {
@@ -46,21 +50,21 @@ class TeamViewModel : ViewModel() {
     private val _salaryProfile = MutableLiveData<SalaryProfile?>()
     val salaryProfile: LiveData<SalaryProfile?> get() = _salaryProfile
 
-    fun initSalary(userId: String) = viewModelScope.launch {
-        try {
-            repo.ensureSalaryProfile(userId)  // idempotent
-            _salaryProfile.postValue(repo.getSalaryProfile(userId))
-        } catch (e: Exception) {
-            Log.e("TeamVM", "initSalary failed", e)
-            _salaryProfile.postValue(null)
-        }
-    }
+    @OptIn(FlowPreview::class)
+    fun observeSalary(userId: String) = viewModelScope.launch {
+        // Start listening immediately
+        val flow = repo.salaryProfileFlow(userId)
+            .distinctUntilChanged()
+            .debounce(150)
 
-    fun refreshSalary(userId: String) = viewModelScope.launch {
-        try {
-            _salaryProfile.postValue(repo.getSalaryProfile(userId))
-        } catch (e: Exception) {
-            Log.e("TeamVM", "refreshSalary failed", e)
+        // In parallel, best-effort ensure (doesn't block UI)
+        launch {
+            try {
+                repo.ensureSalaryProfile(userId)
+            } catch (_: Exception) {
+            }
         }
+
+        flow.collectLatest { _salaryProfile.postValue(it) }
     }
 }

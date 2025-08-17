@@ -9,14 +9,10 @@ import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.pse.pse.databinding.FragmentSalaryIncomeBinding
 import com.pse.pse.ui.viewModels.TeamViewModel
 import com.pse.pse.utils.SharedPrefManager
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -31,12 +27,11 @@ class SalaryIncomeFragment : BaseFragment() {
     private val vm: TeamViewModel by viewModels()
 
     private var countdown: CountDownTimer? = null
-    private var pollJob: Job? = null
 
     private val currencyFmt by lazy { NumberFormat.getCurrencyInstance(Locale.US) }
     private val dateFmt by lazy {
-        SimpleDateFormat("dd MMM yyyy, HH:mm 'UTC'", Locale.US).apply {
-            timeZone = TimeZone.getTimeZone("UTC")
+        SimpleDateFormat("dd MMM yyyy", Locale.US).apply {
+            timeZone = TimeZone.getTimeZone("UTC") // keep times in UTC, but we don't print "UTC"
         }
     }
 
@@ -52,33 +47,31 @@ class SalaryIncomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDrawerTrigger(view)
 
-        val userId = SharedPrefManager(requireContext()).getId().toString()
-
-        // Ensure the profile exists, then fetch it for UI
-        lifecycleScope.launch {
-            try {
-                vm.initSalary(userId)
-            } catch (_: Exception) {
-                // surfaced via LiveData below
-            }
+        val userId = SharedPrefManager(requireContext()).getId()
+        if (userId.isNullOrBlank()) {
+            showError("Unable to load salary profile: user not logged in.")
+            return
         }
 
+        showLoading()
+        vm.observeSalary(userId)
+
+        var firstEmissionHandled = false
         vm.salaryProfile.observe(viewLifecycleOwner) { profile ->
+            if (!firstEmissionHandled) {   // hide on first emission (null or data)
+                firstEmissionHandled = true
+                hideLoading()
+            }
+            if (profile == null) {
+                Snackbar.make(binding.root, "Unable to load salary profile", Snackbar.LENGTH_LONG)
+                    .show()
+                return@observe
+            }
+
             countdown?.cancel()
             binding.stateWindowOpen.isGone = true
             binding.stateActive.isGone = true
             binding.stateEnded.isGone = true
-
-            if (profile == null) {
-                binding.root.post {
-                    Snackbar.make(
-                        binding.root,
-                        "Unable to load salary profile",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-                return@observe
-            }
 
             when (profile.status) {
                 "window_open" -> {
@@ -106,9 +99,6 @@ class SalaryIncomeFragment : BaseFragment() {
                     // Live preview (we only show snapshot field here; real lock happens at D+30)
                     binding.tvPreviewAdb.text = currencyFmt.format(profile.snapshotDirectBusiness)
                     binding.tvPreviewTier.text = "Tier not locked yet"
-
-                    // Poll every 30s so screen auto-switches when window locks
-                    startPolling(userId)
                 }
 
                 "active" -> {
@@ -149,16 +139,6 @@ class SalaryIncomeFragment : BaseFragment() {
         }.start()
     }
 
-    private fun startPolling(userId: String) {
-        pollJob?.cancel()
-        pollJob = lifecycleScope.launch {
-            while (true) {
-                delay(30_000L) // 30s
-                vm.refreshSalary(userId)
-            }
-        }
-    }
-
     private fun formatDuration(ms: Long): String {
         var s = ms / 1000
         val h = s / 3600; s %= 3600
@@ -169,7 +149,6 @@ class SalaryIncomeFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         countdown?.cancel()
-        pollJob?.cancel()
         _binding = null
     }
 }
