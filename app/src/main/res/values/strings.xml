@@ -43,4 +43,5 @@
     <string name="total_amount_to_be_selled">Total Amount to be Selled :</string>
     <string name="regular">Regular</string>
     <string name="enter_old_password">Enter Old Password</string>
+    <string name="buy_plan_title">Buy Plan</string>
 </resources>

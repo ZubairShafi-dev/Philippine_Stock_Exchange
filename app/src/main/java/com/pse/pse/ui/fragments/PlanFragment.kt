@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +27,7 @@ import com.yourpackage.ui.viewmodel.PlansViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class PlanFragment : Fragment() {
+class PlanFragment : BaseFragment() {
 
     private var _binding: FragmentPlanBinding? = null
     private val binding get() = _binding!!
@@ -40,7 +41,6 @@ class PlanFragment : Fragment() {
 
     private val buyRepo = BuyPlanRepo()
 
-    // Shared-pref se UID; FirebaseAuth use karna ho to yahan badal lo
     private val prefs by lazy { SharedPrefManager(requireContext()) }
     private val userId by lazy { prefs.getId().orEmpty() }
 
@@ -57,38 +57,39 @@ class PlanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Drawer trigger + (optional) avatar via BaseFragment
+        setupDrawerTrigger(binding.root)
 
-        // Listen for buy result from BottomSheet
+        // Listen for buy result from BuyPlanFragment
         parentFragmentManager.setFragmentResultListener(
-            BUY_RESULT_KEY, viewLifecycleOwner
-        ) { _, bundle ->
-            val success = bundle.getBoolean(BUY_RESULT_SUCCESS, false)
-            if (success) {
+            BUY_RESULT_KEY,
+            viewLifecycleOwner,
+            FragmentResultListener { _, bundle ->
+                val success = bundle.getBoolean(BUY_RESULT_SUCCESS, false)
+                if (success) {
+                    val hostRoot = requireActivity().findViewById<View>(android.R.id.content)
+                    Snackbar.make(hostRoot, "🎉 Purchase successful!", Snackbar.LENGTH_LONG).show()
 
-                // 1) show a host-level snackbar (persists across navigate)
-                val hostRoot = requireActivity().findViewById<View>(android.R.id.content)
-                Snackbar.make(hostRoot, "🎉 Purchase successful!", Snackbar.LENGTH_LONG).show()
-
-                // Navigate to MyPlans and POP PlanFragment
-                val options = NavOptions.Builder()
-                    .setPopUpTo(R.id.planFragment, /*inclusive=*/true)
-                    .build()
-                findNavController().navigate(
-                    R.id.planFragment_to_myPlansFragment,
-                    null,
-                    options
-                )
+                    val options = NavOptions.Builder()
+                        .setPopUpTo(R.id.planFragment, /*inclusive=*/true)
+                        .build()
+                    findNavController().navigate(
+                        R.id.action_planFragment_to_myPlansFragment,
+                        null,
+                        options
+                    )
+                }
             }
-        }
+        )
 
-        // RecyclerView setup
+        // RecyclerView
         planAdapter = PlanAdapter { plan -> onPlanClicked(plan) }
         binding.allPlansRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = planAdapter
         }
 
-        // Observe plans StateFlow
+        // Observe VM
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 plansVm.state.collectLatest { ui ->
@@ -109,17 +110,20 @@ class PlanFragment : Fragment() {
         }
     }
 
-    /** Show the BottomSheet that now handles the entire buy flow */
+    /** Open full-screen BuyPlanFragment (replacing BottomSheet). */
     private fun onPlanClicked(plan: Plan) {
-        BuyPlanSheet(
-            plan = plan,
-            repo = buyRepo,
-            uid = userId
-        ).show(parentFragmentManager, "BuyPlanSheet")
+        // Pass only the fields we actually use in the buy screen (no model change needed).
+        val args = bundleOf(
+            BuyPlanFragment.ARG_PLAN_NAME to plan.planName,
+            BuyPlanFragment.ARG_MIN_AMOUNT to plan.minAmount,
+            BuyPlanFragment.ARG_MAX_AMOUNT to (plan.maxAmount ?: -1.0), // -1 → "No limit"
+            BuyPlanFragment.ARG_DAILY_PERCENT to plan.dailyPercentage,
+            BuyPlanFragment.ARG_TOTAL_PAYOUT to plan.totalPayout,
+            BuyPlanFragment.ARG_DOC_ID to plan.docId,
+            BuyPlanFragment.ARG_UID to userId
+        )
+        findNavController().navigate(R.id.action_planFragment_to_buyPlanFragment, args)
     }
-
-    private fun showLoading() = Unit
-    private fun hideLoading() = Unit
 
     override fun onDestroyView() {
         super.onDestroyView()

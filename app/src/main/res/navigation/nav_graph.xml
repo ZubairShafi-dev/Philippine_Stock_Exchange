@@ -248,7 +248,22 @@
         tools:layout="@layout/fragment_plan">
 
         <action
-            android:id="@+id/planFragment_to_myPlansFragment"
+            android:id="@+id/action_planFragment_to_myPlansFragment"
+            app:destination="@id/myPlansFragment" />
+
+        <action
+            android:id="@+id/action_planFragment_to_buyPlanFragment"
+            app:destination="@id/buyPlanFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/buyPlanFragment"
+        android:name="com.pse.pse.ui.fragments.BuyPlanFragment"
+        android:label="BuyPlanFragment">
+
+        <action
+            android:id="@+id/action_buyPlanFragment_to_myPlansFragment"
             app:destination="@id/myPlansFragment" />
 
     </fragment>
