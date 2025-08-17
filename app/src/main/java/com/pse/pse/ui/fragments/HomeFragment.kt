@@ -1,5 +1,7 @@
 package com.pse.pse.ui.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -104,7 +106,19 @@ class HomeFragment : BaseFragment() {
 
         }
 
-        // Notification & Announcement icons can be wired later if needed
+        // 🌐 Social Links
+        binding.toFacebookBtn.setOnClickListener {
+            openLink("https://www.facebook.com/PhStockExchange/")
+        }
+        binding.toInstagramBtn.setOnClickListener {
+            openLink("https://www.instagram.com/phstockexchange/")
+        }
+        binding.toTwitterBtn.setOnClickListener {
+            openLink("https://x.com/PhStockExchange")
+        }
+        binding.toYoutubeBtn.setOnClickListener {
+            openLink("https://www.youtube.com/channel/UC9iAU5n7CYFF4pBeChJImig")
+        }
     }
 
     private fun showAnnouncementsDialog(announcements: List<AnnouncementModel>) {
@@ -226,11 +240,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setEarningProgress(
-        today: Double,
-        referral: Double,
-        team: Double,
-        total: Double,
-        roi: Double
+        today: Double, referral: Double, team: Double, total: Double, roi: Double
     ) {
         val denom = if (total <= 0.0) 1.0 else total
 
@@ -271,6 +281,12 @@ class HomeFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    private fun openLink(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
     /** Fetch announcements from ViewModel */
