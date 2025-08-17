@@ -75,10 +75,7 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
-
                     </LinearLayout>
-
-
 
                     <!-- Dates -->
                     <LinearLayout
@@ -143,6 +140,7 @@
                             style="@style/ValueText"
                             android:text="$0" />
                     </LinearLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -201,7 +199,6 @@
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
-
 
                 <!-- ───────── Status: Active (Locked) ───────── -->
                 <LinearLayout
@@ -371,7 +368,6 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
