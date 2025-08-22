@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.pse.pse.models.TransactionModel
 import com.pse.pse.data.repository.TransactionRepository
+import com.pse.pse.models.TransactionModel
 import kotlinx.coroutines.launch
 
 class TransactionViewModel(application: Application) : AndroidViewModel(application) {
@@ -59,10 +59,19 @@ class TransactionViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    suspend fun hasPendingWithdrawal(): Boolean {
+        return repository.hasPendingWithdrawal()
+    }
+
     /** Call from Fragment.onStart (or once after login). */
     fun startBalanceSync() = repository.startBalanceSync()
 
     /** Call from Fragment.onStop OR ViewModel.onCleared. */
     fun stopBalanceSync() = repository.stopBalanceSync()
+
+    val pendingWithdrawal = repository.pendingWithdrawal
+
+    fun startPendingWatcher() = repository.startPendingWatcher()
+    fun stopPendingWatcher() = repository.stopPendingWatcher()
 
 }

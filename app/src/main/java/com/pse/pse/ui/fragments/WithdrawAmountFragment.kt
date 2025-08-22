@@ -14,9 +14,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.snackbar.Snackbar
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentWithdrawAmountBinding
 import com.pse.pse.ui.viewModels.TransactionViewModel
+import kotlinx.coroutines.launch
 
 class WithdrawAmountFragment : BaseFragment() {
 
@@ -35,8 +40,29 @@ class WithdrawAmountFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDrawerTrigger(view)
 
+        viewModel.startPendingWatcher()
+
+        // React to changes live
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.pendingWithdrawal.collect { pending ->
+                    pending?.let { setWithdrawButtonState(!it) }
+                }
+            }
+        }
+
         // 1) Load the current balance from Firestore
         viewModel.loadCurrentBalance()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val pending = viewModel.hasPendingWithdrawal() // expose pass-through in VM
+            if (pending) {
+                setWithdrawButtonState(false)
+                Snackbar.make(
+                    view, "You already have a pending withdrawal.", Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
 
         // 2) Observe it
         viewModel.currentBalance.observe(viewLifecycleOwner) { balance ->
@@ -74,6 +100,7 @@ class WithdrawAmountFragment : BaseFragment() {
 
             hideLoading()
             if (success) {
+                setWithdrawButtonState(false)
                 val amount =
                     binding.amountValue.text.toString().replace(",", "").toDoubleOrNull() ?: 0.0
                 val formattedAmount = "$${"%,.2f".format(amount)}"
@@ -86,13 +113,24 @@ class WithdrawAmountFragment : BaseFragment() {
                 viewModel.loadCurrentBalance()
 
             } else {
+                setWithdrawButtonState(true)
                 showCustomDialog(R.layout.dialog_request_error, "Something Went Wrong")
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val pending = viewModel.hasPendingWithdrawal()
+                    binding.btnWithdrawRequest.isEnabled = !pending
+                    if (pending) {
+                        Toast.makeText(
+                            requireContext(),
+                            "You already have a pending withdrawal.", Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
             }
         }
 
         // 6) Send the request
         binding.btnWithdrawRequest.setOnClickListener {
-            val amt = binding.amountValue.text.toString().toDoubleOrNull()
+            val amt = binding.amountValue.text.toString().replace(",", "").toDoubleOrNull()
             val addr = binding.walletAddress.text.toString()
             if (amt == null || addr.isBlank()) {
                 Toast.makeText(requireContext(), "Please enter valid details", Toast.LENGTH_SHORT)
@@ -110,8 +148,30 @@ class WithdrawAmountFragment : BaseFragment() {
                 return@setOnClickListener
             }
 
+            setWithdrawButtonState(false)
             showLoading()
             viewModel.submitWithdrawal(amt, addr)
+        }
+    }
+
+    private fun setWithdrawButtonState(enabled: Boolean) {
+        binding.btnWithdrawRequest.isEnabled = enabled
+        if (enabled) {
+            binding.btnWithdrawRequest.text = "Request Withdrawal"
+            binding.btnWithdrawRequest.setBackgroundColor(
+                requireContext().getColor(R.color.progress_blue) // your enabled color
+            )
+            binding.btnWithdrawRequest.setTextColor(
+                requireContext().getColor(android.R.color.white)
+            )
+        } else {
+            binding.btnWithdrawRequest.text = "Pending Withdrawl"
+            binding.btnWithdrawRequest.setBackgroundColor(
+                requireContext().getColor(R.color.white_70) // add in colors.xml
+            )
+            binding.btnWithdrawRequest.setTextColor(
+                requireContext().getColor(android.R.color.darker_gray)
+            )
         }
     }
 
@@ -132,6 +192,19 @@ class WithdrawAmountFragment : BaseFragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (dialog.isShowing) dialog.dismiss()
         }, 3000)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val pending = viewModel.hasPendingWithdrawal()
+            binding.btnWithdrawRequest.isEnabled = !pending
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopPendingWatcher()
     }
 
     override fun onDestroyView() {

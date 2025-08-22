@@ -32,6 +32,10 @@ class TransactionRepository(
     private val _liveBalance = MutableStateFlow<Double?>(null)
     val liveBalance: StateFlow<Double?> = _liveBalance.asStateFlow()
 
+    private var pendingListener: ListenerRegistration? = null
+    private val _pendingWithdrawal = MutableStateFlow<Boolean?>(null)
+    val pendingWithdrawal: StateFlow<Boolean?> = _pendingWithdrawal.asStateFlow()
+
 
     companion object {
         private const val TAG = "TransactionRepo"
@@ -70,6 +74,9 @@ class TransactionRepository(
                     val accSnap = tr.get(accDoc.reference)
                     val accRef = accDoc.reference
 
+                    val hasPending = accSnap.getBoolean("hasPendingWithdrawal") ?: false
+                    if (hasPending) throw Exception("You already have a pending withdrawal")
+
                     val investment = accSnap.get("investment") as? Map<*, *> ?: emptyMap<Any, Any>()
                     val curBal = (investment["currentBalance"] as? Number)?.toDouble() ?: 0.0
                     val remBal = (investment["remainingBalance"] as? Number)?.toDouble() ?: 0.0
@@ -97,7 +104,8 @@ class TransactionRepository(
                     tr.update(
                         accRef, mapOf(
                             "investment.currentBalance" to curBal - amount,
-                            "investment.remainingBalance" to remBal - amount
+                            "investment.remainingBalance" to remBal - amount,
+                            "hasPendingWithdrawal" to true
                         )
                     )
                     true
@@ -111,6 +119,18 @@ class TransactionRepository(
                 return@withContext false
             }
         }
+
+    suspend fun hasPendingWithdrawal(): Boolean = withContext(Dispatchers.IO) {
+        try {
+            val userId = prefs.getId() ?: return@withContext false
+            val snap =
+                db.collection(COLL_ACCOUNTS).whereEqualTo("userId", userId).limit(1).get().await()
+            val doc = snap.documents.firstOrNull() ?: return@withContext false
+            doc.getBoolean("hasPendingWithdrawal") ?: false
+        } catch (e: Exception) {
+            false
+        }
+    }
 
 
     private fun sendWithdrawNotificationToAdmin(userId: String, amount: Double) {
@@ -385,14 +405,20 @@ class TransactionRepository(
                                 tr.update(
                                     accRef, mapOf(
                                         "investment.currentBalance" to newCurBal,
-                                        "investment.remainingBalance" to newRemBal
+                                        "investment.remainingBalance" to newRemBal,
+                                        "hasPendingWithdrawal" to false
                                     )
                                 )
 
                                 newStatus = TransactionModel.STATUS_REJECTED
                                 Log.d(TAG, "✅ Refunded $refund for rejected tx ${txSnap.id}")
                             } else {
-                                // No deduction here — already deducted during request
+                                // Approved path: no balance change here (you already deducted at request time)
+                                tr.update(
+                                    accRef, mapOf(
+                                        "hasPendingWithdrawal" to false         // 🔓 clear lock on approve
+                                    )
+                                )
                                 newStatus = TransactionModel.STATUS_APPROVED
                             }
                         }
@@ -422,5 +448,26 @@ class TransactionRepository(
             }.addOnFailureListener { e ->
                 Log.e(TAG, "❌ Account lookup failed for userId=$userId", e)
             }
+    }
+
+    fun startPendingWatcher() {
+        val userId = prefs.getId() ?: return
+        // Stop old listener if any
+        pendingListener?.remove()
+
+        pendingListener = db.collection(COLL_ACCOUNTS)
+            .whereEqualTo("userId", userId)
+            .limit(1)
+            .addSnapshotListener { qs, e ->
+                if (e != null || qs == null) return@addSnapshotListener
+                val doc = qs.documents.firstOrNull()
+                val flag = doc?.getBoolean("hasPendingWithdrawal") ?: false
+                _pendingWithdrawal.value = flag
+            }
+    }
+
+    fun stopPendingWatcher() {
+        pendingListener?.remove()
+        pendingListener = null
     }
 }

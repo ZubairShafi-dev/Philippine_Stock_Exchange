@@ -33,6 +33,7 @@
     <color name="purple_accent">#9B6DFF</color>
     <color name="brand_primary_sheet">#6A6CF6</color>   <!-- purple/indigo -->
     <color name="brand_on_primary_sheet">#FFFFFFFF</color>
+    <color name="disabledGray">#BDBDBD</color>
 
 
 </resources>
