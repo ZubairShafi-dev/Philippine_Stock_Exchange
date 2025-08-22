@@ -55,7 +55,7 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
                 TransactionModel.TYPE_WITHDRAW -> "Withdraw ($monthName)"
                 TransactionModel.TYPE_DAILY_ROI -> "ROI (all active plans)"
                 TransactionModel.TYPE_TEAM_PROFIT -> if (tx.address.isNotBlank())
-                    "Team Profit (${tx.address})"
+                    "${tx.address}"
                 else
                     "Team Profit"
                 TransactionModel.TYPE_LEADERSHIP -> "Leadership Bonus"
