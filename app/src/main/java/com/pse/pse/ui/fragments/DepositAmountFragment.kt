@@ -115,9 +115,9 @@ class DepositAmountFragment : BaseFragment() {
                     .show()
                 return@setOnClickListener
             }
-            if (amt < 25) {
+            if (amt < 20) {
                 Toast.makeText(
-                    requireContext(), "Minimum deposit amount is $25", Toast.LENGTH_SHORT
+                    requireContext(), "Minimum deposit amount is $20", Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
             }
