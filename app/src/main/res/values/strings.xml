@@ -44,4 +44,5 @@
     <string name="regular">Regular</string>
     <string name="enter_old_password">Enter Old Password</string>
     <string name="buy_plan_title">Buy Plan</string>
+    <string name="calculating_ellipsis">Calculating…</string>
 </resources>
