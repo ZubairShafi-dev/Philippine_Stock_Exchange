@@ -111,6 +111,17 @@ class TeamRepository {
         )
     }
 
+    suspend fun fetchSalaryCurrentAdb(userId: String): Double? {
+        val raw = functions.getHttpsCallable("getSalaryProfile")
+            .call(mapOf("userId" to userId))
+            .await().data as HashMap<*, *>
+
+        val exists = raw["exists"] as? Boolean ?: false
+        if (!exists) return null
+
+        return (raw["currentAdb"] as? Number)?.toDouble()
+    }
+
     fun salaryProfileFlow(userId: String): Flow<SalaryProfile?> = callbackFlow {
         val ref = db.collection("salaryProfiles").document(userId)
 

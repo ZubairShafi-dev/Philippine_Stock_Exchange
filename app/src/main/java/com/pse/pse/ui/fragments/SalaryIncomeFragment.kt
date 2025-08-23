@@ -9,10 +9,12 @@ import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.pse.pse.databinding.FragmentSalaryIncomeBinding
 import com.pse.pse.ui.viewModels.TeamViewModel
 import com.pse.pse.utils.SharedPrefManager
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -93,11 +95,19 @@ class SalaryIncomeFragment : BaseFragment() {
                     binding.progressDays.progress = pct
                     binding.tvDaysPct.text = "$pct%"
 
+                    // Live preview: show the *current* ADB (not the snapshot)
+// Falls back to snapshot if server returns null for any reason
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        val liveAdb = vm.fetchSalaryCurrentAdb(userId)
+                        val show = liveAdb ?: (profile.snapshotDirectBusiness ?: 0.0)
+                        binding.tvPreviewAdb.text = currencyFmt.format(show)
+                    }
+
                     // countdown every second
                     startCountdown(end)
 
                     // Live preview (we only show snapshot field here; real lock happens at D+30)
-                    binding.tvPreviewAdb.text = currencyFmt.format(profile.snapshotDirectBusiness)
+//                    binding.tvPreviewAdb.text = currencyFmt.format(profile.snapshotDirectBusiness)
                     binding.tvPreviewTier.text = "Tier not locked yet"
                 }
 

@@ -53,9 +53,7 @@ class TeamViewModel : ViewModel() {
     @OptIn(FlowPreview::class)
     fun observeSalary(userId: String) = viewModelScope.launch {
         // Start listening immediately
-        val flow = repo.salaryProfileFlow(userId)
-            .distinctUntilChanged()
-            .debounce(150)
+        val flow = repo.salaryProfileFlow(userId).distinctUntilChanged().debounce(150)
 
         // In parallel, best-effort ensure (doesn't block UI)
         launch {
@@ -67,4 +65,6 @@ class TeamViewModel : ViewModel() {
 
         flow.collectLatest { _salaryProfile.postValue(it) }
     }
+
+    suspend fun fetchSalaryCurrentAdb(userId: String): Double? = repo.fetchSalaryCurrentAdb(userId)
 }
