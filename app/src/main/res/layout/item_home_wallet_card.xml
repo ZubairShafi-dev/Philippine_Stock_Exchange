@@ -87,19 +87,43 @@
             android:textColor="@color/white_80"
             android:textSize="12sp" />
 
-        <!-- ID value (next to labelId) -->
-        <TextView
-            android:id="@+id/userId"
+
+        <LinearLayout
+            android:id="@+id/idRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/labelId"
+            android:layout_alignTop="@id/labelId"
+            android:layout_alignBottom="@id/labelId"
             android:layout_marginStart="8dp"
+            android:layout_toStartOf="@id/iconToggle"
             android:layout_toEndOf="@id/labelId"
-            android:alpha="0.95"
-            android:text="1234-5678"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <!-- ID value (next to labelId) -->
+            <TextView
+                android:id="@+id/userId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.95"
+                android:includeFontPadding="false"
+                android:text="1234-5678"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/copyUserId"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="1dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="copy"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_copy"
+                app:tint="@color/white" />
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

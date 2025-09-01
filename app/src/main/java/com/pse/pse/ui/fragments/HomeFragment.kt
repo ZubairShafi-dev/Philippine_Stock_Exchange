@@ -1,5 +1,8 @@
 package com.pse.pse.ui.fragments
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -75,6 +78,18 @@ class HomeFragment : BaseFragment() {
 
     /** Set click listeners for navigation */
     private fun setupClickListeners() {
+
+        val copyId: (View) -> Unit = {
+            val text = binding.walletCard.userId.text?.toString().orEmpty()
+            if (text.isNotBlank()) {
+                val clipboard = requireContext()
+                    .getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                clipboard.setPrimaryClip(ClipData.newPlainText("User ID", text))
+                it.performHapticFeedback(android.view.HapticFeedbackConstants.CONTEXT_CLICK)
+                Toast.makeText(requireContext(), "Copied!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.depositAmount.root.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_depositAmount)
         }
@@ -87,6 +102,10 @@ class HomeFragment : BaseFragment() {
         binding.notificationIcon.setOnClickListener {
             showNotificationsDialog()
         }
+        binding.walletCard.idRow.setOnClickListener(copyId)
+        binding.walletCard.copyUserId.setOnClickListener(copyId)
+        binding.walletCard.userId.setOnClickListener(copyId)
+        binding.walletCard.labelId.setOnClickListener(copyId)
 
         binding.announcementIcon.setOnClickListener {
             showLoading()
