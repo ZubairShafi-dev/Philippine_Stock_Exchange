@@ -27,7 +27,7 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentDepositAmountBinding
-import com.pse.pse.ui.viewModels.TransactionViewModel
+import com.pse.pse.viewModels.TransactionViewModel
 import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

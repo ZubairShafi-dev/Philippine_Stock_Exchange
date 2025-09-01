@@ -17,7 +17,7 @@ import com.pse.pse.R
 import com.pse.pse.databinding.FragmentTeamRankingBinding
 import com.pse.pse.models.LevelCondition
 import com.pse.pse.models.TeamStats
-import com.pse.pse.ui.viewModels.TeamViewModel
+import com.pse.pse.viewModels.TeamViewModel
 import com.pse.pse.utils.SharedPrefManager
 
 class TeamRankingFragment : BaseFragment() {

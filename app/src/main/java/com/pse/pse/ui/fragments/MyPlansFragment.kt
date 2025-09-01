@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.pse.pse.adapters.UserPlanAdapter
 import com.pse.pse.databinding.FragmentMyPlansBinding
-import com.pse.pse.ui.viewModels.PlansViewModelFactory
+import com.pse.pse.viewModels.PlansViewModelFactory
 import com.pse.pse.utils.SharedPrefManager
 import com.yourpackage.data.repository.PlanRepository
 import com.yourpackage.ui.viewmodel.PlansViewModel

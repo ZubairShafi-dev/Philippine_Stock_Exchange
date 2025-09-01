@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pse.pse.adapters.LeadershipTierAdapter
 import com.pse.pse.databinding.FragmentLeadershipBinding
 import com.pse.pse.models.LeadershipTiers
-import com.pse.pse.ui.viewModels.LeadershipViewModel
+import com.pse.pse.viewModels.LeadershipViewModel
 import com.pse.pse.utils.SharedPrefManager
 import kotlinx.coroutines.flow.collectLatest
 import java.text.NumberFormat

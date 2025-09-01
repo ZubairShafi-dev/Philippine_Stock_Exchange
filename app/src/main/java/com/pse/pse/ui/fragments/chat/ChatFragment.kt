@@ -16,7 +16,7 @@ import com.pse.pse.adapters.chat.ChatPreviewAdapter
 import com.pse.pse.data.repository.chat.ChatViewModelFactory
 import com.pse.pse.models.chat.Admin
 import com.pse.pse.models.chat.ChatPreview
-import com.pse.pse.ui.viewModels.ChatViewModel
+import com.pse.pse.viewModels.ChatViewModel
 
 class ChatFragment : Fragment(), ChatPreviewAdapter.OnChatPreviewClickListener {
 

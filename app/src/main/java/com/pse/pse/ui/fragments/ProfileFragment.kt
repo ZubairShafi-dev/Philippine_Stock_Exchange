@@ -29,7 +29,7 @@ import com.pse.pse.R
 import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.databinding.FragmentProfileBinding
 import com.pse.pse.models.UserModel
-import com.pse.pse.ui.viewModels.ProfileViewModel
+import com.pse.pse.viewModels.ProfileViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
 

@@ -67,8 +67,7 @@ class AuthRepository(application: Application) {
                     if (snap.exists()) {
                         // signal collision so we retry outside
                         throw FirebaseFirestoreException(
-                            "UID already exists",
-                            FirebaseFirestoreException.Code.ALREADY_EXISTS
+                            "UID already exists", FirebaseFirestoreException.Code.ALREADY_EXISTS
                         )
                     }
                     tx.set(ref, mapOf("createdAt" to FieldValue.serverTimestamp()))
@@ -90,16 +89,31 @@ class AuthRepository(application: Application) {
         }
     }
 
+    // AuthRepository.kt
+
     suspend fun registerUser(userModel: UserModel): FirebaseUser? {
         return try {
+            // 🔒 Minimal guard: if a Firestore profile already exists for this email,
+            // block re-signup (prevents creating a new account/UID).
+            val email = userModel.email?.trim()?.lowercase() ?: return null
+
+            val existing =
+                db.collection("users").whereEqualTo("email", email).limit(1).get().await()
+
+            if (!existing.isEmpty) {
+                Log.w(TAG, "❌ Signup blocked: Firestore profile already exists for $email")
+                return null
+            }
+
+            // Proceed with Auth only if no Firestore profile exists
             val authResult = FirebaseAuth.getInstance()
-                .createUserWithEmailAndPassword(userModel.email!!, userModel.password!!).await()
+                .createUserWithEmailAndPassword(email, userModel.password!!).await()
 
             val firebaseUser = authResult.user ?: return null
             firebaseUser.sendEmailVerification().await()
-            Log.d("AuthRepo", "✅ Email verification sent to ${firebaseUser.email}")
+            Log.d(TAG, "✅ Email verification sent to ${firebaseUser.email}")
 
-            // Proceed to Firestore user creation
+            // Create new business UID and Firestore docs
             val uniqueUserId = generateUniqueUserId()
             sharedPrefManager.clearUserData()
             sharedPrefManager.saveId(uniqueUserId)
@@ -110,7 +124,8 @@ class AuthRepository(application: Application) {
             val user = userModel.copy(
                 uid = uniqueUserId,
                 docId = userDocRef.id,
-                createdAt = Timestamp.now(),
+                email = email, // ensure stored lowercase/email-normalized
+                createdAt = com.google.firebase.Timestamp.now(),
                 firebaseUid = firebaseUser.uid
             )
 
@@ -118,7 +133,7 @@ class AuthRepository(application: Application) {
                 userId = uniqueUserId,
                 accountId = accountRef.id,
                 status = "inactive",
-                createdAt = Timestamp.now(),
+                createdAt = com.google.firebase.Timestamp.now(),
                 investment = InvestmentModel(
                     totalDeposit = 0.0, remainingBalance = 0.0, currentBalance = 0.0
                 ),
@@ -136,24 +151,22 @@ class AuthRepository(application: Application) {
                 transaction.set(accountRef, account.toMap())
             }.await()
 
-            // ✅ Ensure salary profile at registration (starts 30-day window from createdAt)
+            // Best-effort ensure salary profile
             try {
                 Firebase.functions("us-central1").getHttpsCallable("ensureSalaryProfile")
                     .call(mapOf("userId" to uniqueUserId)).await()
                 Log.d(TAG, "ensureSalaryProfile created for $uniqueUserId")
             } catch (e: Exception) {
-                Log.w(
-                    TAG, "ensureSalaryProfile call failed (will try again on login): ${e.message}"
-                )
+                Log.w(TAG, "ensureSalaryProfile call failed: ${e.message}")
             }
 
             firebaseUser
 
         } catch (e: FirebaseAuthUserCollisionException) {
-            Log.w("AuthRepo", "❌ Email already in use: ${userModel.email}")
+            Log.w(TAG, "❌ Email already in use at FirebaseAuth: ${userModel.email}")
             null
         } catch (e: Exception) {
-            Log.e("AuthRepo", "❌ Registration error: ${e.message}", e)
+            Log.e(TAG, "❌ Registration error: ${e.message}", e)
             null
         }
     }

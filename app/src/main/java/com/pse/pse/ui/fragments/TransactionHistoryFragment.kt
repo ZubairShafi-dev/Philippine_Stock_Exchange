@@ -21,7 +21,7 @@ import com.pse.pse.R
 import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.databinding.FragmentTransactionHistoryBinding
 import com.pse.pse.models.TransactionModel
-import com.pse.pse.ui.viewModels.TransactionViewModel
+import com.pse.pse.viewModels.TransactionViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
 import com.trustledger.aitrustledger.adapters.TransactionAdapter

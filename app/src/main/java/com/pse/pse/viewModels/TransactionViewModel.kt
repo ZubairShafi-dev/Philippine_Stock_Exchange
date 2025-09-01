@@ -1,4 +1,4 @@
-package com.pse.pse.ui.viewModels
+package com.pse.pse.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

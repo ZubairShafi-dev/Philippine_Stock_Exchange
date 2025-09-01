@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.pse.pse.data.repository.chat.ChatViewModelFactory
 import com.pse.pse.databinding.FragmentDetailChatBinding
 import com.pse.pse.models.chat.Admin
-import com.pse.pse.ui.viewModels.ChatViewModel
+import com.pse.pse.viewModels.ChatViewModel
 import com.pse.pse.utils.SharedPrefManager
 import com.pse.pse.adapters.chat.ChatDetailAdapter
 import com.pse.pse.fcm.AccessToken

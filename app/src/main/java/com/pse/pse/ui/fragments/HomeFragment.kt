@@ -26,8 +26,8 @@ import com.pse.pse.adapters.AnnouncementSliderAdapter
 import com.pse.pse.adapters.NotificationAdapter
 import com.pse.pse.databinding.FragmentHomeBinding
 import com.pse.pse.models.AnnouncementModel
-import com.pse.pse.ui.viewModels.AccountViewModel
-import com.pse.pse.ui.viewModels.TransactionViewModel
+import com.pse.pse.viewModels.AccountViewModel
+import com.pse.pse.viewModels.TransactionViewModel
 import com.pse.pse.utils.NotificationPreferenceManager
 import com.pse.pse.utils.SharedPrefManager
 import java.text.DecimalFormat

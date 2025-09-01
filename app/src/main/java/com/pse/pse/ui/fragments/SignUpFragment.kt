@@ -12,7 +12,7 @@ import com.google.firebase.Timestamp
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentSignUpBinding
 import com.pse.pse.models.UserModel
-import com.pse.pse.ui.viewModels.AuthViewModel
+import com.pse.pse.viewModels.AuthViewModel
 import com.pse.pse.utils.SharedPrefManager
 
 class SignUpFragment : BaseFragment() {

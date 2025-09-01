@@ -1,4 +1,4 @@
-package com.pse.pse.ui.viewModels
+package com.pse.pse.viewModels
 
 import android.util.Log
 import androidx.lifecycle.LiveData

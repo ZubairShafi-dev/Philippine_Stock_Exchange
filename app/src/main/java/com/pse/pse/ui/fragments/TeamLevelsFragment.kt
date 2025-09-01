@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pse.pse.R
 import com.pse.pse.adapters.TeamLevelAdapter
 import com.pse.pse.databinding.FragmentTeamLevelsBinding
-import com.pse.pse.ui.viewModels.TeamViewModel
+import com.pse.pse.viewModels.TeamViewModel
 import com.pse.pse.utils.SharedPrefManager
 
 class TeamLevelsFragment : BaseFragment() {

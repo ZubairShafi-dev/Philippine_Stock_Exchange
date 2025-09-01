@@ -9,7 +9,6 @@ plugins {
     id("com.google.gms.google-services") version "4.4.2"
 }
 
-
 android {
     namespace = "com.pse.pse"
     compileSdk = 36
@@ -18,8 +17,8 @@ android {
         applicationId = "com.pse.pse"
         minSdk = 24
         targetSdk = 36
-        versionCode = 5
-        versionName = "5.0"
+        versionCode = 6
+        versionName = "6.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

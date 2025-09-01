@@ -3,7 +3,7 @@ package com.pse.pse.data.repository.chat
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pse.pse.ui.viewModels.ChatViewModel
+import com.pse.pse.viewModels.ChatViewModel
 
 class ChatViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 

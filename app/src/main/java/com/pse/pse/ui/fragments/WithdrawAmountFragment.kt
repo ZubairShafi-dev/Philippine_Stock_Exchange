@@ -20,7 +20,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentWithdrawAmountBinding
-import com.pse.pse.ui.viewModels.TransactionViewModel
+import com.pse.pse.viewModels.TransactionViewModel
 import kotlinx.coroutines.launch
 
 class WithdrawAmountFragment : BaseFragment() {

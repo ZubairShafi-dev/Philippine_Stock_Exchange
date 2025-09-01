@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.pse.pse.R
 import com.pse.pse.databinding.FragmentSignInBinding
-import com.pse.pse.ui.viewModels.AuthViewModel
+import com.pse.pse.viewModels.AuthViewModel
 
 class SignInFragment : BaseFragment() {
 

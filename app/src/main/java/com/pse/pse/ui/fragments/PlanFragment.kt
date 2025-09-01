@@ -20,7 +20,7 @@ import com.pse.pse.adapters.PlanAdapter
 import com.pse.pse.data.repository.BuyPlanRepo
 import com.pse.pse.databinding.FragmentPlanBinding
 import com.pse.pse.models.Plan
-import com.pse.pse.ui.viewModels.PlansViewModelFactory
+import com.pse.pse.viewModels.PlansViewModelFactory
 import com.pse.pse.utils.SharedPrefManager
 import com.yourpackage.data.repository.PlanRepository
 import com.yourpackage.ui.viewmodel.PlansViewModel
